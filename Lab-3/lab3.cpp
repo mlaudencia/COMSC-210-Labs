@@ -22,9 +22,12 @@ Restaurant newRestaurant(){  // newRestaurant() takes in user inputs for the nam
     getline(cin, temp.cuisine);
     cout << "Enter Restaurant rating: " << endl;
     cin >> temp.rating;      // I didn't use getline() here, because that skipping input error was happening just in the opposite way.
-    cout << "Enter Restaurant capacity: " << endl; // It would skip because of numbers, while the previous one skipped because of
-    cin >> temp.capacity;                          // spaces in the input.
-    return temp;
+    cout << "Enter Restaurant capacity: " << endl;
+    cin >> temp.capacity; 
+    cin.ignore(); // I was really confused about why some inputs were being skipped, and searching it up, I learned cin >>
+                  // leaves its newline when you press Enter and only reads the user input, so when the next restaurant comes around,
+                  // the newline left over only gets seen then and skips that getline, so nothing can be inputted for the next
+                  // restaurant's name.
 }
 
 void printRestaurant(Restaurant r){ // printRestaurant() takes a restaurant passed in and prints its data one by one
