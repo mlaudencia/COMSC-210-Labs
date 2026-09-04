@@ -28,6 +28,7 @@ Restaurant newRestaurant(){  // newRestaurant() takes in user inputs for the nam
                   // leaves its newline when you press Enter and only reads the user input, so when the next restaurant comes around,
                   // the newline left over only gets seen then and skips that getline, so nothing can be inputted for the next
                   // restaurant's name.
+    return temp;
 }
 
 void printRestaurant(Restaurant r){ // printRestaurant() takes a restaurant passed in and prints its data one by one
@@ -44,7 +45,7 @@ int main() {
     Restaurant r2 = newRestaurant(); // I assume that meant print, so I just made four restaurants, and then printed them all
     Restaurant r3 = newRestaurant(); // at the same time.
     Restaurant r4 = newRestaurant();
-    printRestaurant(r1);
+    printRestaurant(r1);             // Each one of these prints out the data for the restaurant inputted. 
     printRestaurant(r2);
     printRestaurant(r3);
     printRestaurant(r4);
