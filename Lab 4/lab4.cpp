@@ -1,22 +1,50 @@
+// COMSC-210 | Lab 4 | Jeremy Laudencia
+
+// included <random> to generate random numbers,
+// <vector> to store each Color generated,
+// and <iomanip> to have a nice format when printed.
 #include <iostream>
 #include <iomanip>
 #include <random>
 #include <vector>
 using namespace std;
 
+
+// struct for a new Color, as given by the
+// info before Milestone 1, taking in a
+// red, green, and blue value
 struct Color{
     int r;
     int g;
     int b;
 };
 
-Color makeNewColor();
+// makeNewColor() makes a new color with user inputs
+// arguments: none
+// returns: A Color object containing the three user inputs for r, g, and b
+Color makeNewColor(); 
+
+// newColor() makes a new color by taking in given r, g, and b values
+// arguments: int r, g, b
+// returns: A color object containing the three parameter inputs for r, g, and b 
 Color newColor(int r, int g, int b);
+
+// Originally, I had makeNewColor() as newColor(), but after
+// reading Milestone 2, I  changed it so that there would be a
+// function for user input colors, and then general parameter colors.
+
+// printColor() takes in a Color c and prints its r, g, and b values
+// arguments: Color c
+//returns: nothing
 void printColor(Color c);
 
 int main(){
+    // initialized an empty vector of type Color for later
     vector<Color> myColors;
+    // put this to generate actual random numbers instead of repeated ones
     srand(time(0));
+    // randomNum() generates a random number between 25-50 for how many
+    // colors that are going to be printed
     int randomNum = rand() % (50-25+1) + 25;
     for(int i = 0; i < randomNum; i++){
         int randomR = rand() % (255+1);
