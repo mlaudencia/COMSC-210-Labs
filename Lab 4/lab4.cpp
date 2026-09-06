@@ -14,7 +14,7 @@ void printColor(Color c);
 vector<Color> myColors;
 
 int main(){
-    
+    printColor(newColor());
 }
 
 Color newColor(){
