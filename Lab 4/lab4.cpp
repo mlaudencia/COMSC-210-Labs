@@ -10,7 +10,8 @@ struct Color{
     int b;
 };
 
-Color newColor();
+Color makeNewColor();
+Color newColor(int r, int g, int b);
 void printColor(Color c);
 
 int main(){
