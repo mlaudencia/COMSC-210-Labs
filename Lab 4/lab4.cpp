@@ -15,16 +15,21 @@ void printColor(Color c);
 
 int main(){
     vector<Color> myColors;
-    Color c1 = newColor();
-    printColor(c1);
-    myColors.push_back(c1);
+    srand(time(0));
+    int randomNum = rand() % (50-25+1) + 25;
+    for(int i = 0; i < randomNum; i++){
+        int randomR = rand() % (255+1);
+        int randomG = rand() % (255+1);
+        int randomB = rand() % (255+1);
+        myColors.push_back(newColor(randomR, randomG, randomB));
+    }
 
     cout << right << setw(10) 
          << "Color #  " << setw(10) <<
             "R value" << setw(10) <<
             "G value" << setw(10) <<
             "B value" << setw(10) << endl;
-    cout << "----------------------------------------------" << endl;
+    cout << "-------------------------------------------" << endl;
     for(int i = 0; i < myColors.size(); ++i){
         cout << right << setw(5) 
              << i+1 << setw(11) <<
@@ -35,7 +40,7 @@ int main(){
 
 }
 
-Color newColor(){
+Color makeNewColor(){
     Color temp;
     cout << "Enter color's r value: " << endl;
     cin >> temp.r;
@@ -44,6 +49,14 @@ Color newColor(){
     cout << "Enter color's r value: " << endl;
     cin >> temp.b;
 
+    return temp;
+}
+
+Color newColor(int r, int g, int b){
+    Color temp;
+    temp.r = r;
+    temp.g = g;
+    temp.b = b;
     return temp;
 }
 
