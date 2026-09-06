@@ -1,14 +1,19 @@
 // COMSC-210 | Lab 4 | Jeremy Laudencia
 
-// included <random> to generate random numbers,
+// included <cstdlib> and <ctime> to generate random numbers,
 // <vector> to store each Color generated,
 // and <iomanip> to have a nice format when printed.
 #include <iostream>
 #include <iomanip>
-#include <random>
+#include <cstdlib>
+#include <ctime>
 #include <vector>
 using namespace std;
 
+const int MIN_COLORS = 25;
+const int MAX_COLORS = 50;
+const int MAX_RGB = 255;
+const int COL_WIDTH = 15;
 
 // struct for a new Color, as given by the
 // info before Milestone 1, taking in a
@@ -19,24 +24,11 @@ struct Color{
     int b;
 };
 
-// makeNewColor() makes a new color with user inputs
-// arguments: none
-// returns: A Color object containing the three user inputs for r, g, and b
-Color makeNewColor(); 
-
 // newColor() makes a new color by taking in given r, g, and b values
 // arguments: int r, g, b
 // returns: A color object containing the three parameter inputs for r, g, and b 
 Color newColor(int r, int g, int b);
 
-// Originally, I had makeNewColor() as newColor(), but after
-// reading Milestone 2, I  changed it so that there would be a
-// function for user input colors, and then general parameter colors.
-
-// printColor() takes in a Color c and prints its r, g, and b values
-// arguments: Color c
-//returns: nothing
-void printColor(Color c);
 
 int main(){
     // initialized an empty vector of type Color for later
@@ -45,53 +37,43 @@ int main(){
     srand(time(0));
     // randomNum() generates a random number between 25-50 for how many
     // colors that are going to be printed
-    int randomNum = rand() % (50-25+1) + 25;
+    int randomNum = rand() % (MAX_COLORS-MIN_COLORS+1) + MIN_COLORS;
     for(int i = 0; i < randomNum; i++){
-        int randomR = rand() % (255+1);
-        int randomG = rand() % (255+1);
-        int randomB = rand() % (255+1);
+        // The below generates random numbers from 0-255 for
+        // a color's r, g, and b hues
+        int randomR = rand() % (MAX_RGB+1);
+        int randomG = rand() % (MAX_RGB+1);
+        int randomB = rand() % (MAX_RGB+1);
+        // After we generate those, we make a new Color with the
+        // random RGB, and then put it into our vector, myColors.
         myColors.push_back(newColor(randomR, randomG, randomB));
     }
 
-    cout << right << setw(10) 
-         << "Color #  " << setw(10) <<
-            "R value" << setw(10) <<
-            "G value" << setw(10) <<
-            "B value" << setw(10) << endl;
-    cout << "-------------------------------------------" << endl;
+    // The below is just a bunch of formatting for the print
+    // so that it looks nice.
+    cout << left << setw(COL_WIDTH) 
+         << "Color #" << setw(COL_WIDTH) <<
+            "R value" << setw(COL_WIDTH) <<
+            "G value" << setw(COL_WIDTH) <<
+            "B value" << endl;
+    cout << "-----------------------------------------------------" << endl;
+    // Prints out each color in myColors and its r, g, and b values
     for(int i = 0; i < myColors.size(); ++i){
-        cout << right << setw(5) 
-             << i+1 << setw(11) <<
-            myColors[i].r << setw(11) <<
-            myColors[i].g << setw(11) <<
+        cout << left << setw(COL_WIDTH) 
+             << i+1 << setw(COL_WIDTH) <<
+            myColors[i].r << setw(COL_WIDTH) <<
+            myColors[i].g << setw(COL_WIDTH) <<
             myColors[i].b << endl;
     }
 
 }
 
-Color makeNewColor(){
-    Color temp;
-    cout << "Enter color's r value: " << endl;
-    cin >> temp.r;
-    cout << "Enter color's g value: " << endl;
-    cin >> temp.g;
-    cout << "Enter color's r value: " << endl;
-    cin >> temp.b;
-
-    return temp;
-}
-
+    // This takes in three parameters for r, g, and b,
+    // then returns a Color from those given ints. 
 Color newColor(int r, int g, int b){
     Color temp;
     temp.r = r;
     temp.g = g;
     temp.b = b;
     return temp;
-}
-
-void printColor(Color c){
-    cout << "Color values:" << endl;
-    cout << "   R: " << c.r << endl;
-    cout << "   G: " << c.g << endl;
-    cout << "   B: " << c.b << endl;
 }
