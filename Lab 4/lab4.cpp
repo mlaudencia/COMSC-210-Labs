@@ -19,16 +19,18 @@ int main(){
     printColor(c1);
     myColors.push_back(c1);
 
-    cout << right << "Color #" << setw(5) <<
-            "R" << setw(5) <<
-            "G" << setw(5) <<
-            "B" << setw(5) << endl;
-    cout << "----------------------------" << endl;
+    cout << right << setw(10) 
+         << "Color #  " << setw(10) <<
+            "R value" << setw(10) <<
+            "G value" << setw(10) <<
+            "B value" << setw(10) << endl;
+    cout << "----------------------------------------------" << endl;
     for(int i = 0; i < myColors.size(); ++i){
-        cout << right << i+1 << setw(5) <<
-            myColors[i].r << setw(5) <<
-            myColors[i].g << setw(5) <<
-            myColors[i].b << setw(5) << endl;
+        cout << right << setw(5) 
+             << i+1 << setw(11) <<
+            myColors[i].r << setw(11) <<
+            myColors[i].g << setw(11) <<
+            myColors[i].b << endl;
     }
 
 }
