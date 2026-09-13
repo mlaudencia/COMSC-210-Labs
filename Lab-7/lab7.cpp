@@ -8,22 +8,29 @@ void displayArray(string* names);
 const int SIZE = 5;
 
 int main(){
-    string* names = new string[SIZE];
+    string* names = new string[5]{"Doron", "Isaac", "Pot", "Pico", "Jonas"};
     cout << "Original array: ";
-    for(int i = 0; i < SIZE; i++){
-        cin >> names[i];
-    }
     displayArray(names);
 
-    // reverseArray(names);
-    // cout << "Reversed array: ";
-    // displayArray(names);
+    cout << "Reversed array: ";
+    displayArray(reverseArray(names));
+
+    delete[] names;
 }
 
 string* reverseArray(string* names){
     string* temp = new string[SIZE];
+    for(int i = 0; i < SIZE; i++)
+        *(temp + i) = *(names + SIZE - 1 - i);
+    for(int i = 0; i < SIZE; i++)
+        *(names + i) = *(temp + i);
+    delete[] temp;
+    return names;
+}
+
+void displayArray(string* names){
     for(int i = 0; i < SIZE; i++){
-        *(names + SIZE - i) = *(temp + i);
+        cout << *(names + i) << " ";
     }
-    return temp;
+    cout << endl;
 }
