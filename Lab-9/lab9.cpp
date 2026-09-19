@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <array>
+#include <numeric>
 #include <vector>
 #include <string>
 #include <algorithm>
@@ -51,4 +52,27 @@ int main(){
     else
         cout << " was not found" << endl;
     cout << "    Name: " << *foundName << endl;
+
+    array<string, 4> fourTaira;
+    fill(fourTaira.begin(), fourTaira.end(), "Taira");
+    array<string, 4> fourVan;
+    fill(fourVan.begin(), fourVan.end(), "Van");
+    
+    cout << "4-element array of Taira: ";
+    for(string name : fourTaira) cout << name << " "; cout << endl;
+    cout << "4-element array of Van: ";
+    for(string name : fourVan) cout << name << " "; cout << endl;
+
+    fourTaira.swap(fourVan);
+    cout << "Swapped Taira and Van, Taira array now holds: ";
+    for(string name : fourTaira) cout << name << " "; cout << endl;
+
+    array<string, 2> row1 = {"Gaethje", "Topuria"};
+    array<string, 2> row2 = {"Tsarukyan", "Oliveira"};
+    array<array<string, 2>,2> lightWeight = {row1, row2};
+    cout << lightWeight[1][1] << endl;
+
+    cout << "First alphabetically: " << *min_element(fighters.begin(), fighters.end()) << endl;
+    cout << "Last alphabetically: " << *max_element(fighters.begin(), fighters.end()) << endl;
+    cout << "Concatenated names " << accumulate(fighters.begin(), fighters.end(), string("")) << endl;
 }
