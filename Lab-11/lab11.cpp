@@ -17,6 +17,12 @@ struct Fighter{
     vector<string> specialMoves;
 };
 
+// Here, I initialize two constants for the index of Ryu and Cammy.
+// I wasn't sure if I should include them since the index of a fighter
+// can change, but I just put them just in case.
+const int INDEX_RYU = 2;
+const int INDEX_CAMMY = 4;
+
 int main(){
 
     // I make a new dynamic array of type fighter 
@@ -43,15 +49,16 @@ int main(){
     // change the attributes of any fighter.
     int fighterNum = 1;
     for(const Fighter &f : *fighters){
-    cout << "Fighter " << fighterNum << ": " << f.name << endl;
-    cout << "    Style: " << f.style << endl;
-    cout << "    Height: " << f.height << endl;
-    cout << "    Weight: " << f.weight << endl;
-    cout << "    Moves:" << endl;
-    // We use the same & operator when accessing specialMoves, printing
-    // the moves themselves and not copies.
-    for(const string &move : f.specialMoves)
-        cout << "      [" << move << "]" << endl;
+        cout << "Fighter " << fighterNum << ": " << f.name << endl;
+        cout << "    Style: " << f.style << endl;
+        cout << "    Height: " << f.height << endl;
+        cout << "    Weight: " << f.weight << endl;
+        cout << "    Moves:" << endl;
+        // We use the same & operator when accessing specialMoves, printing
+        // the moves themselves and not copies.
+        for(const string &move : f.specialMoves){
+            cout << "      [" << move << "]" << endl;
+        }
     fighterNum++;
     }
 
@@ -59,15 +66,15 @@ int main(){
     // by dereferencing the vector pointer, and then accessing the
     // third item of the fighters array and changing whatever attribute
     // I want, it being style in this case.
-    fighters->at(2).style = "Karate";
-    cout <<  fighters->at(2).style << endl;
+    fighters->at(INDEX_RYU).style = "Karate";
+    cout <<  fighters->at(INDEX_RYU).style << endl;
 
     // Here, I show that I can get rid of a fighter using erase(), 
     // erasing the fifth fighter in the vector, and then replacing them
     // with a new fighter. After that, I insert a new fighter at the
     // start of the array, which moves every fighter up one in the array.
-    fighters->erase(fighters->begin() + 4);
-    fighters->insert(fighters->begin() + 4, {"Cammy", "CQC", 5.5, 134,
+    fighters->erase(fighters->begin() + INDEX_CAMMY);
+    fighters->insert(fighters->begin() + INDEX_CAMMY, {"Cammy", "CQC", 5.5, 134,
     {"Spiral Arrow", "Cannon Spike", "Quick Spin Knuckle"}});
     fighters->insert(fighters->begin(), {"Ken", "Ansatsuken", 5.9, 183,
     {"Hadoken", "Shoryuken", "Tatsumaki Senpu-kyaku"}});
@@ -77,12 +84,14 @@ int main(){
     // in the vector.
     fighterNum = 1;
     for(const Fighter &f : *fighters){
-    cout << "Fighter " << fighterNum << ": " << f.name << endl;
-    cout << "    Style: " << f.style << endl;
-    cout << "    Height: " << f.height << endl;
-    cout << "    Weight: " << f.weight << endl;
-    for(const string &move : f.specialMoves)
-        cout << "      [" << move << "]" << endl;
+        cout << "Fighter " << fighterNum << ": " << f.name << endl;
+        cout << "    Style: " << f.style << endl;
+        cout << "    Height: " << f.height << endl;
+        cout << "    Weight: " << f.weight << endl;
+        cout << "    Moves:" << endl;
+        for(const string &move : f.specialMoves){
+            cout << "      [" << move << "]" << endl;
+        }
     fighterNum++;
     }
 
@@ -93,4 +102,4 @@ int main(){
     // just on the heap, while "delete[] fighters" are for arrays that would've
     // been allocated using "new Fighter[size]".
     delete fighters;
-};
+}
