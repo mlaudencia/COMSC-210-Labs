@@ -25,35 +25,37 @@ int main(){
     fighters->push_back({"Zangief", "Wrestling", 7.0, 399,
     {"Double Lariat", "Screw Piledriver", "Borscht Dynamite"}});
 
-    int temp = 1;
+    int fighterNum = 1;
     for(const Fighter &f : *fighters){
-    cout << "Fighter " << temp << ": " << f.name << endl;
+    cout << "Fighter " << fighterNum << ": " << f.name << endl;
     cout << "    Style: " << f.style << endl;
     cout << "    Height: " << f.height << endl;
     cout << "    Weight: " << f.weight << endl;
     cout << "    Moves:" << endl;
     for(const string &move : f.specialMoves)
         cout << "      [" << move << "]" << endl;
-    temp++;
+    fighterNum++;
     }
 
     fighters->at(2).style = "Karate";
     cout <<  fighters->at(2).style << endl;
 
     fighters->erase(fighters->begin() + 4);
-    fighters->insert(fighters->begin() + 4, {"Cammy", "CQC", 5.5, 134});
-    fighters->insert(fighters->begin(), {"Ken", "Ansatsuken", 5.9, 183});
+    fighters->insert(fighters->begin() + 4, {"Cammy", "CQC", 5.5, 134,
+    {"Spiral Arrow", "Cannon Spike", "Quick Spin Knuckle"}});
+    fighters->insert(fighters->begin(), {"Ken", "Ansatsuken", 5.9, 183,
+    {"Hadoken", "Shoryuken", "Tatsumaki Senpu-kyaku"}});
 
-    temp = 1;
+    fighterNum = 1;
     for(const Fighter &f : *fighters){
-    cout << "Fighter " << temp << ": " << f.name << endl;
+    cout << "Fighter " << fighterNum << ": " << f.name << endl;
     cout << "    Style: " << f.style << endl;
     cout << "    Height: " << f.height << endl;
     cout << "    Weight: " << f.weight << endl;
     for(const string &move : f.specialMoves)
         cout << "      [" << move << "]" << endl;
-    temp++;
+    fighterNum++;
     }
 
-    delete[] fighters;
+    delete fighters;
 };
