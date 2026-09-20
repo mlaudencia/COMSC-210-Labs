@@ -27,4 +27,8 @@ int main(){
     cout << "    Weight: " << f.weight << endl;
     temp++;
     }
+
+    (*fighters)[2].style = "Karate";
+
+    cout << (*fighters)[2].style << endl;
 };
