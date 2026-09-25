@@ -66,7 +66,6 @@ int main(){
      sdScore(students, NUM_STUDENTS);
 }
 
-
 // SelectionSort() takes in an array and its size, and sorts it by
 // ascending ID's.
 // arguments: Student* students, int NUM_STUDENTS
@@ -169,7 +168,6 @@ void medianScore(Student* students, int NUM_STUDENTS){
     }
 }
 
-
 // sdScore() finds the standard deviation of the grades of the
 // students, and prints it out.
 // arguments: Student* students, int NUM_STUDENTS
@@ -192,8 +190,14 @@ void sdScore(Student* students, int NUM_STUDENTS){
 void outputSortedStudents(Student* students, int NUM_STUDENTS, string fileName){
     ofstream outFile(fileName);
 
+    // In the coding conventions, it says to make error messages specific
+    // with the fixes and everything so its clear to the user. Unlike inFile,
+    // I had no idea how to fix outFile, so I had to search it up. Sorry if
+    // this looks too by the book.
     if(!outFile.is_open()){
-        cout << "ERROR: Could not open file for writing!" << endl;
+        cout << "ERROR: Could not open file for writing! Check if"
+        << " file path or disk permissions are valid, then restart"
+        << " program!" << endl;
         return;
     }
 
