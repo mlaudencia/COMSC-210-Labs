@@ -48,9 +48,18 @@ void SelectionSort(Student* students, int NUM_STUDENTS){
         
     }
 };
-void minScore(Student* students, int NUM_STUDENTS){
 
+void minScore(Student* students, int NUM_STUDENTS){
+    int smallScore = 0;
+        for(int i = 1; i < NUM_STUDENTS; i++){
+            if(students[i].grade < students[smallScore].grade)
+                smallScore = i;
+        }
+    }
+    cout << "Minimum score: " << students[smallScore].grade
+    << " (Student ID: " << students[smallScore].id << ") " << endl;
 };
+
 void maxScore(Student* students, int NUM_STUDENTS){
 
 };
