@@ -101,12 +101,19 @@ void meanScore(Student* students, int NUM_STUDENTS){
 void medianScore(Student* students, int NUM_STUDENTS){
     double median = 0;
     if(NUM_STUDENTS % 2 == 1){
-        median = students[NUM_STUDENTS/2].grade;
+        int middle = NUM_STUDENTS/2;
+        median = students[middle].grade;
+
+        cout << "Median score: " << median << " (Student ID: " 
+        << students[middle].id << ") " << endl;
     }
     else{
         int middle1 = (NUM_STUDENTS / 2) - 1;
         int middle2 = (NUM_STUDENTS / 2);
         median = (students[middle1].grade + students[middle2].grade) / 2.0;
+
+        cout << "Median score: " << median << " (Student IDs: " 
+        << students[middle1].id << " " << students[middle2].id << ") " << endl;
     }
 }
 
