@@ -72,17 +72,26 @@ void maxScore(Student* students, int NUM_STUDENTS){
     << " (Student ID: " << students[highScore].id << ") " << endl;
 };
 
-void meanScore(Student* students, int NUM_STUDENTS){
+double findMeanScore(Student* students, int NUM_STUDENTS){
     double total = 0;
     for(int i = 0; i < NUM_STUDENTS; i++){
         total += students[i].grade;
     }
-     cout << "Mean score: " << total / NUM_STUDENTS << endl;
+    return total / NUM_STUDENTS;
 };
+
+void meanScore(Student* students, int NUM_STUDENTS){
+    double meanScore = findMeanScore(students, NUM_STUDENTS);
+    cout << "Mean score: " << meanScore << endl;
+}
 
 void sdScore(Student* students, int NUM_STUDENTS){
     double sd = 0;
+    double total = 0;
+    double mean = findMeanScore(students, NUM_STUDENTS);
     for(int i = 0; i < NUM_STUDENTS; i++){
-        
+        total = (students[i].grade - mean);
+        sd += total * total;
     }
-};
+    cout << "Standard Deviation of Scores: " << sqrt(sd/NUM_STUDENTS) << endl;
+}
