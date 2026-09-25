@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <cmath>
 using namespace std;
 
 const int NUM_STUDENTS = 150;
@@ -52,7 +53,7 @@ void SelectionSort(Student* students, int NUM_STUDENTS){
 void minScore(Student* students, int NUM_STUDENTS){
     int smallScore = 0;
         for(int i = 1; i < NUM_STUDENTS; i++){
-            if(students[i].grade < students[smallScore].grade)
+            if(students[i].grade < students[smallScore].grade){
                 smallScore = i;
         }
     }
@@ -61,11 +62,27 @@ void minScore(Student* students, int NUM_STUDENTS){
 };
 
 void maxScore(Student* students, int NUM_STUDENTS){
-
+    int highScore = 0;
+        for(int i = 1; i < NUM_STUDENTS; i++){
+            if(students[i].grade > students[highScore].grade){
+                highScore = i;
+        }
+    }
+    cout << "Maximum score: " << students[highScore].grade
+    << " (Student ID: " << students[highScore].id << ") " << endl;
 };
+
 void meanScore(Student* students, int NUM_STUDENTS){
-
+    double total = 0;
+    for(int i = 0; i < NUM_STUDENTS; i++){
+        total += students[i].grade;
+    }
+     cout << "Mean score: " << total / NUM_STUDENTS << endl;
 };
-void sdScore(Student* students, int NUM_STUDENTS){
 
+void sdScore(Student* students, int NUM_STUDENTS){
+    double sd = 0;
+    for(int i = 0; i < NUM_STUDENTS; i++){
+        
+    }
 };
