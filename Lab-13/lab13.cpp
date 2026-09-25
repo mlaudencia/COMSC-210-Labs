@@ -18,7 +18,7 @@ void sdScore(Student* students, int NUM_STUDENTS);
 
 int main(){
 
-    Student students[150];
+    Student students[NUM_STUDENTS];
     ifstream inFile("210-lab-13-grades.txt");
 
     if(!inFile){
@@ -32,6 +32,18 @@ int main(){
 
      inFile.close();
      cout << "Data read successfully!" << endl;
+
+     cout << "Read " << NUM_STUDENTS << " student records" << endl;
+     cout << "Outputted sorted results to 210-lab-13-grades-sorted.txt" 
+     << endl;
+
+     // Do the above after printing the summary
+
+     cout << " --- Summary Statistics ---" << endl;
+     minScore(students, NUM_STUDENTS);
+     maxScore(students, NUM_STUDENTS);
+     meanScore(students, NUM_STUDENTS);
+     sdScore(students, NUM_STUDENTS);
 }
 
 void SelectionSort(Student* students, int NUM_STUDENTS){
