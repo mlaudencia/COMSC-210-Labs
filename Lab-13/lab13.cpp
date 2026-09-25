@@ -27,6 +27,7 @@ void maxScore(Student* students, int NUM_STUDENTS);
 void meanScore(Student* students, int NUM_STUDENTS);
 void medianScore(Student* students, int NUM_STUDENTS);
 void sdScore(Student* students, int NUM_STUDENTS);
+void outputSortedStudents(Student* students, int NUM_STUDENTS, string fileName);
 
 int main(){
 
@@ -37,7 +38,7 @@ int main(){
 
     if(!inFile){
         cout << "ERROR: Could not open data file!" << endl;
-        return;
+        return 1;
     }
 
      for(int i = 0; i < NUM_STUDENTS; ++i){
@@ -50,8 +51,8 @@ int main(){
      cout << "Read " << NUM_STUDENTS << " student records" << endl;
 
      // After reading the contents of the data file, we sort them by
-     // ascending ID, and then export it as another data file.
-     SelectionSort(students, NUM_STUDENTS);
+     // ascending ID in the outputSortedStudents() function, and then
+     // export it as another data file.
      outputSortedStudents(students, NUM_STUDENTS, "210-lab-13-grades-sorted.txt");
 
      // The below just prints out the statistics of the summary,
@@ -142,6 +143,11 @@ void meanScore(Student* students, int NUM_STUDENTS){
 // returns: nothing
 void medianScore(Student* students, int NUM_STUDENTS){
     double median = 0;
+    // Writing this part of medianScore() had me stuck for a while.
+    // I didn't know why my output was different from the sample output.
+    // I thought it was better if medianScore() was able to handle if there
+    // were two students in the middle, and I think that's what might've
+    // confused me.
     if(NUM_STUDENTS % 2 == 1){
         int middle = NUM_STUDENTS/2;
         median = students[middle].grade;
@@ -159,6 +165,11 @@ void medianScore(Student* students, int NUM_STUDENTS){
     }
 }
 
+
+// sdScore() finds the standard deviation of the grades of the
+// students, and prints it out.
+// arguments: Student* students, int NUM_STUDENTS
+// returns: nothing
 void sdScore(Student* students, int NUM_STUDENTS){
     double sd = 0;
     double total = 0;
@@ -170,6 +181,10 @@ void sdScore(Student* students, int NUM_STUDENTS){
     cout << "Standard Deviation of Scores: " << sqrt(sd/NUM_STUDENTS) << endl;
 }
 
+// outputSortedStudents() takes an array, sorts it, and then writes a
+// data file containing the array's sorted values.
+// arguments: Student* students, int NUM_STUDENTS, string fileName
+// returns: nothing
 void outputSortedStudents(Student* students, int NUM_STUDENTS, string fileName){
     ofstream outFile(fileName);
 
@@ -177,6 +192,8 @@ void outputSortedStudents(Student* students, int NUM_STUDENTS, string fileName){
         cout << "ERROR: Could not open file for writing!" << endl;
         return;
     }
+
+    SelectionSort(students, NUM_STUDENTS);
 
     for(int i = 0; i < NUM_STUDENTS; i++){
         outFile << students[i].id << " " << students[i].grade << endl;
