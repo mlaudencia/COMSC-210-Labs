@@ -14,6 +14,7 @@ void SelectionSort(Student* students, int NUM_STUDENTS);
 void minScore(Student* students, int NUM_STUDENTS);
 void maxScore(Student* students, int NUM_STUDENTS);
 void meanScore(Student* students, int NUM_STUDENTS);
+void medianScore(Student* students, int NUM_STUDENTS);
 void sdScore(Student* students, int NUM_STUDENTS);
 
 int main(){
@@ -95,6 +96,18 @@ double findMeanScore(Student* students, int NUM_STUDENTS){
 void meanScore(Student* students, int NUM_STUDENTS){
     double meanScore = findMeanScore(students, NUM_STUDENTS);
     cout << "Mean score: " << meanScore << endl;
+}
+
+void medianScore(Student* students, int NUM_STUDENTS){
+    double median = 0;
+    if(NUM_STUDENTS % 2 == 1){
+        median = students[NUM_STUDENTS/2].grade;
+    }
+    else{
+        int middle1 = (NUM_STUDENTS / 2) - 1;
+        int middle2 = (NUM_STUDENTS / 2);
+        median = (students[middle1].grade + students[middle2].grade) / 2.0;
+    }
 }
 
 void sdScore(Student* students, int NUM_STUDENTS){
