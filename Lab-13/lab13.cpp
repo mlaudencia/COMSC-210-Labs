@@ -37,7 +37,8 @@ int main(){
     ifstream inFile("210-lab-13-grades.txt");
 
     if(!inFile){
-        cout << "ERROR: Could not open data file!" << endl;
+        cout << "ERROR: Could not open data file! Check if it exists "
+        << "in directory, then restart program!" << endl;
         return 1;
     }
 
@@ -86,7 +87,7 @@ void SelectionSort(Student* students, int NUM_STUDENTS){
     }
 };
 
-// maxScore() takes in an array and its size, and prints what student
+// minScore() takes in an array and its size, and prints what student
 // had the smallest score and their ID. 
 // arguments: Student* students, int NUM_STUDENTS
 // returns: nothing
@@ -147,7 +148,10 @@ void medianScore(Student* students, int NUM_STUDENTS){
     // I didn't know why my output was different from the sample output.
     // I thought it was better if medianScore() was able to handle if there
     // were two students in the middle, and I think that's what might've
-    // confused me.
+    // confused me. On top of that, my median was different from the sample
+    // output, and I'm not sure why. I got different outputs for median
+    // before sorting, after sorting, and when my function only uses 
+    // one student.
     if(NUM_STUDENTS % 2 == 1){
         int middle = NUM_STUDENTS/2;
         median = students[middle].grade;
@@ -193,6 +197,10 @@ void outputSortedStudents(Student* students, int NUM_STUDENTS, string fileName){
         return;
     }
 
+    // Initially, I had SelectionSort() outside of this function, and
+    // just in main, but it sort of looked out of place to have it there
+    // when it's only being used for the export of the new file, so I 
+    // decided to move it here.
     SelectionSort(students, NUM_STUDENTS);
 
     for(int i = 0; i < NUM_STUDENTS; i++){
