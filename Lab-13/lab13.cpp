@@ -32,3 +32,31 @@ int main(){
      inFile.close();
      cout << "Data read successfully!" << endl;
 }
+
+void SelectionSort(Student* students, int NUM_STUDENTS){
+    for(int i = 0; i < NUM_STUDENTS - 1; i++){
+        int smallIndex = i;
+        Student temp;
+        for(int j = i + 1; j < NUM_STUDENTS; j++){
+            if(students[j].id < students[smallIndex].id){
+                smallIndex = j;
+            }
+        }
+        temp = students[i];
+        students[i] = students[smallIndex];
+        students[smallIndex] = temp;
+        
+    }
+};
+void minScore(Student* students, int NUM_STUDENTS){
+
+};
+void maxScore(Student* students, int NUM_STUDENTS){
+
+};
+void meanScore(Student* students, int NUM_STUDENTS){
+
+};
+void sdScore(Student* students, int NUM_STUDENTS){
+
+};
