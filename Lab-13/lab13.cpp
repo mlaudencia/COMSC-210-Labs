@@ -24,7 +24,7 @@ int main(){
 
     if(!inFile){
         cout << "ERROR: Could not open data file!" << endl;
-        return 1;
+        return;
     }
 
      for(int i = 0; i < NUM_STUDENTS; ++i){
@@ -35,15 +35,13 @@ int main(){
      cout << "Data read successfully!" << endl;
 
      cout << "Read " << NUM_STUDENTS << " student records" << endl;
-     cout << "Outputted sorted results to 210-lab-13-grades-sorted.txt" 
-     << endl;
-
-     // Do the above after printing the summary
+     outputSortedStudents(students, NUM_STUDENTS, "210-lab-13-grades-sorted.txt");
 
      cout << " --- Summary Statistics ---" << endl;
      minScore(students, NUM_STUDENTS);
      maxScore(students, NUM_STUDENTS);
      meanScore(students, NUM_STUDENTS);
+     medianScore(students, NUM_STUDENTS);
      sdScore(students, NUM_STUDENTS);
 }
 
@@ -126,4 +124,21 @@ void sdScore(Student* students, int NUM_STUDENTS){
         sd += total * total;
     }
     cout << "Standard Deviation of Scores: " << sqrt(sd/NUM_STUDENTS) << endl;
+}
+
+void outputSortedStudents(Student* students, int NUM_STUDENTS, string fileName){
+    ofstream outFile(fileName);
+
+    if(!outFile.is_open()){
+        cout << "ERROR: Could not open file for writing!" << endl;
+        return;
+    }
+
+    for(int i = 0; i < NUM_STUDENTS; i++){
+        outFile << students[i].id << " " << students[i].grade << endl;
+    }
+    
+    outFile.close();
+
+    cout << "Sorted results written to " << fileName << endl;
 }
