@@ -30,7 +30,17 @@ int main(){
     // its values into the temp movie. Searching it up, apparently
     // it does a lot, so I changed the order to match the external
     // file.
-    while(inFile >> sW >> year >> title){
+
+    // I ended up having to change it from
+    // while(inFile >> sW >> year >> title)
+    // to the below, because there was a problem with reading in
+    // spaced out strings compared to just one word. Searching up
+    // and learning about it was tough, but definitely useful.
+    while(true)
+        if(!getline(inFile, sW)) break;
+        if(!(inFile >> year)) break;
+        inFile.ignore();
+        if(!getline(inFile, title)) break;
         Movie temp(sW, year, title);
         movies.push_back(temp);
     }
