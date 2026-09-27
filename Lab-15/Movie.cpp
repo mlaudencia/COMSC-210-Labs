@@ -8,7 +8,7 @@
 #include <iostream>
 #include <string>
 
-Movie::Movie(std::string sW, std::string title, int year){
+Movie::Movie(std::string sW, int year, std::string title){
     screenWriter = sW;
     movieTitle = title;
     yearReleased = year;

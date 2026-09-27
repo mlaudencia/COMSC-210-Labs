@@ -9,15 +9,14 @@ class Movie{
         std::string movieTitle;
         int yearReleased;
     public:
-        Movie();
-        Movie(std::string sW, std::string title, int year);
+        Movie(std::string sW, int year, std::string title);
 
         std::string getScreenWriter();
-        std::string getTitle();
+        std::string getMovieTitle();
         int getYearReleased();
 
         void setScreenWriter(std::string sW);
-        void setTitle(std::string title);
+        void setMovieTitle(std::string title);
         void setYearReleased(int year);
 
         void printMovie();

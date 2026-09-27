@@ -25,12 +25,21 @@ int main(){
         return 1;
     }
 
-    while(inFile >> title >> sW >> year){
-        Movie temp(sW, title, year);
+    // While I was writing this, I was wondering if the order
+    // of the stuff in the external file mattered when putting
+    // its values into the temp movie. Searching it up, apparently
+    // it does a lot, so I changed the order to match the external
+    // file.
+    while(inFile >> sW >> year >> title){
+        Movie temp(sW, year, title);
         movies.push_back(temp);
     }
 
     inFile.close();
+    cout << "Succesfully read in data file! " << endl;
 
-    Movie temp();
+    for(Movie movie : movies){
+        movie.printMovie();
+    }
+
 }
