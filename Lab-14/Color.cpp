@@ -31,6 +31,11 @@ Color::Color(std::string name, int red, int green, int blue){
 
 // Everything else below is pretty self-explanatory, just my 
 // gets and sets, and then the two different version of print.
+
+std::string Color::getName(){
+    return color;
+}
+
 int Color::getR(){
     return r;
 }
