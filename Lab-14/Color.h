@@ -12,15 +12,15 @@ class Color{
         int b;
     public:
         Color();
-        Color(int r, int g, int b);
+        Color(int red, int green, int blue);
 
         int getR();
         int getG();
         int getB();
 
-        void setR(int r);
-        void setG(int g);
-        void setB(int b);
+        void setR(int red);
+        void setG(int green);
+        void setB(int blue);
 
         void print();
 
