@@ -1,3 +1,8 @@
+// COMSC-210 | Lab 14 | Jeremy Laudencia
+
+// Comments start at Color.h
+
+
 #include <iostream>
 #include "Color.h"
 #include "Color.cpp"

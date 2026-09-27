@@ -1,4 +1,7 @@
+
+
 #include "Color.h"
+#include <iostream>
 
 Color::Color(){
     r = 0;
@@ -12,7 +15,7 @@ Color::Color(int red, int green, int blue){
     b = blue;
 }
 
-Color::Color(string name, int red, int green, int blue){
+Color::Color(std::string name, int red, int green, int blue){
     color = name;
     r = red;
     g = green;
@@ -31,6 +34,10 @@ int Color::getB(){
     return b;
 }
 
+void Color::setColor(std::string name){
+    color = name;
+}
+
 void Color::setR(int red){
     r = red;
 }
@@ -44,14 +51,14 @@ void Color::setB(int blue){
 }
 
 void Color::print1(){
-    cout << "    Red value: " << r << endl;
-    cout << "    Green value: " << g << endl;
-    cout << "    Blue value: " << b << endl;
+    std::cout << "    Red value: " << r << std::endl;
+    std::cout << "    Green value: " << g << std::endl;
+    std::cout << "    Blue value: " << b << std::endl;
 }
 
 void Color::print2(){
-    cout << "Color name: " << color << endl;
-    cout << "    Red value: " << r << endl;
-    cout << "    Green value: " << g << endl;
-    cout << "    Blue value: " << b << endl;
+    std::cout << "Color name: " << color << std::endl;
+    std::cout << "    Red value: " << r << std::endl;
+    std::cout << "    Green value: " << g << std::endl;
+    std::cout << "    Blue value: " << b << std::endl;
 }

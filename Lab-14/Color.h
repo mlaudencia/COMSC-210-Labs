@@ -3,18 +3,16 @@
 #define COLOR_H
 #include <iostream>
 
-using namespace std;
-
 class Color{
     private:
         int r;
         int g;
         int b;
-        string color;
+        std::string color;
     public:
         Color();
         Color(int red, int green, int blue);
-        Color(string name, int red, int green, int blue);
+        Color(std::string name, int red, int green, int blue);
 
         int getName();
         int getR();
