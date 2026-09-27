@@ -1,9 +1,17 @@
+// COMSC-210 | Lab 15 | Jeremy Laudencia
 
+// Here, I include the Movie.h file to use their functions and all,
+// <fstream> to read in external files, and <vector> since that's 
+// what I wanna use to store the movies. I, once again, had the
+// Movie.cpp file included here, too, but I took it out. I made
+// the same mistake in the previous lab, so I clearly did not learn
+// my lesson. This is strike 2, and this is more of a reminder to
+// not include the cpp file in the next lab.
 
 #include "Movie.h"
-#include "Movie.cpp"
 #include <fstream>
 #include <vector>
+#include <iostream>
 using namespace std;
 
 int main(){
@@ -61,7 +69,7 @@ int main(){
     // After we're done with the external file, we close it for no memory
     // leaks, and then print that the data from it was successfully read in.
     inFile.close();
-    cout << "Succesfully read in data file! " << endl;
+    cout << "Successfully read in data file! " << endl;
 
     // Finally, we just used an enhanced for loop and print each movie out.
     for(Movie movie : movies){

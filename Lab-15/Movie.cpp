@@ -8,12 +8,16 @@
 #include <iostream>
 #include <string>
 
+// I make the movie constructor here, once again practicing not
+// using the standard namespace and adding std:: to string parameters
+// and functions for the below.
 Movie::Movie(std::string sW, int year, std::string title){
     screenWriter = sW;
     movieTitle = title;
     yearReleased = year;
 }
 
+// Standard gets
 std::string Movie::getScreenWriter(){
     return screenWriter;
 }
@@ -26,6 +30,7 @@ int Movie::getYearReleased(){
     return yearReleased;
 }
 
+// Standard sets
 void Movie::setScreenWriter(std::string sW){
     screenWriter = sW;
 }
