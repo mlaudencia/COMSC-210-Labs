@@ -10,10 +10,13 @@ class Color{
         int r;
         int g;
         int b;
+        string color;
     public:
         Color();
         Color(int red, int green, int blue);
+        Color(string name, int red, int green, int blue);
 
+        int getName();
         int getR();
         int getG();
         int getB();
@@ -22,7 +25,8 @@ class Color{
         void setG(int green);
         void setB(int blue);
 
-        void print();
+        void print1();
+        void print2();
 
 };
 

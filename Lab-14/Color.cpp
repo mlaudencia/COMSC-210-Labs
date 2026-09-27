@@ -12,6 +12,13 @@ Color::Color(int red, int green, int blue){
     b = blue;
 }
 
+Color::Color(string name, int red, int green, int blue){
+    color = name;
+    r = red;
+    g = green;
+    b = blue;
+}
+
 int Color::getR(){
     return r;
 }
@@ -36,8 +43,15 @@ void Color::setB(int blue){
     b = blue;
 }
 
-void Color::print(){
-    cout << "Red value: " << r << endl;
-    cout << "Green value: " << g << endl;
-    cout << "Blue value: " << b << endl;
+void Color::print1(){
+    cout << "    Red value: " << r << endl;
+    cout << "    Green value: " << g << endl;
+    cout << "    Blue value: " << b << endl;
+}
+
+void Color::print2(){
+    cout << "Color name: " << color << endl;
+    cout << "    Red value: " << r << endl;
+    cout << "    Green value: " << g << endl;
+    cout << "    Blue value: " << b << endl;
 }
