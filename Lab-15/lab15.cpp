@@ -66,8 +66,8 @@ int main(){
         movies.push_back(temp);
     }
 
-    // After we're done with the external file, we close it for no memory
-    // leaks, and then print that the data from it was successfully read in.
+    // After we're done with the external file, we close it since we're
+    // finished using it.
     inFile.close();
     cout << "Successfully read in data file! " << endl;
 
