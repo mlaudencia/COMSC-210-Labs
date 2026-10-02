@@ -97,16 +97,38 @@ void createLinkedList(int SIZE, Node *&head){
 // arguments: Node *&head
 // returns: nothing
 void deleteNode(Node *&head){
-    cout << "Which node to delete? " << endl;
-    output(head);
-    int entry;
-    cout << "Choice --> ";
-    cin >> entry;
+    if(head == nullptr){
+        cout << "The list is empty, nothing to delete." << endl;
+        return;
+    }
 
     // traverse that many times and delete that node
     Node *current = head;
     Node *prev = nullptr;  // start prev as nullptr to detect head deletion
+    int entry;
 
+    bool isValid = false;
+    while(!isValid){
+        cout << "Which node to delete? " << endl;
+        output(head);
+        cout << "Choice --> ";
+        cin >> entry;
+
+        if(cin.fail()){
+            cout << "Invalid input, please enter a different number." << endl;
+            cin.clear();
+            cin.ignore(IGNORE_NUM_CHARACTERS, '\n');
+        }
+        else if(entry < 1){
+            cout << "Out of range, please choose an index shown." << endl;
+        }
+        else{
+            int count = 0;
+            Node *temp = head;
+            while
+        }
+    }
+    
     for (int i = 0; i < (entry - 1); i++) {
         prev = current;
         current = current->next;
@@ -152,7 +174,10 @@ void insertNodeAfter(Node *&head){
             cin.ignore(IGNORE_NUM_CHARACTERS, '\n');
         }
         else if(entry < 1 || entry >= count){
-            cout << ""
+            cout << "Out of range, please choose an index shown." << endl;
+        }
+        else{
+            isValid = true;
         }
     }
     current = head;
