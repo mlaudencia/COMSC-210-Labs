@@ -107,25 +107,46 @@ void deleteNode(Node *&head){
     Node *prev = nullptr;  // start prev as nullptr to detect head deletion
     int entry;
 
-    bool isValid = false;
+    bool isValid = false; // The below basically validates the user's input.
     while(!isValid){
         cout << "Which node to delete? " << endl;
         output(head);
         cout << "Choice --> ";
         cin >> entry;
 
+        // The below happens when the user inputs something like a word,
+        // since it isn't the same data type as entry. If that happens,
+        // we clear the "fail state" from the wrong input, and then use
+        // cin.ignore() to ignore the old invalid input.
         if(cin.fail()){
             cout << "Invalid input, please enter a different number." << endl;
             cin.clear();
             cin.ignore(IGNORE_NUM_CHARACTERS, '\n');
         }
+        // If the user input is a number, we check if it is in range.
+        // Right here, we check if it is greater than 1 since you can't
+        // delete the node before the head node.
         else if(entry < 1){
             cout << "Out of range, please choose an index shown." << endl;
         }
+        // If the user input is greater than 1, then we check if it is in
+        // range for numbers more than the size of the list. The below just
+        // makes a count, listSize, for all the nodes in the list that aren't
+        // the tail. Once the tail is reached, we compare the listSize calculated
+        // to the user input. If it is greater than the listSize, then we ask the
+        // user to input something again that's valid.
         else{
-            int count = 0;
+            int listSize = 0;
             Node *temp = head;
-            while
+            while(temp != nullptr){
+                listSize++;
+                temp = temp->next;
+            }
+            if(entry > listSize){
+            cout << "Out of range, please choose an index shown." << endl;
+            } else{
+                isValid = true;
+            }
         }
     }
     
@@ -164,6 +185,9 @@ void insertNodeAfter(Node *&head){
             cout << "[" << count++ << "] " << current->value << endl;
             current = current->next;
         }
+    // Like the previous function, we check for valid inputs from the user.
+    // The below basically does the same as the validation in deleteNode(),
+    // seeing if the input is less than 1 or larger than the size of the list.
     bool isValid = false;
     while(!isValid){
         cout << "Choice --> ";
