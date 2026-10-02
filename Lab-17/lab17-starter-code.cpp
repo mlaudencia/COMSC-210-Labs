@@ -9,6 +9,10 @@ struct Node {
 };
 
 void output(Node *);
+void createLinkedList(int SIZE, Node *&head);
+void deleteNode(Node *&head);
+void insertNodeAfter(Node *&head);
+int deleteLinkedList(Node *&head);
 
 int main() {
     Node *head = nullptr;
@@ -21,9 +25,10 @@ int main() {
     deleteNode(head);
 
     // insert a node
-    insertNodeAfter(head, current, prev, count, entry);
+    insertNodeAfter(head);
 
     // deleting the linked list
+    deleteLinkedList(head);
     
 }
 
@@ -91,7 +96,11 @@ void deleteNode(Node *&head){
     output(head);
 }
 
-void insertNodeAfter(Node *&head, Node *&current, Node *&prev, int count, int entry){
+void insertNodeAfter(Node *&head){
+    int count, entry;
+    Node *current = head;
+    Node *prev = nullptr;
+
     cout << "After which node to insert 10000? " << endl;
     count = 1;
     current = head;
@@ -126,8 +135,8 @@ void insertNodeAfter(Node *&head, Node *&current, Node *&prev, int count, int en
 }
 
 
-int deleteLinkedList(Node *&current, Node *&head){
-    current = head;
+int deleteLinkedList(Node *&head){
+    Node *current = head;
     while (current) {
         head = current->next;
         delete current;
