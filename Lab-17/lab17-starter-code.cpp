@@ -34,33 +34,6 @@ int main() {
     output(head);
 
     // deleting a node
-    cout << "Which node to delete? " << endl;
-    output(head);
-    int entry;
-    cout << "Choice --> ";
-    cin >> entry;
-
-    // traverse that many times and delete that node
-    Node *current = head;
-    Node *prev = nullptr;  // start prev as nullptr to detect head deletion
-
-    for (int i = 0; i < (entry - 1); i++) {
-        prev = current;
-        current = current->next;
-    }
-
-    // at this point, delete current and reroute pointers
-    if (current) {
-        if (prev == nullptr) {
-            // deleting the head node
-            head = current->next;
-        } else {
-            prev->next = current->next;
-        }
-        delete current;
-        current = nullptr;
-    }
-    output(head);
 
     // insert a node
     cout << "After which node to insert 10000? " << endl;
@@ -119,4 +92,54 @@ void output(Node *hd) {
         current = current->next;
     }
     cout << endl;
+}
+
+void createLinkedList(int SIZE){
+    for (int i = 0; i < SIZE; i++) {
+            int tmp_val = rand() % 100;
+            Node *newVal = new Node;
+        
+        // adds node at head
+        if (!head) {
+            head = newVal;
+            newVal->next = nullptr;
+            newVal->value = tmp_val;
+        }
+        else {
+            newVal->next = head;
+            newVal->value = tmp_val;
+            head = newVal;
+        }
+    }
+    output(head);
+}
+
+void deleteNode(){
+    cout << "Which node to delete? " << endl;
+    output(head);
+    int entry;
+    cout << "Choice --> ";
+    cin >> entry;
+
+    // traverse that many times and delete that node
+    Node *current = head;
+    Node *prev = nullptr;  // start prev as nullptr to detect head deletion
+
+    for (int i = 0; i < (entry - 1); i++) {
+        prev = current;
+        current = current->next;
+    }
+
+    // at this point, delete current and reroute pointers
+    if (current) {
+        if (prev == nullptr) {
+            // deleting the head node
+            head = current->next;
+        } else {
+            prev->next = current->next;
+        }
+        delete current;
+        current = nullptr;
+    }
+    output(head);
 }
