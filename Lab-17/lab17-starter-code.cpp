@@ -4,6 +4,8 @@
 using namespace std;
 
 const int SIZE = 7;  
+const int NUMBER_RANGE = 100;
+const int TEST_VALUE = 10000;
 
 struct Node {
     float value;
@@ -13,7 +15,7 @@ struct Node {
 // These are my protoypes for the functions used. For all of them,
 // I passed by reference because I thought it looked cleaner, and
 // I felt better being able to make my functions void and what not
-// compared to having them return an actual node.
+// compared to having them return an actual node, or its pointer.
 void output(Node *);
 void createLinkedList(int SIZE, Node *&head);
 void deleteNode(Node *&head);
@@ -67,10 +69,11 @@ void output(Node *hd) {
 
 // createdLinkedList() makes a list of size SIZE and fills it with
 // random values from 0-99.
-// arguments:
+// arguments: int SIZE, Node *&head
+// returns: nothing
 void createLinkedList(int SIZE, Node *&head){
     for (int i = 0; i < SIZE; i++) {
-            int tmp_val = rand() % 100;
+            int tmp_val = rand() % NUMBER_RANGE;
             Node *newVal = new Node;
         
         // adds node at head
@@ -88,6 +91,10 @@ void createLinkedList(int SIZE, Node *&head){
     output(head);
 }
 
+// deleteNode() lets the user pick an index of the list and deletes
+// the node found at that index.
+// arguments: Node *&head
+// returns: nothing
 void deleteNode(Node *&head){
     cout << "Which node to delete? " << endl;
     output(head);
@@ -118,6 +125,10 @@ void deleteNode(Node *&head){
     output(head);
 }
 
+// insertNodeAfter() lets the user input an index and inserts a 
+// new node after that index, the new node having value 10000.
+// arguments: Node *&head
+// returns: nothing
 void insertNodeAfter(Node *&head){
     int count, entry;
     Node *current = head;
@@ -156,7 +167,10 @@ void insertNodeAfter(Node *&head){
 
 }
 
-
+// deleteLinkedList() goes through each node in the list and deletes
+// them until the list is empty.
+// arguments: Node *&head
+// returns: 0
 int deleteLinkedList(Node *&head){
     Node *current = head;
     while (current) {
@@ -170,25 +184,38 @@ int deleteLinkedList(Node *&head){
     return 0;
 }
 
-// Comment below since there wasnt any code for it
+// prependNode() takes in a value and makes a new node to be
+// the head of the list.
+// arguments: Node *&head, float val
+// returns: nothing
 void prependNode(Node *&head, float val){
     Node *newVal = new Node;
-    newVal->value = val;
-    newVal->next = head;
-    head = newVal;
+    newVal->value = val; // Make newVal, the new node, value to val.
+    newVal->next = head; // Make the next node point to head.
+    head = newVal; // Make the new node the new head.
     output(head);
 }
 
+// appendNode() takes in a value and makes a new node to be
+// the tail of the list.
+// arguments: Node *&head, float val
+// returns: nothing
 void appendNode(Node *&head, float val){
     Node *newVal = new Node;
-    newVal->value = val;
-    newVal->next = nullptr;
-    Node *current = head;
-    if(!head){
+    newVal->value = val; // Like above, make newVal's value to val.
+    newVal->next = nullptr; // Make it's next node point to a nullptr.
+    Node *current = head; // Since head is nullptr, basically make current
+                          // the head of the list.
+    if(!head){  // If head is null, the list is empty, and just make 
+                // head = newVal, since its the head and tail of the list.
         head = newVal;
     }
+    // The below is basically if the head isn't null, as long as the current
+    // node has a node after it, make it the new current, looping until the
+    // current-> next is nullptr, which means the current is the tail of the
+    // list. After that, just make the tail point to our new node.
     else {
-        while(current->next != nullptr){
+        while(current->next != nullptr){ 
         current = current->next;
         }
         current->next = newVal;
