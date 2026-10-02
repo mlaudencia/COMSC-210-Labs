@@ -147,3 +147,8 @@ int deleteLinkedList(Node *&head){
 
     return 0;
 }
+
+void prependNode(Node *&head){
+    Node *current = head;
+    for(int i = 0)
+}
