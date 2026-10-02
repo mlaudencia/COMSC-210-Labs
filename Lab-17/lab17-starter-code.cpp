@@ -6,6 +6,7 @@ using namespace std;
 const int SIZE = 7;  
 const int NUMBER_RANGE = 100;
 const int TEST_VALUE = 10000;
+const int IGNORE_NUM_CHARACTERS = 10000;
 
 struct Node {
     float value;
@@ -134,16 +135,26 @@ void insertNodeAfter(Node *&head){
     Node *current = head;
     Node *prev = nullptr;
 
-    cout << "After which node to insert 10000? " << endl;
+    cout << "After which node to insert " << TEST_VALUE << "?" << endl;
     count = 1;
     current = head;
         while (current) {
             cout << "[" << count++ << "] " << current->value << endl;
             current = current->next;
         }
-    cout << "Choice --> ";
-    cin >> entry;
-
+    bool isValid = false;
+    while(!isValid){
+        cout << "Choice --> ";
+        cin >> entry;
+        if(cin.fail()){
+            cout << "Invalid input, please enter a different number." << endl;
+            cin.clear();
+            cin.ignore(IGNORE_NUM_CHARACTERS, '\n');
+        }
+        else if(entry < 1 || entry >= count){
+            cout << ""
+        }
+    }
     current = head;
     prev = nullptr;  // reset prev to nullptr for same reason
 
