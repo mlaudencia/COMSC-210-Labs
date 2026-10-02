@@ -13,6 +13,8 @@ void createLinkedList(int SIZE, Node *&head);
 void deleteNode(Node *&head);
 void insertNodeAfter(Node *&head);
 int deleteLinkedList(Node *&head);
+void prependNode(Node *&head, float val);
+void appendNode(Node *&head, float val);
 
 int main() {
     Node *head = nullptr;
@@ -148,7 +150,28 @@ int deleteLinkedList(Node *&head){
     return 0;
 }
 
-void prependNode(Node *&head){
+// Comment below since there wasnt any code for it
+void prependNode(Node *&head, float val){
+    Node *newVal = new Node;
+    newVal->value = val;
+    newVal->next = head;
+    head = newVal;
+    output(head);
+}
+
+void appendNode(Node *&head, float val){
+    Node *newVal = new Node;
+    newVal->value = val;
+    newVal->next = nullptr;
     Node *current = head;
-    for(int i = 0)
+    if(!head){
+        head = newVal;
+    }
+    else {
+        while(current->next != nullptr){
+        current = current->next;
+        }
+        current->next = newVal;
+    }
+    output(head);
 }
