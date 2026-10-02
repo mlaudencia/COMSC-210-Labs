@@ -1,3 +1,5 @@
+// COMSC-210 | Lab 17 | Jeremy Laudencia
+
 #include <iostream>
 using namespace std;
 
@@ -8,6 +10,10 @@ struct Node {
     Node *next;
 };
 
+// These are my protoypes for the functions used. For all of them,
+// I passed by reference because I thought it looked cleaner, and
+// I felt better being able to make my functions void and what not
+// compared to having them return an actual node.
 void output(Node *);
 void createLinkedList(int SIZE, Node *&head);
 void deleteNode(Node *&head);
@@ -23,6 +29,12 @@ int main() {
     // create a linked list of size SIZE with random numbers 0-99
     createLinkedList(SIZE, head);
 
+    // prepend a node, put the num at the front(head) of the list
+    prependNode(head, 9999);
+
+    // append a node, put the num at the end(tail)of the list
+    appendNode(head, 12345);
+
     // deleting a node
     deleteNode(head);
 
@@ -34,6 +46,11 @@ int main() {
     
 }
 
+// This was already written, so I don't have much to say.
+
+// output() prints all the values of the list.
+// arguments: Node *hd, the head node
+// returns: nothing
 void output(Node *hd) {
     if (!hd) {
         cout << "Empty list.\n";
@@ -48,6 +65,9 @@ void output(Node *hd) {
     cout << endl;
 }
 
+// createdLinkedList() makes a list of size SIZE and fills it with
+// random values from 0-99.
+// arguments:
 void createLinkedList(int SIZE, Node *&head){
     for (int i = 0; i < SIZE; i++) {
             int tmp_val = rand() % 100;
