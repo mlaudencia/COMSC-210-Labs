@@ -38,18 +38,22 @@ Movie::Movie(const Movie& m){
             head = nullptr;
             return;
         }
-    Node* current = m.head;
     
     title = m.title;
     head = new Node();
     head->revAndRat.rating = m.head->revAndRat.rating;
     head->revAndRat.review = m.head->revAndRat.review;
 
+    Node* current = m.head->next;
+    Node* tail = head;
+
     while(current != nullptr){
         Node* copyNode = new Node();
         copyNode->revAndRat.rating = current->revAndRat.rating;
         copyNode->revAndRat.review = current->revAndRat.review;
+        tail->next = copyNode;
+        tail = copyNode;
         current = current->next;
     }
-    
+    tail->next = nullptr;
 }
