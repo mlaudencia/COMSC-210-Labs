@@ -56,4 +56,6 @@ Movie::Movie(const Movie& m){
         current = current->next;
     }
     tail->next = nullptr;
+
+    // Continue the copy assingnment and main tomorrow
 }
