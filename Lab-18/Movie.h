@@ -4,19 +4,24 @@
 #include <string>
 
 struct MovieRs{
-    float rating;
+    double rating;
     std::string review;
-}
+};
 
 class Movie{
     private:
         std::string title;
         struct Node{
             MovieRs revAndRat;
-        }
+            Node* next;
+        };
+        Node* head;
     public:
-        void addRs(int rat, string rev);
-
+        void addRs(double rat, std::string& rev);
+        void print();
+        ~Movie();
+        Movie(const Movie& m);
+        Movie& operator=(const Movie& m);
 };
 
 #endif
