@@ -13,8 +13,8 @@ void Movie::addRs(double rat, std::string& rev){
 }
 
 void Movie::print(){
-    Node* temp = new Node();
-    while(temp->next != nullptr){
-        
+    Node* current = head;
+    while(current != nullptr){
+
     }
 }
