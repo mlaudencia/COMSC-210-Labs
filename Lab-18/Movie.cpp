@@ -25,5 +25,10 @@ void Movie::print(){
 }
 
 Movie::~Movie(){
-    
+    Node* current = head;
+    while(current != nullptr){
+        Node* temp = current->next;
+        delete current;
+        current = temp;
+    }
 }
