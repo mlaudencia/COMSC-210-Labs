@@ -14,7 +14,16 @@ void Movie::addRs(double rat, std::string& rev){
 
 void Movie::print(){
     Node* current = head;
+    std::cout << "Movie Title:" << title << std::endl;
+    int count = 0;
     while(current != nullptr){
-
+        std::cout << "   > Review " << ++count << ": " << 
+        current->revAndRat.rating << ": " << 
+        current->revAndRat.review << std::endl;
+        current = current->next;
     }
+}
+
+Movie::~Movie(){
+    
 }
