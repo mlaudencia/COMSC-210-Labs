@@ -32,3 +32,11 @@ Movie::~Movie(){
         current = temp;
     }
 }
+
+Movie::Movie(const Movie& m){
+    Node* current = head;
+    title = m.title;
+    copyRevAndRat.rating = head->revAndRat.rating;
+    copyRevAndRat.review = head->revAndRat.review;
+
+}
