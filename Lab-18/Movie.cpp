@@ -34,15 +34,22 @@ Movie::~Movie(){
 }
 
 Movie::Movie(const Movie& m){
-    Node* current = m.head;
-    title = m.title;
     if(m.head == nullptr){
             head = nullptr;
+            return;
         }
+    Node* current = m.head;
+    
+    title = m.title;
+    head = new Node();
+    head->revAndRat.rating = m.head->revAndRat.rating;
+    head->revAndRat.review = m.head->revAndRat.review;
+
     while(current != nullptr){
         Node* copyNode = new Node();
-        copyNode->revAndRat.rating = m.head->revAndRat.rating;
-        copyNode->revAndRat.review = m.head->revAndRat.review;
-        current = m.head->next;
+        copyNode->revAndRat.rating = current->revAndRat.rating;
+        copyNode->revAndRat.review = current->revAndRat.review;
+        current = current->next;
     }
+    
 }
