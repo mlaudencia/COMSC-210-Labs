@@ -3,12 +3,11 @@
 // Here, I included <iostream> to handle couts, <fstream> for external files,
 // <string> since I use strings in this program, <vector> to hold my movies,
 // and <cstidlib> and <ctime> to generate random ratings.
-// I also included Movie.h and Movie.cpp. I know Movie.cpp is bad to add in my
+// I also included Movie.h, and previously, Movie.cpp. I know Movie.cpp is bad to add in my
 // main file, but I was having compilation errors, and instead of typing some
 // code into my terminal everytime, I was just able to run without debugging
-// if I included Movie.cpp, so this is just for convenience right now.
+// if I included Movie.cpp, so I removed it after using that for convenience.
 #include "Movie.h"
-#include "Movie.cpp"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -20,8 +19,8 @@ using namespace std;
 
 const int NUM_MOVIES = 4;
 const int NUM_REVIEWS = 3;
-const int MAX_RATING = 5;
-const int MIN_RATING = 1;
+const int MAX_RATING_SCALED = 41;
+const int MIN_RATING_SCALED = 10;
 
 int main(){
 
@@ -51,7 +50,7 @@ int main(){
     // search up how to use static_cast<double>().
     for(int i = 0; i < NUM_MOVIES; i++){
         for(int j = 0; j < NUM_REVIEWS; j++){
-            double randomRating = static_cast<double>((rand() % MAX_RATING) + MIN_RATING);
+            double randomRating = ((rand() % MAX_RATING_SCALED) + MIN_RATING_SCALED) / 10.0;
             string review;
 
             getline(inFile, review);
