@@ -56,12 +56,40 @@ Movie::Movie(const Movie& m){
         current = current->next;
     }
     tail->next = nullptr;
+}
 
     // Continue the copy assingnment and main tomorrow
 
-    Movie& Movie::operator=(const Movie& m){
-        if(this == &m){
-            return *this;
-        }
+Movie& Movie::operator=(const Movie& m){
+    if(this == &m){
+        return *this;
     }
-}
+        Movie::~Movie();
+        head = nullptr;
+        title = m.title;
+
+    if(m.head == nullptr){
+        head = nullptr;
+        return;
+    }
+    
+    title = m.title;
+    head = new Node();
+    head->revAndRat.rating = m.head->revAndRat.rating;
+    head->revAndRat.review = m.head->revAndRat.review;
+
+    Node* current = m.head->next;
+    Node* tail = head;
+
+    while(current != nullptr){
+        Node* copyNode = new Node();
+        copyNode->revAndRat.rating = current->revAndRat.rating;
+        copyNode->revAndRat.review = current->revAndRat.review;
+        tail->next = copyNode;
+        tail = copyNode;
+        current = current->next;
+    }
+    tail->next = nullptr;
+
+    return *this;
+    }
