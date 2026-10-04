@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <iomanip>
 
 Movie::Movie(std::string mT){
     head = nullptr;
@@ -25,6 +26,7 @@ void Movie::print(){
     int count = 0;
     while(current != nullptr){
         std::cout << "   > Review " << ++count << ": " << 
+        std::fixed << std::setprecision(1) <<
         current->revAndRat.rating << ": " << 
         current->revAndRat.review << std::endl;
         current = current->next;

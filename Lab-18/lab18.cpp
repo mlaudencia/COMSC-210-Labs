@@ -35,7 +35,7 @@ int main(){
 
     for(int i = 0; i < NUM_MOVIES; i++){
         for(int j = 0; j < NUM_REVIEWS; j++){
-            int randomRating = (rand() % MAX_RATING) + MIN_RATING;
+            int randomRating = static_cast<double>(rand() % MAX_RATING) + MIN_RATING;
             string review;
 
             getline(inFile, review);
