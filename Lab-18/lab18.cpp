@@ -49,6 +49,11 @@ int main(){
     // Put in 3 reviews for each movie in the movies vector. One thing that
     // was a bit tough here was making my ratings double, and I had to 
     // search up how to use static_cast<double>().
+
+    // The above is initially what I had, but then I realized that my ratings
+    // were actually just whole numbers with a .0 added to the end. I had to
+    // scale the values up so that the range became 0-50, and then divide by
+    // 10.0 to get the random rating between 0.0 and 5.0.
     for(int i = 0; i < NUM_MOVIES; i++){
         for(int j = 0; j < NUM_REVIEWS; j++){
             double randomRating = ((rand() % MAX_RATING_SCALED) + MIN_RATING_SCALED) / SCALE_FACTOR;
