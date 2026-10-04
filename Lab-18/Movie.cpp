@@ -26,6 +26,9 @@ void Movie::addRs(double rat, std::string& rev){
     head = newNode;
 }
 
+// print() prints out the title, reviews, ratings, and avg rating of a movie
+// arguments: none
+// returns: nothing
 void Movie::print(){
     Node* current = head;
     std::cout << "Movie Title:" << title << std::endl;
@@ -42,6 +45,9 @@ void Movie::print(){
         avgRating() << std::endl;
 }
 
+// avgRating() calculates the average rating of a movie.
+// arguments: none
+// returns: ratingTotal/count, a double for the avg rating of a movie
 double Movie::avgRating(){
     Node* current = head;
     int count = 0;
@@ -57,6 +63,9 @@ double Movie::avgRating(){
     return (ratingTotal/count);
 }
 
+// ~Movie() deletes the data in a movie to free up memory.
+// arguments: none
+// returns: nothing
 Movie::~Movie(){
     Node* current = head;
     while(current != nullptr){
@@ -66,6 +75,9 @@ Movie::~Movie(){
     }
 }
 
+// Movie(const Movie& m) deep copies a movie and its reviews.
+// arguments: const Movie& m
+// returns: nothing
 Movie::Movie(const Movie& m){
     if(m.head == nullptr){
             head = nullptr;
@@ -93,6 +105,9 @@ Movie::Movie(const Movie& m){
 
     // Continue the copy assingnment and main tomorrow
 
+// operator=() copies one movie to another using an already existing movie.
+// arguments: const Movie& m
+// returns: a reference to the new copied movie
 Movie& Movie::operator=(const Movie& m){
     if(this == &m){
         return *this;
