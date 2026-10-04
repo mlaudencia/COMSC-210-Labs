@@ -1,6 +1,8 @@
 #include "Movie.h"
 #include <string>
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 Movie::Movie(std::string mT){
     head = nullptr;
