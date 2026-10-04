@@ -9,6 +9,9 @@
 using namespace std;
 
 const int NUM_MOVIES = 4;
+const int NUM_REVIEWS = 3;
+const int MAX_RATING = 5;
+const int MIN_RATING = 1;
 
 int main(){
 
@@ -17,7 +20,7 @@ int main(){
     string title, rev;
     double rating;
 
-     ifstream inFile("movie-input.txt");
+     ifstream inFile("review-input.txt");
 
      if(!inFile){
         cout << "ERROR: Could not open data file! Check if it exists "
@@ -29,5 +32,21 @@ int main(){
     movies.push_back(Movie("The Return of Verity"));
     movies.push_back(Movie("Give Me My Toy Right Now!"));
     movies.push_back(Movie("Clark and Steve: Into the Minecraft Backrooms"));
+
+    for(int i = 0; i < NUM_MOVIES; i++){
+        for(int j = 0; j < NUM_REVIEWS; j++){
+            int randomRating = (rand() % MAX_RATING) + MIN_RATING;
+            string review;
+
+            getline(inFile, review);
+
+            movies[i].addRs(randomRating, review);
+        }
+    }
+    inFile.close();
+
+    for(int i = 0; i < NUM_MOVIES; i++){
+        movies[i].print();
+    }
 }
 

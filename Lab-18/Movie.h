@@ -17,8 +17,10 @@ class Movie{
         };
         Node* head;
     public:
+        Movie(std::string mT);
         void addRs(double rat, std::string& rev);
         void print();
+        double avgRating();
         ~Movie();
         Movie(const Movie& m);
         Movie& operator=(const Movie& m);
