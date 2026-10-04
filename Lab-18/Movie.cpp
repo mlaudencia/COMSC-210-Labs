@@ -2,6 +2,11 @@
 #include <string>
 #include <iostream>
 
+Movie::Movie(std::string mT){
+    head = nullptr;
+    title = mT;
+}
+
 void Movie::addRs(double rat, std::string& rev){
     Node* newNode = new Node();
 
@@ -64,13 +69,17 @@ Movie& Movie::operator=(const Movie& m){
     if(this == &m){
         return *this;
     }
-        Movie::~Movie();
+        Node* current = head;
+    
+    while(current != nullptr){
+        Node* temp = current->next;
+        delete current;
+        current = temp;
+    }
         head = nullptr;
-        title = m.title;
 
     if(m.head == nullptr){
-        head = nullptr;
-        return;
+        return *this;
     }
     
     title = m.title;
@@ -78,7 +87,7 @@ Movie& Movie::operator=(const Movie& m){
     head->revAndRat.rating = m.head->revAndRat.rating;
     head->revAndRat.review = m.head->revAndRat.review;
 
-    Node* current = m.head->next;
+    current = m.head->next;
     Node* tail = head;
 
     while(current != nullptr){
