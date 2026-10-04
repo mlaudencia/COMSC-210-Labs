@@ -31,7 +31,9 @@ void Movie::print(){
         current->revAndRat.review << std::endl;
         current = current->next;
     }
-    std::cout << "   > Average Rating: " << avgRating() << std::endl;
+    std::cout << "   > Average Rating: " << 
+        std::fixed << std::setprecision(1) << 
+        avgRating() << std::endl;
 }
 
 double Movie::avgRating(){
