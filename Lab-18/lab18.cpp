@@ -21,6 +21,7 @@ const int NUM_MOVIES = 4;
 const int NUM_REVIEWS = 3;
 const int MAX_RATING_SCALED = 41;
 const int MIN_RATING_SCALED = 10;
+const double SCALE_FACTOR = 10.0;
 
 int main(){
 
@@ -50,7 +51,7 @@ int main(){
     // search up how to use static_cast<double>().
     for(int i = 0; i < NUM_MOVIES; i++){
         for(int j = 0; j < NUM_REVIEWS; j++){
-            double randomRating = ((rand() % MAX_RATING_SCALED) + MIN_RATING_SCALED) / 10.0;
+            double randomRating = ((rand() % MAX_RATING_SCALED) + MIN_RATING_SCALED) / SCALE_FACTOR;
             string review;
 
             getline(inFile, review);
