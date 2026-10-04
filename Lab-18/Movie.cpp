@@ -31,6 +31,21 @@ void Movie::print(){
     }
 }
 
+double Movie::avgRating(){
+    Node* current = head;
+    int count = 0;
+    double ratingTotal = 0.0;
+    if(current == nullptr){
+        return 0;
+    }
+    while(current != nullptr){
+            ratingTotal += current->revAndRat.rating;
+            count++;
+            current = current->next;
+    }
+    return (ratingTotal/count);
+}
+
 Movie::~Movie(){
     Node* current = head;
     while(current != nullptr){
