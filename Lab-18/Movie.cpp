@@ -58,4 +58,10 @@ Movie::Movie(const Movie& m){
     tail->next = nullptr;
 
     // Continue the copy assingnment and main tomorrow
+
+    Movie& Movie::operator=(const Movie& m){
+        if(this == &m){
+            return *this;
+        }
+    }
 }
