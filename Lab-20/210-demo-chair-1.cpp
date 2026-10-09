@@ -73,6 +73,9 @@ public:
         cout << endl << endl;
     }
 
+    // Here, I made a destructor for Chair since I saw that prices wasn't
+    // getting deleted at the end of the program, which'll lead to memory
+    // leaks.
     ~Chair(){
         delete[] prices;
     }
@@ -80,6 +83,11 @@ public:
 
 int main() {
     cout << fixed << setprecision(2);
+
+    // I don't think I was supposed to touch these first two new chair
+    // objects of chairPtr and livingChair, but I just changed the livingChair
+    // so that it would not be an error anymore, making it fit with the new two
+    // parameter constructor. I also deleted chairPtr because the sample didn't.
 
     //creating pointer to first chair object
     Chair *chairPtr = new Chair;
@@ -98,15 +106,23 @@ int main() {
 
     //creating dynamic array of chair objects
     Chair *collection = new Chair[SIZE];
+    // Since I assumed that the instructions asked for collection just to
+    // be made with the default constructor, I commented the below code out
+    // and just printed collection, since the default constructor already
+    // set the legs and prices for however many chairs there were.
+
     // collection[0].setLegs(4);
     // collection[0].setPrices(441.41, 552.52, 663.63);
     // collection[1].setLegs(4);
     // collection[1].setPrices(484.84, 959.59, 868.68);
     // collection[2].setLegs(4);
     // collection[2].setPrices(626.26, 515.15, 757.57);
+
     for (int i = 0; i < SIZE; i++)
         collection[i].print();
     
+    // At the end here, I also added a delele collection just to be safe with
+    // memory and all.
     delete[] collection;
     collection = nullptr;
 
