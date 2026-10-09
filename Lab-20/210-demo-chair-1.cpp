@@ -17,21 +17,22 @@ public:
     // constructors
     Chair() {
         prices = new double[SIZE];
-        double price = (rand() % (MAX-MIN+1) + MIN) / (double) 100;
         int flip = rand() % COIN_SIDES;
         if(flip == 0){
             legs = 3;
         } else{
             legs = 4;
         }
-        for (int i = 0; i < SIZE; i++)
+        for (int i = 0; i < SIZE; i++){
+            double price = (rand() % (MAX-MIN+1) + MIN) / (double) 100;
             prices[i] = price;
+        }
     }
-    Chair(int l) {
+    Chair(int l, double arr[SIZE]) {
         prices = new double[SIZE];
         legs = l;
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = arr[i];
     }
 
     // setters and getters
@@ -69,7 +70,8 @@ int main() {
     chairPtr->print();
 
     //creating dynamic chair object with constructor
-    Chair *livingChair = new Chair(3);
+    double livingChairPrices[SIZE] = {525.25, 434.34, 252.52};
+    Chair *livingChair = new Chair(3, livingChairPrices);
     livingChair->setPrices(525.25, 434.34, 252.52);
     livingChair->print();
     delete livingChair;
