@@ -1,8 +1,13 @@
 #include <iostream>
 #include <iomanip>
+#include <ctime>
+#include <cstdlib>
 
 using namespace std;
 const int SIZE = 3;
+
+const int MIN = 10000, MAX = 99999;
+const int COIN_SIDES = 2;
 
 class Chair {
 private:
@@ -12,9 +17,15 @@ public:
     // constructors
     Chair() {
         prices = new double[SIZE];
-        legs = 0;
+        double price = (rand() % (MAX-MIN+1) + MIN) / (double) 100;
+        int flip = rand() % COIN_SIDES;
+        if(flip == 0){
+            legs = 3;
+        } else{
+            legs = 4;
+        }
         for (int i = 0; i < SIZE; i++)
-            prices[i] = 0;
+            prices[i] = price;
     }
     Chair(int l) {
         prices = new double[SIZE];
