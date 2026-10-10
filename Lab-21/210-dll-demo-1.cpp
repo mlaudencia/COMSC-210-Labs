@@ -81,7 +81,9 @@ public:
         if (!head) return; // Empty list
 
         Node* temp = head;
-        while (temp && temp->goat != value)
+        while (temp && temp->goat.getAge() != value.getAge() ||
+                temp->goat.getColor() != value.getColor() ||
+                temp->goat.getName() != value.getName())
             temp = temp->next;
 
         if (!temp) return; // Value not found
@@ -105,7 +107,7 @@ public:
         Node* current = head;
         if (!current) return;
         while (current) {
-            cout << current->goat << " ";
+            cout << current->goat.print() << " ";
             current = current->next;
         }
         cout << endl;
@@ -115,7 +117,7 @@ public:
         Node* current = tail;
         if (!current) return;
         while (current) {
-            cout << current->goat << " ";
+            cout << current->goat.print() << " ";
             current = current->prev;
         }
         cout << endl;

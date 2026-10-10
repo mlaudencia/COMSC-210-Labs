@@ -33,4 +33,16 @@ class Goat{
             name = n;
             color = c;
         }
+        void print(){
+            cout << name << " (" << color << ", " << age << ")" << endl;
+        }
+        int getAge(){
+            return age;
+        }
+        string getName(){
+            return name;
+        }
+        string getColor(){
+            return color;
+        }
 };
