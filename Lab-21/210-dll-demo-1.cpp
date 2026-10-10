@@ -1,10 +1,8 @@
 // COMSC-210 | Lab 21 | Jeremy Laudencia
 
-// Here, <iostream> is included for couts and stuff, "Goat.cpp" for
+// Here, <iostream> is included for couts, "Goat.cpp" for
 // goat objects, and then <cstdlib> and <ctime> for random generation.
 
-// Most of this stuff is just the code from the demo but changed, so
-// I don't think I will have much to comment on.
 #include <iostream>
 #include "Goat.cpp"
 #include <cstdlib>
@@ -98,8 +96,9 @@ public:
         // temp compared an int to an int for easy comparison if value and
         // temp were the same, so instead of an int to int comparison,
         // I made some getters in the Goat class to compare the name, age
-        // and color of the goats to make sure they weren't the same, so that
-        // the function could search for the right Goat object to delete.
+        // and color of a Goat until they were the same as Goat value. When
+        // they were all the same, then the program would know to delete that
+        // node.
         while (temp && (temp->goat.getAge() != value.getAge() ||
                 temp->goat.getColor() != value.getColor() ||
                 temp->goat.getName() != value.getName()))
@@ -135,8 +134,8 @@ public:
         while (current) {
             // Here and for print_reverse(), I made a print function in the
             // Goat class, since this function was handling integers before,
-            // so that made it easier to just use a cout to print. I couldn't
-            // do that with my Goat objects, so this is what I did.
+            // so that made it easier to just use a cout to print all of a 
+            // Goat's data.
             current->goat.print();
             current = current->next;
         }
@@ -183,7 +182,11 @@ int main() {
     list.print_reverse();
 
     // In the original demo code, the below used a destructor to show an empty
-    // list, but since
+    // list, but since the destructor already gets called automatically,
+    // it's unsafe to try using a destructor twice, since that would destroy
+    // an object with risk of continuing to use it. Instead of doing that, I 
+    // just made a new DLL, emptyList, and printed it to show that the print 
+    // function executed properly for empty lists.
     DoublyLinkedList emptyList;
     cout << "Empty list test: ";
     emptyList.print();
