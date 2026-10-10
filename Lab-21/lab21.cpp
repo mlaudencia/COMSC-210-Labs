@@ -107,7 +107,11 @@ public:
 
     void print() {
         Node* current = head;
-        if (!current) return;
+        if (!current){
+            cout << "List is empty. Fill the list with objects, then rerun" <<
+            " the program." << endl;
+            return;
+        };
         while (current) {
             current->goat.print();
             current = current->next;
@@ -117,7 +121,11 @@ public:
 
     void print_reverse() {
         Node* current = tail;
-        if (!current) return;
+        if (!current){
+            cout << "List is empty. Fill the list with objects, then rerun" <<
+            " the program." << endl;
+            return;
+        };
         while (current) {
             current->goat.print();
             current = current->prev;
@@ -136,21 +144,23 @@ public:
 
 // Driver program
 int main() {
+    srand(time(0));
     DoublyLinkedList list;
     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
-    for (int i = 0; i < size; ++i)
-        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
-    cout << "List forward: ";
+    for (int i = 0; i < size; ++i){
+        Goat g;
+        list.push_back(g);
+    }
+    cout << "List forward: " << endl;
     list.print();
 
-    cout << "List backward: ";
+    cout << "List backward: " << endl;
     list.print_reverse();
 
-    cout << "Deleting list, then trying to print.\n";
-    list.~DoublyLinkedList();
-    cout << "List forward: ";
-    list.print();
+    DoublyLinkedList emptyList;
+    cout << "Empty list test: ";
+    emptyList.print();
 
     return 0;
 }

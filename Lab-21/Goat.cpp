@@ -8,7 +8,6 @@ using namespace std;
 const int ARRAY_SIZE = 15;
 const int MAX_AGE = 20;
 const int MIN_AGE = 1;
-const int MAX_INDEX = 15;
 
 class Goat{
     private:
@@ -24,8 +23,8 @@ class Goat{
     public:
         Goat(){
             age = (rand() % MAX_AGE) + MIN_AGE;
-            name = names[(rand() % MAX_INDEX)];
-            color = colors[(rand() % MAX_INDEX)];
+            name = names[(rand() % ARRAY_SIZE)];
+            color = colors[(rand() % ARRAY_SIZE)];
         }
         Goat(int a, string n, string c){
             age = a;
@@ -33,7 +32,7 @@ class Goat{
             color = c;
         }
         void print(){
-            cout << name << " (" << color << ", " << age << ")" << endl;
+            cout << "   " << name << " (" << color << ", " << age << ")" << endl;
         }
         int getAge(){
             return age;
