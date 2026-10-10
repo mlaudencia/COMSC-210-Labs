@@ -1,3 +1,10 @@
+// COMSC-210 | Lab 21 | Jeremy Laudencia
+
+// Here, <iostream> is included for couts and stuff, "Goat.cpp" for
+// goat objects, and then <cstdlib> and <ctime> for random generation.
+
+// Most of this stuff is just the code from the demo but changed, so
+// I don't think I will have much to comment on.
 #include <iostream>
 #include "Goat.cpp"
 #include <cstdlib>
@@ -9,9 +16,11 @@ const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 class DoublyLinkedList {
 private:
     struct Node {
+        // Here, I changed the data from int to Goat.
         Goat goat;
         Node* prev;
         Node* next;
+        // Same thing here, used to be an int data type, now is Goat.
         Node(Goat given, Node* p = nullptr, Node* n = nullptr) {
             goat = given; 
             prev = p;
@@ -27,6 +36,8 @@ public:
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
     void push_back(Goat value) {
+        // Once again, I changed the int data type to Goat.
+        // I did the same thing for the push_front() function.
         Node* newNode = new Node(value);
         if (!tail)  // if there's no tail, the list is empty
             head = tail = newNode;
@@ -83,6 +94,12 @@ public:
         if (!head) return; // Empty list
 
         Node* temp = head;
+        // Here, I had to edit the conditions of the while loop. Before,
+        // temp compared an int to an int for easy comparison if value and
+        // temp were the same, so instead of an int to int comparison,
+        // I made some getters in the Goat class to compare the name, age
+        // and color of the goats to make sure they weren't the same, so that
+        // the function could search for the right Goat object to delete.
         while (temp && (temp->goat.getAge() != value.getAge() ||
                 temp->goat.getColor() != value.getColor() ||
                 temp->goat.getName() != value.getName()))
@@ -107,12 +124,19 @@ public:
 
     void print() {
         Node* current = head;
+        // Here, I added a statement to tell the user that the list is empty
+        // like the instructions in the lab asked for. It is the same for 
+        // print_reverse().
         if (!current){
             cout << "List is empty. Fill the list with objects, then rerun" <<
             " the program." << endl;
             return;
         };
         while (current) {
+            // Here and for print_reverse(), I made a print function in the
+            // Goat class, since this function was handling integers before,
+            // so that made it easier to just use a cout to print. I couldn't
+            // do that with my Goat objects, so this is what I did.
             current->goat.print();
             current = current->next;
         }
@@ -158,6 +182,8 @@ int main() {
     cout << "List backward: " << endl;
     list.print_reverse();
 
+    // In the original demo code, the below used a destructor to show an empty
+    // list, but since
     DoublyLinkedList emptyList;
     cout << "Empty list test: ";
     emptyList.print();
