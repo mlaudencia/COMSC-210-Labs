@@ -1,5 +1,7 @@
 #include <iostream>
 #include "Goat.cpp"
+#include <cstdlib>
+#include <ctime>
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -81,9 +83,9 @@ public:
         if (!head) return; // Empty list
 
         Node* temp = head;
-        while (temp && temp->goat.getAge() != value.getAge() ||
+        while (temp && (temp->goat.getAge() != value.getAge() ||
                 temp->goat.getColor() != value.getColor() ||
-                temp->goat.getName() != value.getName())
+                temp->goat.getName() != value.getName()))
             temp = temp->next;
 
         if (!temp) return; // Value not found
@@ -107,7 +109,7 @@ public:
         Node* current = head;
         if (!current) return;
         while (current) {
-            cout << current->goat.print() << " ";
+            current->goat.print();
             current = current->next;
         }
         cout << endl;
@@ -117,7 +119,7 @@ public:
         Node* current = tail;
         if (!current) return;
         while (current) {
-            cout << current->goat.print() << " ";
+            current->goat.print();
             current = current->prev;
         }
         cout << endl;
@@ -133,22 +135,22 @@ public:
 };
 
 // Driver program
-// int main() {
-//     DoublyLinkedList list;
-//     int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
+int main() {
+    DoublyLinkedList list;
+    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
-//     for (int i = 0; i < size; ++i)
-//         list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
-//     cout << "List forward: ";
-//     list.print();
+    for (int i = 0; i < size; ++i)
+        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
+    cout << "List forward: ";
+    list.print();
 
-//     cout << "List backward: ";
-//     list.print_reverse();
+    cout << "List backward: ";
+    list.print_reverse();
 
-//     cout << "Deleting list, then trying to print.\n";
-//     list.~DoublyLinkedList();
-//     cout << "List forward: ";
-//     list.print();
+    cout << "Deleting list, then trying to print.\n";
+    list.~DoublyLinkedList();
+    cout << "List forward: ";
+    list.print();
 
-//     return 0;
-// }
+    return 0;
+}
