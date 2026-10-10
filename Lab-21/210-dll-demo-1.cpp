@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Goat.cpp"
 using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
@@ -6,11 +7,11 @@ const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 class DoublyLinkedList {
 private:
     struct Node {
-        int data;
+        Goat goat;
         Node* prev;
         Node* next;
-        Node(int val, Node* p = nullptr, Node* n = nullptr) {
-            data = val; 
+        Node(Goat given, Node* p = nullptr, Node* n = nullptr) {
+            goat = given; 
             prev = p;
             next = n;
         }
@@ -23,8 +24,8 @@ public:
     // constructor
     DoublyLinkedList() { head = nullptr; tail = nullptr; }
 
-    void push_back(int value) {
-        Node* newNode = new Node(value);
+    void push_back(Goat g) {
+        Node* newNode = new Node(g);
         if (!tail)  // if there's no tail, the list is empty
             head = tail = newNode;
         else {
@@ -34,8 +35,8 @@ public:
         }
     }
 
-    void push_front(int value) {
-        Node* newNode = new Node(value);
+    void push_front(Goat g) {
+        Node* newNode = new Node(g);
         if (!head)  // if there's no head, the list is empty
             head = tail = newNode;
         else {
