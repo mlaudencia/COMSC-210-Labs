@@ -100,6 +100,11 @@ public:
         delete temp;
     }
 
+    void delete_pos(int pos){
+        if(!head) return; // Empty list
+
+    }
+
     void print() {
         Node* current = head;
         if (!current) return;
