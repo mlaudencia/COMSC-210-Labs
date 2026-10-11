@@ -103,6 +103,20 @@ public:
     void delete_pos(int pos){
         if(!head) return; // Empty list
 
+        Node* current = head;
+        for(int i = 0; i < pos; i++){
+            current = current->next;
+        }
+
+        if(current->next){
+            current->prev->next = current->next;
+            current->next->prev = current->prev;
+        }
+        else{
+            current->prev->next = nullptr;
+            tail = current->prev;
+        }
+
     }
 
     void print() {
