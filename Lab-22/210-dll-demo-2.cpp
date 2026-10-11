@@ -205,7 +205,8 @@ public:
 int main() {
     DoublyLinkedList list;
 
-    for(int i = 0; i < 5; ++i){
+    const int LIST_SIZE = 5;
+    for(int i = 0; i < LIST_SIZE; ++i){
         list.push_back(i);
     }
     cout << "Original list" << endl;
