@@ -3,7 +3,8 @@ using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
-const int DELETE_POS = 4;
+const int DELETE_POS = 3;
+const int DELETE_VAL = 2;
 
 class DoublyLinkedList {
 private:
@@ -204,12 +205,26 @@ public:
 int main() {
     DoublyLinkedList list;
 
-    for(int i = 5; i > 0; i--){
+    for(int i = 0; i < 5; ++i){
         list.push_back(i);
     }
+    cout << "Original list" << endl;
+    list.print();
 
-    cout << "Deleting 4th index of the list" << endl;
-    list.delete_pos();
+    cout << "Deleting 4th value of the list" << endl;
+    list.delete_pos(DELETE_POS);
+    list.print();
+
+    cout << "Deleting value 2 from the list" << endl;
+    list.delete_val(DELETE_VAL);
+    list.print();
+
+    cout << "Pop front deletion" << endl;
+    list.pop_front();
+    list.print();
+
+    cout <<"Pop back deletion" << endl;
+    list.pop_back();
     list.print();
 
     return 0;
