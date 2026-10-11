@@ -104,19 +104,37 @@ public:
         if(!head) return; // Empty list
 
         Node* current = head;
-        for(int i = 0; i < pos; i++){
-            current = current->next;
+        if(pos == 0){  // If deleting head of the list
+            head = head->next;
+            if(head) // If head->next exists, make its prev nullptr
+                head->prev = nullptr;
+            else  // If it doesn't exist, that means head is null and the list
+                  // is empty, so make the tail nullptr as well.
+                tail = nullptr;
+            delete current;
+            return;
         }
 
-        if(current->next){
+        for(int i = 0; i < pos; i++){ // Go through the list until at pos
+            current = current->next;
+            if(!current) return; // If current is null at any time, then
+                                 // pos was bigger than the list length.
+        }
+
+        if(current->next){ // If current is not the tail, then assign the
+                           // next of the previous node to the node after
+                           // current, and the prev of the next node to the
+                           // node before current.
             current->prev->next = current->next;
             current->next->prev = current->prev;
         }
-        else{
+        else{ // If current is the tail, make the previous node's next null,
+              // and then make it the new tail.
             current->prev->next = nullptr;
             tail = current->prev;
         }
 
+        delete current; // Finally, just delete current.
     }
 
     void print() {
