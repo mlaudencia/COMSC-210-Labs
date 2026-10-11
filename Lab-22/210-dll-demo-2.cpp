@@ -3,6 +3,8 @@ using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
+const int DELETE_POS = 4;
+
 class DoublyLinkedList {
 private:
     struct Node {
@@ -201,19 +203,13 @@ public:
 // Driver program
 int main() {
     DoublyLinkedList list;
-    int size = rand() % (MAX_LS-MIN_LS+1) + MIN_LS;
 
-    for (int i = 0; i < size; ++i)
-        list.push_back(rand() % (MAX_NR-MIN_NR+1) + MIN_NR);
-    cout << "List forward: ";
-    list.print();
+    for(int i = 5; i > 0; i--){
+        list.push_back(i);
+    }
 
-    cout << "List backward: ";
-    list.print_reverse();
-
-    cout << "Deleting list, then trying to print.\n";
-    list.~DoublyLinkedList();
-    cout << "List forward: ";
+    cout << "Deleting 4th index of the list" << endl;
+    list.delete_pos();
     list.print();
 
     return 0;
