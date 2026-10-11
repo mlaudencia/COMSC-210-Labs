@@ -76,7 +76,7 @@ public:
         temp->next = newNode;
     }
 
-    void delete_node(int value) {
+    void delete_val(int value) {
         if (!head) return; // Empty list
 
         Node* temp = head;
@@ -151,6 +151,22 @@ public:
             tail = nullptr;
 
         delete temp; // Finally, delete temp just like the function above
+    }
+
+    void pop_back(){
+        if(!tail) return; // If tail doesn't exist, list is empty, so return
+
+        Node* temp = tail; // Make the new tail the node before tail
+        tail = tail->prev;
+
+        if(tail) // If it exists, that means the list is not empty, so
+                 // make the new tail->next nullptr.
+            tail->next = nullptr;
+        else     // If the tail no longer exists, that means the list is
+                 // empty, so make head nullptr as well.
+            head = nullptr;
+
+        delete temp; // Then just delete temp;
     }
 
     void print() {
