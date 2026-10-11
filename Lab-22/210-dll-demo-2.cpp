@@ -5,8 +5,6 @@ using namespace std;
 
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
 
-
-
 class DoublyLinkedList {
 private:
     struct Node {
@@ -209,7 +207,7 @@ int main() {
     const int LIST_SIZE = 5;
     const int DELETE_POS = 3;
     const int DELETE_VAL = 2;
-    
+
     for(int i = 0; i < LIST_SIZE; ++i){
         list.push_back(i);
     }
