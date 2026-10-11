@@ -137,6 +137,22 @@ public:
         delete current; // Finally, just delete current.
     }
 
+    void pop_front(){
+        if(!head) return; // This is basically the same code as in the
+                          // (pos == 0) in delete_pos(), check if head exists,
+                          // if not, list is empty, so just return.
+
+        Node* temp = head; // Make temp head, and make the new head the
+        head = head->next; // node after head.
+
+        if(head) // If it still exists, head's previous node is nullptr,
+            head->prev = nullptr;
+        else     // If it doesn't exist, the list is empty, so make tail null
+            tail = nullptr;
+
+        delete temp; // Finally, delete temp just like the function above
+    }
+
     void print() {
         Node* current = head;
         if (!current) return;
