@@ -16,7 +16,7 @@ Movie::Movie(std::string mT){
 // addRs() adds a review and a rating to a movie.
 // arguments: double rat, the rating, std::string& rev, the review
 // returns: nothing
-void Movie::addRs(double rat, std::string& rev){
+void Movie::addRs(double rat, const std::string& rev){
     Node* newNode = new Node();
 
     newNode->revAndRat.review = rev;

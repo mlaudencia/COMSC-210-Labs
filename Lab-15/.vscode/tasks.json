@@ -3,19 +3,18 @@
 	"tasks": [
 		{
 			"type": "cppbuild",
-			"label": "C/C++: g++.exe build active file",
+			"label": "Build Lab 15",
 			"command": "C:\\msys64\\ucrt64\\bin\\g++.exe",
 			"args": [
     "-fdiagnostics-color=always",
     "-g",
-    "${workspaceFolder}\\lab15.cpp",
-    "${workspaceFolder}\\Movie.cpp",
+    "lab15.cpp",
+    "Movie.cpp",
     "-o",
-    "${workspaceFolder}\\lab15.exe"
+    "C:\\Users\\jlaud\\OneDrive\\Documents\\School\\Programming\\COMSC-210\\COMSC-210-Labs\\Lab-15\\lab15.exe"
 ],
 			"options": {
-				"cwd": "${fileDirname}"
-			},
+				"cwd": "C:\\Users\\jlaud\\OneDrive\\Documents\\School\\Programming\\COMSC-210\\COMSC-210-Labs\\Lab-15"			},
 			"problemMatcher": [
 				"$gcc"
 			],

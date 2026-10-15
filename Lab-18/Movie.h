@@ -18,7 +18,7 @@ class Movie{
         Node* head;
     public:
         Movie(std::string mT);
-        void addRs(double rat, std::string& rev);
+        void addRs(double rat, const std::string& rev);
         void print();
         // Here, I added an avgRating() function, since when I got to making
         // my main and everything, calculating my average rating in main

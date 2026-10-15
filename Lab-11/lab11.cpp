@@ -59,7 +59,7 @@ int main(){
         for(const string &move : f.specialMoves){
             cout << "      [" << move << "]" << endl;
         }
-    fighterNum++;
+        fighterNum++;
     }
 
     // Here, I demonstrate how to change an attribute of any fighter
@@ -92,7 +92,7 @@ int main(){
         for(const string &move : f.specialMoves){
             cout << "      [" << move << "]" << endl;
         }
-    fighterNum++;
+        fighterNum++;
     }
 
     // After everything, we delete the fighters vector so that there aren't
