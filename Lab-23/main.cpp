@@ -23,13 +23,25 @@ int main() {
     bool again;
 
     // read & populate arrays for names and colors
+
+    // I added these open file checks just in case. I didn't really want to
+    // since the code came like that, but I don't wanna risk losing any points
     ifstream fin("names.txt");
-    if()
+    if(!fin){
+        cout << "Could not open external file, check if name is correct " <<
+        " then restart the program." << endl;
+        return 1;
+    }
     string names[SZ_NAMES];
     int i = 0;
     while (fin >> names[i++]);
     fin.close();
     ifstream fin1("colors.txt");
+    if(!fin1){
+        cout << "Could not open external file, check if name is correct " <<
+        " then restart the program." << endl;
+        return 1;
+    }
     string colors[SZ_COLORS];
     i = 0;
     while (fin1 >> colors[i++]);
