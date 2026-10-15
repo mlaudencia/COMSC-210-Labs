@@ -39,5 +39,18 @@ int main_menu(){
     int input = 0;
     while(input != 4){
         cout << "*** GOAT MANAGER 3001 ***" << endl;
+        cout << "   >  [1] Add a goat" << endl;
+        cout << "   >  [2] Delete a goat" << endl;
+        cout << "   >  [3] List goats" << endl;
+        cout << "   >  [4] Quit" << endl;
+        cout << "   >  Choice --> ";
+        cin >> input;
+
+        if(cin.fail()){
+            cout << "   Invalid input, please choose a number from 1-4" << endl;
+            cout << "   >  Choice --> ";
+            cin.clear();
+            cin.ignore();
+        }
     }
 };
