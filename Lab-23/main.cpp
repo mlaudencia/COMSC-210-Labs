@@ -68,6 +68,8 @@ int main_menu(){
     //     add_goat(trip, names, colors);
 };
 
-void add_goat(list<Goat> &trip, string n, string c){
-
+void add_goat(list<Goat> &t, string n, string c){
+    int randColor = rand() % SZ_COLORS + 1;
+    int randName = rand() % SZ_NAMES + 1;
+    t.push_back(n[randName], c[randColor]);
 };
