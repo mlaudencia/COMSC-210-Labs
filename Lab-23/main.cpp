@@ -11,7 +11,7 @@ const int IGNORE_SIZE = 10000;
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
-void display_trip(list<Goat> trip);
+void display_trip(const list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -66,10 +66,27 @@ int main_menu(){
     return input;
     // if(input == 1)
     //     add_goat(trip, names, colors);
-};
+}
 
-void add_goat(list<Goat> &t, string n, string c){
-    int randColor = rand() % SZ_COLORS + 1;
-    int randName = rand() % SZ_NAMES + 1;
-    t.push_back(n[randName], c[randColor]);
-};
+void add_goat(list<Goat> &t, string n[], string c[]){
+    int randColor = rand() % SZ_COLORS;
+    int randName = rand() % SZ_NAMES;
+    int randAge = rand() % MAX_AGE;
+    t.push_back(Goat(n[randName], randAge, c[randColor]));
+    cout << "Added random goat: " << endl;
+    cout << "   Name: " << n[randName] << endl;
+    cout << "   Age: " << randAge << endl;
+    cout << "   Color: " << c[randColor] << endl;
+}
+
+void delete_goat(list<Goat> &t){
+
+}
+
+void display_trip(const list<Goat> &t){
+    int count = 0;
+    for(Goat g : t){
+        cout << "[" << ++count << "] " << g.get_name() << " (" << 
+        g.get_age() << ", " << g.get_color() << ")" << endl;
+    }
+}
