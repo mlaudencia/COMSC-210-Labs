@@ -80,13 +80,47 @@ void add_goat(list<Goat> &t, string n[], string c[]){
 }
 
 void delete_goat(list<Goat> &t){
+    if(t.empty()){
+        cout << "No goats in trip, cannot release any goats." << endl;
+        return;
+    }
+    int indexToDelete = 0;
+    display_trip(t);
+    cout << "What goat would you like to release?" << endl;
+    cout << "Choice --> ";
+
+    while(true){
+        cin >> indexToDelete;
+        if(cin.fail()){
+            cout << "   Invalid input, please choose an index shown" << endl;
+            cout << "   >  Choice --> ";
+            cin.clear();
+            cin.ignore(IGNORE_SIZE, '\n');
+        }
+        else if(indexToDelete > t.size() || indexToDelete < 1){
+            cout << "   Invalid input, please choose an index shown" << endl;
+            cout << "   >  Choice --> ";
+            cin.clear();
+            cin.ignore(IGNORE_SIZE, '\n');
+        }
+        else
+            break;
+    }
+
+    auto it = t.begin();
+
 
 }
 
 void display_trip(const list<Goat> &t){
     int count = 0;
-    for(Goat g : t){
-        cout << "[" << ++count << "] " << g.get_name() << " (" << 
-        g.get_age() << ", " << g.get_color() << ")" << endl;
+    if(t.empty()){
+        cout << "Trip is empty, no goats to display." << endl;
+    }
+    else{
+        for(Goat g : t){
+            cout << "[" << ++count << "] " << g.get_name() << " (" << 
+            g.get_age() << ", " << g.get_color() << ")" << endl;
+        }
     }
 }
