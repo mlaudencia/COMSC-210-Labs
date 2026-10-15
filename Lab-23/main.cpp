@@ -35,3 +35,9 @@ int main() {
     return 0;
 }
 
+int main_menu(){
+    int input = 0;
+    while(input != 4){
+        cout << "*** GOAT MANAGER 3001 ***" << endl;
+    }
+};
