@@ -63,6 +63,11 @@ int main_menu(){
             break;
     }
 
-    if(input == 1)
-        add_goat(trip, names, colors);
+    return input;
+    // if(input == 1)
+    //     add_goat(trip, names, colors);
+};
+
+void add_goat(list<Goat> &trip, string n, string c){
+
 };
