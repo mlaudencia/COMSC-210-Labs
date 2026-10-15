@@ -6,6 +6,7 @@
 using namespace std;
 
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20;
+const int IGNORE_SIZE = 10000;
 
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip);
@@ -37,20 +38,31 @@ int main() {
 
 int main_menu(){
     int input = 0;
-    while(input != 4){
         cout << "*** GOAT MANAGER 3001 ***" << endl;
         cout << "   >  [1] Add a goat" << endl;
         cout << "   >  [2] Delete a goat" << endl;
         cout << "   >  [3] List goats" << endl;
         cout << "   >  [4] Quit" << endl;
         cout << "   >  Choice --> ";
-        cin >> input;
 
+    while(true){
+        cin >> input;
         if(cin.fail()){
             cout << "   Invalid input, please choose a number from 1-4" << endl;
             cout << "   >  Choice --> ";
             cin.clear();
-            cin.ignore();
+            cin.ignore(IGNORE_SIZE, '\n');
         }
+        else if(input > 4 || input < 1){
+            cout << "   Invalid input, please choose a number from 1-4" << endl;
+            cout << "   >  Choice --> ";
+            cin.clear();
+            cin.ignore(IGNORE_SIZE, '\n');
+        }
+        else
+            break;
     }
+
+    if(input == 1)
+        add_goat(trip, names, colors);
 };
