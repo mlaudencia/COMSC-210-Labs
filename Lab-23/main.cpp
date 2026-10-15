@@ -24,6 +24,7 @@ int main() {
 
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
+    if()
     string names[SZ_NAMES];
     int i = 0;
     while (fin >> names[i++]);
@@ -55,7 +56,9 @@ int main() {
     return 0;
 }
 
-// main_menu()
+// main_menu() shows the user options for the goats and returns their choice
+// arguments: none
+// returns: an int, input
 int main_menu(){
     int input = 0;
         cout << endl;
@@ -93,7 +96,13 @@ int main_menu(){
     return input;
 }
 
+// add_goat() adds a goat of random color, name, and age into the trip.
+// arguments: list<Goat> &t, string n[], string c[]
+// returns: nothing
 
+// I didn't have much difficulty with add_goat() either. The only thing I
+// struggled with here was putting the right stuff into that push_back,
+// since I had the order of color and age switched before.
 void add_goat(list<Goat> &t, string n[], string c[]){
     int randColor = rand() % SZ_COLORS;
     int randName = rand() % SZ_NAMES;
@@ -105,6 +114,22 @@ void add_goat(list<Goat> &t, string n[], string c[]){
     cout << "   Color: " << c[randColor] << endl;
 }
 
+// delete_goat() deletes a goat from the list.
+// arguments: list<Goat> &t
+// returns: nothing
+
+// I had some trouble here, because I started writing this function before
+// having display_trip(), which I needed so that the user could choose what
+// goat they wanted to release, so I stopped midway and wrote display_trip(),
+// then moved on to this.
+
+// I think a lot of delete_goat() had similar code to main_menu() because of
+// the input checks. Something I also had some trouble with was iterating
+// through the list. It's definitely a lot more convenient when you're able to
+// access elements by index, so this was a bit harder to wrap my head around.
+// One thing I don't understand about this is why we use auto it when we can
+// just initalize it as an iterator. I think iterators as a whole is something
+// I need to study more on.
 void delete_goat(list<Goat> &t){
     if(t.empty()){
         cout << "No goats in trip, cannot release any goats." << endl;
@@ -143,6 +168,14 @@ void delete_goat(list<Goat> &t){
 
 }
 
+// display_trip() displays all the goats in a trip.
+// arguments: const list<Goat> &t
+// returns: nothing
+
+// This was also pretty straightforward to write. The one thing I had in mind
+// when writing it was including the first if statement. The code would work
+// even if that wasn't there, but I think it's cleaner in display for the user
+// to know that the trip is empty.
 void display_trip(const list<Goat> &t){
     int count = 0;
     if(t.empty()){
