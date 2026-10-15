@@ -108,7 +108,12 @@ void delete_goat(list<Goat> &t){
     }
 
     auto it = t.begin();
+    for(int i = 0; i < indexToDelete - 1; i++){
+        ++it;
+    }
+    t.erase(it);
 
+    cout << "Selected goat has been released." << endl;
 
 }
 
