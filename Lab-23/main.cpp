@@ -30,14 +30,25 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-
-
+    list<Goat> trip;
+    while(true){
+        int user = main_menu();
+        if(user == 1)
+            add_goat(trip, names, colors);
+        else if(user == 2)
+            delete_goat(trip);
+        else if(user == 3)
+            display_trip(trip);
+        else if(user == 4)
+            break;
+    }
 
     return 0;
 }
 
 int main_menu(){
     int input = 0;
+        cout << endl;
         cout << "*** GOAT MANAGER 3001 ***" << endl;
         cout << "   >  [1] Add a goat" << endl;
         cout << "   >  [2] Delete a goat" << endl;
@@ -64,8 +75,6 @@ int main_menu(){
     }
 
     return input;
-    // if(input == 1)
-    //     add_goat(trip, names, colors);
 }
 
 void add_goat(list<Goat> &t, string n[], string c[]){
@@ -123,9 +132,12 @@ void display_trip(const list<Goat> &t){
         cout << "Trip is empty, no goats to display." << endl;
     }
     else{
+        cout << endl;
+        cout << "=== GOAT LIST ===" << endl;
         for(Goat g : t){
             cout << "[" << ++count << "] " << g.get_name() << " (" << 
             g.get_age() << ", " << g.get_color() << ")" << endl;
         }
     }
+    cout << endl;
 }
