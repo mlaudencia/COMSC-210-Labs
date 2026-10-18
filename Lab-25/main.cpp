@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <iterator>
 using namespace std;
 using namespace std::chrono;
 
@@ -111,7 +112,42 @@ int main() {
     // END OF RACE 2, START OF RACE 3
     // START OF VECTOR RACE 3
 
-    
+    start = high_resolution_clock::now();
+
+    vectorCodes.insert(vectorCodes.begin() + (vectorCodes.size()/2), "TESTCODE");
+
+    end = high_resolution_clock::now();
+    duration = duration_cast<nanoseconds>(end - start).count();
+
+    vectorInsertTime = duration;
+
+    // END OF VECTOR RACE 3, START OF LIST RACE 3
+
+    start = high_resolution_clock::now();
+
+    auto listIt = listCodes.begin();
+    advance(listIt, listCodes.size()/2);
+    listCodes.insert(listIt, "TESTCODE");
+
+    end = high_resolution_clock::now();
+    duration = duration_cast<nanoseconds>(end - start).count();
+
+    listInsertTime = duration;
+
+    // END OF LIST RACE 3, START OF SET RACE 3
+
+    start = high_resolution_clock::now();
+
+    // Since set auto sorts its elements, we can't insert in the middle of 
+    // the list, so all we can do is insert "TESTCODE" into the set.
+    setCodes.insert("TESTCODE");
+
+    end = high_resolution_clock::now();
+    duration = duration_cast<nanoseconds>(end - start).count();
+
+    setInsertTime = duration;
+
+     // END OF RACE 3, START OF RACE 4
 }
 
 /* syntax examples:
