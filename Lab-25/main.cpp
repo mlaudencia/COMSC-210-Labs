@@ -7,8 +7,12 @@
 #include <string>
 #include <algorithm>
 #include <iterator>
+#include <iomanip>
 using namespace std;
 using namespace std::chrono;
+
+const int colSize = 12;
+const int rowSize = 15;
 
 int main() {
     
@@ -190,15 +194,22 @@ int main() {
 
     // END OF RACE 4, ONTO DISPLAYING RESULTS
 
+    const auto col = setw(colSize);
+    const auto row = setw(rowSize);
+
+    cout << left;
+
     cout << "*** RACE RESULTS ***" << endl;
-    cout << "                 |  Reading  |  Sorting  |  " <<  
-            "Inserting  |  Deleting  |" << endl;
-    cout << "      Vector     |  " << vectorReadTime << "     " << vectorSortTime <<
-        "      " << vectorInsertTime << "       " << vectorDeleteTime << endl;
-    cout << "       List      |  " << listReadTime << "     " << listSortTime <<
-        "      " << listInsertTime << "       " << listDeleteTime << endl;
-    cout << "      Vector     |  " << vectorReadTime << "     " << vectorSortTime <<
-        "      " << vectorInsertTime << "       " << vectorDeleteTime << endl;
+    cout << "            |  Reading        Sorting      " << "  Inserting      Deleting   " << endl;
+    cout << col << "   Vector   |  " << 
+        row << vectorReadTime << row << vectorSortTime <<
+        row << vectorInsertTime << row << vectorDeleteTime << endl;
+    cout << col << "    List    |  " <<
+        row << listReadTime << row << listSortTime <<
+        row << listInsertTime << row << listDeleteTime << endl;
+    cout << col << "     Set    |  " <<
+        row << setReadTime << row << setSortTime <<
+        row << setInsertTime << row << setDeleteTime << endl;
 
 }
 
