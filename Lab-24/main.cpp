@@ -74,7 +74,7 @@ int main() {
 int main_menu(){
     int input = 0;
         cout << endl;
-        cout << "*** GOAT MANAGER 3001 ***" << endl;
+        cout << "*** GOAT MANAGER 3002 ***" << endl;
         cout << "   >  [1] Add a goat" << endl;
         cout << "   >  [2] Delete a goat" << endl;
         cout << "   >  [3] List goats" << endl;
@@ -112,9 +112,8 @@ int main_menu(){
 // arguments: set<Goat> &t, string n[], string c[]
 // returns: nothing
 
-// I didn't have much difficulty with add_goat() either. The only thing I
-// struggled with here was putting the right stuff into that push_back,
-// since I had the order of color and age switched before.
+// Here, in the previous lab, we had to use a push_back() to put a goat
+// into the list, but with set, we use insert, so I included that here.
 void add_goat(set<Goat> &t, string n[], string c[]){
     int randColor = rand() % SZ_COLORS;
     int randName = rand() % SZ_NAMES;
