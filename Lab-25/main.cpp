@@ -8,6 +8,8 @@
 using namespace std;
 using namespace std::chrono;
 
+const int CODES_SIZE = 20000;
+
 int main() {
     
     ifstream fin("codes.txt");
@@ -16,7 +18,19 @@ int main() {
         " then restart the program." << endl;
         return 1;
     }
+
+    int masterCodes[CODES_SIZE];
+    int count = 0;
+    int number;
+
+    while(fin >> number && count < CODES_SIZE){
+        masterCodes[count] = number;
+        count++;
+    }
+    
     vector<int> vectorCodes;
+
+
 
     auto start = high_resolution_clock::now();
 
