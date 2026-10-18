@@ -163,10 +163,7 @@ int main() {
     // END OF VECTOR RACE 4, START OF LIST RACE 4
 
     start = high_resolution_clock::now();
-
-    auto listIt = listCodes.begin();
-    advance(listIt,listCodes.size()/2);
-
+    
     listCodes.erase(listIt);
 
     end = high_resolution_clock::now();
@@ -178,7 +175,7 @@ int main() {
 
     start = high_resolution_clock::now();
 
-    auto setIt = listCodes.begin();
+    auto setIt = setCodes.begin();
     advance(setIt,setCodes.size()/2);
 
     // For sets, we can't really access any middle point, since it's sorted,
@@ -191,7 +188,17 @@ int main() {
 
     setDeleteTime = duration;
 
-    // END OF RACE 4
+    // END OF RACE 4, ONTO DISPLAYING RESULTS
+
+    cout << "*** RACE RESULTS ***" << endl;
+    cout << "                 |  Reading  |  Sorting  |  " <<  
+            "Inserting  |  Deleting  |" << endl;
+    cout << "      Vector     |  " << vectorReadTime << "     " << vectorSortTime <<
+        "      " << vectorInsertTime << "       " << vectorDeleteTime << endl;
+    cout << "       List      |  " << listReadTime << "     " << listSortTime <<
+        "      " << listInsertTime << "       " << listDeleteTime << endl;
+    cout << "      Vector     |  " << vectorReadTime << "     " << vectorSortTime <<
+        "      " << vectorInsertTime << "       " << vectorDeleteTime << endl;
 
 }
 
