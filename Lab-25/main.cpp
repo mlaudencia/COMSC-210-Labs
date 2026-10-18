@@ -5,6 +5,7 @@
 #include <set>
 #include <fstream>
 #include <string>
+#include <algorithm>
 using namespace std;
 using namespace std::chrono;
 
@@ -34,6 +35,9 @@ int main() {
 
     int masterCodesSize = masterCodes.size();
 
+    // START OF RACE 1
+    // START OF VECTOR RACE 1
+
     auto start = high_resolution_clock::now();
 
     vector<string> vectorCodes;
@@ -42,10 +46,11 @@ int main() {
     }
 
     auto end = high_resolution_clock::now();
-
     auto duration = duration_cast<nanoseconds>(end - start).count();
 
     vectorReadTime = duration;
+
+    // END OF VECTOR RACE 1, START OF LIST RACE 1
 
     start = high_resolution_clock::now();
 
@@ -59,6 +64,8 @@ int main() {
 
     listReadTime = duration;
 
+    // END OF LIST RACE 1, START OF SET RACE 1
+
      start = high_resolution_clock::now();
 
     set<string> setCodes;
@@ -71,11 +78,45 @@ int main() {
 
     setReadTime = duration;
 
+    // END OF RACE 1, START OF RACE 2
+    // START OF VECTOR RACE 2
+
+    start = high_resolution_clock::now();
+
+    sort(vectorCodes.begin(), vectorCodes.end());
+
+    end = high_resolution_clock::now();
+    duration = duration_cast<nanoseconds>(end - start).count();
+
+    vectorSortTime = duration;
+
+    // END OF VECTOR RACE 2, START OF LIST RACE 2
+
+    start = high_resolution_clock::now();
+
+    listCodes.sort();
+
+    end = high_resolution_clock::now();
+    duration = duration_cast<nanoseconds>(end - start).count();
+
+    listSortTime = duration;
+
+    // END OF LIST RACE 2, START OF SET RACE 2
+
+    // Set is already sorted, so can't time it. Per instructions, we just set
+    // the time to -1.
+
+    setSortTime = -1;
+
+    // END OF RACE 2, START OF RACE 3
+    // START OF VECTOR RACE 3
+
+    
 }
 
 /* syntax examples:
-auto start = high_resolution_clock::now()
-auto end = high_resolution_clock::now()
-auto duration = duration_cast<milliseconds>(end - start)
+auto start = high_resolution_clock::now();
+auto end = high_resolution_clock::now();
+auto duration = duration_cast<milliseconds>(end - start);
 duration.count() references elapsed milliseconds
 */
