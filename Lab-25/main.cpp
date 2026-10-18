@@ -19,20 +19,25 @@ int main() {
         return 1;
     }
 
-    string masterCodes[CODES_SIZE];
+    vector<string> masterCodes;
     int count = 0;
-    int vectorTime, listTime, setTime;
+    int vectorReadTime, listReadTime, setReadTime;
+    int vectorSortTime, listSortTime, setSortTime;
+    int vectorInsertTime, listInsertTime, setInsertTime;
+    int vectorDeleteTime, listDeleteTime, setDeleteTime;
     string code;
 
-    while(fin >> code && count < CODES_SIZE){
-        masterCodes[count] = code;
-        count++;
+    while(fin >> code){
+        masterCodes.push_back(code);
     }
+    fin.close();
+
+    int masterCodesSize = masterCodes.size();
 
     auto start = high_resolution_clock::now();
 
     vector<string> vectorCodes;
-    for(int i = 0; i < CODES_SIZE; i++){
+    for(int i = 0; i < masterCodesSize; i++){
         vectorCodes.push_back(masterCodes[i]);
     }
 
@@ -40,36 +45,32 @@ int main() {
 
     auto duration = duration_cast<nanoseconds>(end - start).count();
 
-    vectorTime = duration;
+    vectorReadTime = duration;
 
     start = high_resolution_clock::now();
 
     list<string> listCodes;
-    for(int i = 0; i < CODES_SIZE; i++){
+    for(int i = 0; i < masterCodesSize; i++){
         listCodes.push_back(masterCodes[i]);
     }
 
     end = high_resolution_clock::now();
     duration = duration_cast<nanoseconds>(end - start).count();
 
-    listTime = duration;
+    listReadTime = duration;
 
      start = high_resolution_clock::now();
 
     set<string> setCodes;
-    for(int i = 0; i < CODES_SIZE; i++){
+    for(int i = 0; i < masterCodesSize; i++){
         setCodes.insert(masterCodes[i]);
     }
 
     end = high_resolution_clock::now();
     duration = duration_cast<nanoseconds>(end - start).count();
 
-    cout << "*** FIRST RACE: READING ***" << endl;
-    cout << "RESULTS: " << endl;
-    cout << "   Vector Time: " << vectorTime << endl;
-    cout << "   List Time: " << listTime << endl;
-    cout << "   Set Time: " << setTime << endl;
-    return 0;
+    setReadTime = duration;
+
 }
 
 /* syntax examples:
