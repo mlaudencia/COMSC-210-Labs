@@ -19,22 +19,34 @@ int main() {
         return 1;
     }
 
-    int masterCodes[CODES_SIZE];
+    string masterCodes[CODES_SIZE];
     int count = 0;
-    int number;
+    int number, vectorTime, listTime, setTime;
 
     while(fin >> number && count < CODES_SIZE){
         masterCodes[count] = number;
         count++;
     }
-    
-    vector<int> vectorCodes;
-
-
 
     auto start = high_resolution_clock::now();
 
+    vector<string> vectorCodes;
+    for(int i = 0; i < CODES_SIZE; i++){
+        vectorCodes.push_back(masterCodes[i]);
+    }
 
+    auto end = high_resolution_clock::now();
+
+    auto duration = duration_cast<nanoseconds>(end - start).count();
+
+    vectorTime = duration;
+
+    start = high_resolution_clock::now();
+
+    list<string> listCodes;
+    for(int i = 0; i < CODES_SIZE; i++){
+        listCodes.push_back(masterCodes[i]);
+    }
 
     return 0;
 }
