@@ -10,8 +10,6 @@
 using namespace std;
 using namespace std::chrono;
 
-const int CODES_SIZE = 20000;
-
 int main() {
     
     ifstream fin("codes.txt");
@@ -147,7 +145,54 @@ int main() {
 
     setInsertTime = duration;
 
-     // END OF RACE 3, START OF RACE 4
+    // END OF RACE 3, START OF RACE 4
+    // START OF VECTOR RACE 4
+
+    start = high_resolution_clock::now();
+
+    auto vectorIt = vectorCodes.begin();
+    advance(vectorIt, vectorCodes.size()/2);
+
+    vectorCodes.erase(vectorIt);
+
+    end = high_resolution_clock::now();
+    duration = duration_cast<nanoseconds>(end - start).count();
+
+    vectorDeleteTime = duration;
+
+    // END OF VECTOR RACE 4, START OF LIST RACE 4
+
+    start = high_resolution_clock::now();
+
+    auto listIt = listCodes.begin();
+    advance(listIt,listCodes.size()/2);
+
+    listCodes.erase(listIt);
+
+    end = high_resolution_clock::now();
+    duration = duration_cast<nanoseconds>(end - start).count();
+
+    listDeleteTime = duration;
+
+    // END OF LIST RACE 4, START OF SET RACE 4
+
+    start = high_resolution_clock::now();
+
+    auto setIt = listCodes.begin();
+    advance(setIt,setCodes.size()/2);
+
+    // For sets, we can't really access any middle point, since it's sorted,
+    // and the built-in erase for sets only takes in a value, so we just 
+    // delete our inserted value from earlier.
+    setCodes.erase("TESTCODE");
+
+    end = high_resolution_clock::now();
+    duration = duration_cast<nanoseconds>(end - start).count();
+
+    setDeleteTime = duration;
+
+    // END OF RACE 4
+
 }
 
 /* syntax examples:
