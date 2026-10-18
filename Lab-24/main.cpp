@@ -1,4 +1,4 @@
-// COMSC-210 | Lab 23 | Jeremy Laudencia
+// COMSC-210 | Lab 24 | Jeremy Laudencia
 
 #include <iostream>
 #include <fstream>
@@ -77,7 +77,7 @@ int main_menu(){
         cout << "*** GOAT MANAGER 3001 ***" << endl;
         cout << "   >  [1] Add a goat" << endl;
         cout << "   >  [2] Delete a goat" << endl;
-        cout << "   >  [3] set goats" << endl;
+        cout << "   >  [3] List goats" << endl;
         cout << "   >  [4] Quit" << endl;
         cout << "   >  Choice --> ";
 
@@ -119,7 +119,7 @@ void add_goat(set<Goat> &t, string n[], string c[]){
     int randColor = rand() % SZ_COLORS;
     int randName = rand() % SZ_NAMES;
     int randAge = rand() % MAX_AGE;
-    t.push_back(Goat(n[randName], randAge, c[randColor]));
+    t.insert(Goat(n[randName], randAge, c[randColor]));
     cout << "Added random goat: " << endl;
     cout << "   Name: " << n[randName] << endl;
     cout << "   Age: " << randAge << endl;
@@ -195,7 +195,7 @@ void display_trip(const set<Goat> &t){
     }
     else{
         cout << endl;
-        cout << "=== GOAT set ===" << endl;
+        cout << "=== GOAT SET ===" << endl;
         for(Goat g : t){
             cout << "[" << ++count << "] " << g.get_name() << " (" << 
             g.get_age() << ", " << g.get_color() << ")" << endl;
