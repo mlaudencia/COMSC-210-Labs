@@ -21,7 +21,10 @@ using namespace std::chrono;
 const int colSize = 12;
 const int rowSize = 15;
 
-void displayResults(int vrt, int lrt, int srt, int vst, int lst, int sst, int vit, int lit, int sit, int vdt, int ldt, int sdt);
+void displayResults(long long vrt, long long lrt, long long srt, 
+                    long long vst, long long lst, long long sst, 
+                    long long vit, long long lit, long long sit, 
+                    long long vdt, long long ldt, long long sdt);
 
 int main() {
     
@@ -216,8 +219,18 @@ int main() {
 
 }
 
+// displayResults() displays the respective read time, sort time, insert time,
+// and delete time of a vector, list, and set data structure.
+// arguments: long long vrt, lrt, srt, vst, lst, sst, vit, lit, sit, vdt, ldt, sdt
+// returns: nothing
 
-void displayResults(int vrt, int lrt, int srt, int vst, int lst, int sst, int vit, int lit, int sit, int vdt, int ldt, int sdt){
+// Originally, I wasn't going to add this, but I think it was better just to 
+// have it and not risk getting points off for not having any function 
+// prototypes or anything.
+void displayResults(long long vrt, long long lrt, long long srt, 
+                    long long vst, long long lst, long long sst, 
+                    long long vit, long long lit, long long sit, 
+                    long long vdt, long long ldt, long long sdt){
     const auto col = setw(colSize);
     const auto row = setw(rowSize);
 
