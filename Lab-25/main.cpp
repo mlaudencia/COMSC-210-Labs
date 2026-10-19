@@ -237,8 +237,8 @@ void displayResults(long long vrt, long long lrt, long long srt,
     cout << left;
 
     cout << "*** RACE RESULTS ***" << endl;
-    cout << "    Structure   |  Vector         List           Set   " << endl;
-    cout << "---------------------------------------------------------" << endl;
+    cout << "    Operation   |  Vector         List           Set    (all in ns)" << endl;
+    cout << "-------------------------------------------------------------------" << endl;
     cout << col << "     Reading    |  " << 
         row << vrt << row << lrt <<
         row << srt  << endl;
