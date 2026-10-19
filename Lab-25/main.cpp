@@ -21,6 +21,8 @@ using namespace std::chrono;
 const int colSize = 12;
 const int rowSize = 15;
 
+void displayResults(int vrt, int lrt, int srt, int vst, int lst, int sst, int vit, int lit, int sit, int vdt, int ldt, int sdt);
+
 int main() {
     
     // Here, we read in codes.txt, and return an error if it can't be read in.
@@ -32,11 +34,10 @@ int main() {
     }
 
     vector<string> masterCodes;
-    int count = 0;
-    int vectorReadTime, listReadTime, setReadTime;
-    int vectorSortTime, listSortTime, setSortTime;
-    int vectorInsertTime, listInsertTime, setInsertTime;
-    int vectorDeleteTime, listDeleteTime, setDeleteTime;
+    long long vectorReadTime, listReadTime, setReadTime;
+    long long vectorSortTime, listSortTime, setSortTime;
+    long long vectorInsertTime, listInsertTime, setInsertTime;
+    long long vectorDeleteTime, listDeleteTime, setDeleteTime;
     string code;
 
     // This is just so that instead of reading in codes.txt three times for
@@ -182,7 +183,10 @@ int main() {
 
     start = high_resolution_clock::now();
     
-    listCodes.erase(listIt);
+    auto listDeleteIt = listCodes.begin();
+    advance(listDeleteIt, listCodes.size()/2);
+
+    listCodes.erase(listDeleteIt);
 
     end = high_resolution_clock::now();
     duration = duration_cast<nanoseconds>(end - start).count();
@@ -193,13 +197,10 @@ int main() {
 
     start = high_resolution_clock::now();
 
-    auto setIt = setCodes.begin();
-    advance(setIt,setCodes.size()/2);
+    auto setDeleteIt = setCodes.begin();
+    advance(setDeleteIt, setCodes.size()/2);
 
-    // For sets, we can't really access any middle point, since it's sorted,
-    // and the built-in erase for sets only takes in a value, so we just 
-    // delete our inserted value from earlier.
-    setCodes.erase("TESTCODE");
+    setCodes.erase(setDeleteIt);
 
     end = high_resolution_clock::now();
     duration = duration_cast<nanoseconds>(end - start).count();
@@ -208,25 +209,37 @@ int main() {
 
     // END OF RACE 4, ONTO DISPLAYING RESULTS
 
+    displayResults(vectorReadTime, listReadTime, setReadTime,
+                   vectorSortTime, listSortTime, setSortTime, 
+                   vectorInsertTime, listInsertTime, setInsertTime,
+                   vectorDeleteTime, listDeleteTime, setDeleteTime);
+
+}
+
+
+void displayResults(int vrt, int lrt, int srt, int vst, int lst, int sst, int vit, int lit, int sit, int vdt, int ldt, int sdt){
     const auto col = setw(colSize);
     const auto row = setw(rowSize);
 
     cout << left;
 
     cout << "*** RACE RESULTS ***" << endl;
-    cout << "            |  Reading        Sorting      " << "  Inserting      Deleting   " << endl;
-    cout << col << "   Vector   |  " << 
-        row << vectorReadTime << row << vectorSortTime <<
-        row << vectorInsertTime << row << vectorDeleteTime << endl;
-    cout << col << "    List    |  " <<
-        row << listReadTime << row << listSortTime <<
-        row << listInsertTime << row << listDeleteTime << endl;
-    cout << col << "     Set    |  " <<
-        row << setReadTime << row << setSortTime <<
-        row << setInsertTime << row << setDeleteTime << endl;
+    cout << "    Structure   |  Vector         List           Set   " << endl;
+    cout << "---------------------------------------------------------" << endl;
+    cout << col << "     Reading    |  " << 
+        row << vrt << row << lrt <<
+        row << srt  << endl;
+    cout << col << "     Sorting    |  " <<
+        row << vst << row << lst <<
+        row << sst  << endl;
+    cout << col << "    Inserting   |  " <<
+        row << vit << row << lit <<
+        row << sit  << endl;
+    cout << col << "    Deleting    |  " <<
+        row << vdt << row << ldt <<
+        row << sdt  << endl;
 
 }
-
 /* syntax examples:
 auto start = high_resolution_clock::now();
 auto end = high_resolution_clock::now();
