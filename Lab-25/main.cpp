@@ -1,5 +1,9 @@
 // COMSC-210 | Lab 25 | Jeremy Laudencia
 
+// Here, I included <iostream> and <iomanip> for couts and nicer formatting,
+// <chrono> for the timer, <vector>, <list>, and <set> for the races,
+// <fstream> and <string> to read in codes.txt, <algorithm> for the built-in
+// sort function for vector, and <iterator> to maneuver through list and set.
 #include <iostream>
 #include <chrono>
 #include <vector>
@@ -13,11 +17,13 @@
 using namespace std;
 using namespace std::chrono;
 
+// These two constants are for a neater table of operations.
 const int colSize = 12;
 const int rowSize = 15;
 
 int main() {
     
+    // Here, we read in codes.txt, and return an error if it can't be read in.
     ifstream fin("codes.txt");
     if(!fin){
         cout << "Could not open external file, check if name is correct " <<
@@ -33,6 +39,9 @@ int main() {
     int vectorDeleteTime, listDeleteTime, setDeleteTime;
     string code;
 
+    // This is just so that instead of reading in codes.txt three times for
+    // each structure in the race, we just do it once and let each structure
+    // read off from the data in the masterCodes vector.
     while(fin >> code){
         masterCodes.push_back(code);
     }
@@ -71,7 +80,7 @@ int main() {
 
     // END OF LIST RACE 1, START OF SET RACE 1
 
-     start = high_resolution_clock::now();
+    start = high_resolution_clock::now();
 
     set<string> setCodes;
     for(int i = 0; i < masterCodesSize; i++){
@@ -129,6 +138,9 @@ int main() {
 
     start = high_resolution_clock::now();
 
+    // Here, we use iterators to navigate through the list and insert an
+    // element in the middle of it. This was tricky, so I need to learn about
+    // iterators and their usage more, and practice using them.
     auto listIt = listCodes.begin();
     advance(listIt, listCodes.size()/2);
     listCodes.insert(listIt, "TESTCODE");
