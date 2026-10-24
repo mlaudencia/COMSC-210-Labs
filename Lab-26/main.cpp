@@ -25,13 +25,13 @@ const int numStructs = 3;
 const int numTimes = 4;
 
 const int READ = 0;
-const int READ = 0;
-const int READ = 0;
-const int READ = 0;
+const int SORT = 1;
+const int INSERT = 2;
+const int DELETE = 3;
 
-const int READ = 0;
-const int READ = 0;
-const int READ = 0;
+const int VECTOR = 0;
+const int LIST = 1;
+const int SET = 2;
 
 void displayResults(long long vrt, long long lrt, long long srt, 
                     long long vst, long long lst, long long sst, 
@@ -65,8 +65,9 @@ int main() {
 
     int masterCodesSize = masterCodes.size();
     long long allRuns[numRuns][numTimes][numStructs];
+    long long averages[numTimes][numStructs];
 
-    for(int i = 0; i < numRuns; i++){
+    for(int run = 0; run < numRuns; run++){
 
     // START OF RACE 1
     // START OF VECTOR RACE 1
@@ -81,7 +82,8 @@ int main() {
     auto end = high_resolution_clock::now();
     auto duration = duration_cast<nanoseconds>(end - start).count();
 
-    vectorReadTime = duration;
+    allRuns[run][READ][VECTOR] = duration;
+    averages[READ][VECTOR] += duration;
 
     // END OF VECTOR RACE 1, START OF LIST RACE 1
 
