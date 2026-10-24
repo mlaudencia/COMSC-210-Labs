@@ -66,8 +66,6 @@ int main() {
 
     for(int run = 0; run < numRuns; run++){
 
-        cout << "+- RUN #" << run << " -+" << endl;
-
         // START OF RACE 1
         // START OF VECTOR RACE 1
 
@@ -242,6 +240,18 @@ int main() {
 
     }
 
+    for(int time = 0; time < numTimes; time++){
+        for(int stru = 0; stru < numStructs; stru++){
+            if(time == SORT && stru == SET){
+                averages[time][stru] = -1;
+            } else {
+            averages[time][stru] /= numRuns;
+            }
+        }
+    }
+
+    
+
     displayResults(averages);
     
 
@@ -266,7 +276,7 @@ void displayResults(long long arr[numTimes][numStructs]){
     cout << "-------------------------------------------------------------------" << endl;
     cout << col << "     Reading    |  " << 
         row << arr[READ][VECTOR] << row << arr[READ][LIST] <<
-        row << arr[READ][SORT]  << endl;
+        row << arr[READ][SET]  << endl;
     cout << col << "     Sorting    |  " <<
         row << arr[SORT][VECTOR] << row << arr[SORT][LIST] <<
         row << arr[SORT][SET]  << endl;
