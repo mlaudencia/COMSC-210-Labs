@@ -21,11 +21,14 @@ using namespace std::chrono;
 const int colSize = 12;
 const int rowSize = 15;
 
-// The below constants are for
+// The below constants are for easier access when it came to the for loops
+// and elements of the arrays.
 const int numRuns = 15;
 const int numStructs = 3;
 const int numTimes = 4;
 
+// The seven below variables were especially helpful when it came to 
+// changing displayResults().
 const int READ = 0;
 const int SORT = 1;
 const int INSERT = 2;
@@ -35,6 +38,8 @@ const int VECTOR = 0;
 const int LIST = 1;
 const int SET = 2;
 
+// Here, I changed the huge long long parameter list into just one array,
+// since all the values from before are now in this new 2D array.
 void displayResults(long long arr[numTimes][numStructs]);
 
 int main() {
@@ -48,10 +53,6 @@ int main() {
     }
 
     vector<string> masterCodes;
-    long long vectorReadTime, listReadTime, setReadTime;
-    long long vectorSortTime, listSortTime, setSortTime;
-    long long vectorInsertTime, listInsertTime, setInsertTime;
-    long long vectorDeleteTime, listDeleteTime, setDeleteTime;
     string code;
 
     // This is just so that instead of reading in codes.txt three times for
@@ -63,9 +64,16 @@ int main() {
     fin.close();
 
     int masterCodesSize = masterCodes.size();
+
+    // Below, I added two new arrays: allRuns, so that even though we're
+    // finding averages, you could still access each run's different times.
+    // For averages, that basically replaced the huge block of individual
+    // times I had declared before. Using an array here is so much neater.
     long long allRuns[numRuns][numTimes][numStructs];
     long long averages[numTimes][numStructs] = {0};
 
+    // Here, I use a for loop to run numRuns times, which is 15 runs as per
+    // the lab instructions.
     for(int run = 0; run < numRuns; run++){
 
         // START OF RACE 1
@@ -81,6 +89,10 @@ int main() {
         auto end = high_resolution_clock::now();
         auto duration = duration_cast<nanoseconds>(end - start).count();
 
+        // Instead of making vectorReadTime and what not equal to duration,
+        // with our new arrays, we can just assign duration to that element
+        // of the array. For averages, duration is added, so that I can
+        // divide that total time by numRuns after the for loop ends.
         allRuns[run][READ][VECTOR] = duration;
         averages[READ][VECTOR] += duration;
 
@@ -144,9 +156,10 @@ int main() {
         // Set is already sorted, so can't time it. Per instructions, we just set
         // the time to -1.
 
-        // Since the time is 0, nothing is added to the average sort set time.
+        // Since the time is 0, nothing is added to the average sort set time,
+        // and I set the sort set time of that run to 0, since it took no time.
 
-        allRuns[run][SORT][SET] = -1;
+        allRuns[run][SORT][SET] = 0;
 
         // END OF RACE 2, START OF RACE 3
         // START OF VECTOR RACE 3
@@ -242,6 +255,11 @@ int main() {
 
     }
 
+    // Here, since I changed displayResults() to take in an array instead of
+    // each individual value, to output the right averages, I needed to divide
+    // the averages by numRuns before putting it into the function, so I used
+    // two for loops to access each element of the averages array and divided
+    // them all by 15, all except for the sort set times, since they're all 0.
     for(int time = 0; time < numTimes; time++){
         for(int stru = 0; stru < numStructs; stru++){
             if(time == SORT && stru == SET){
@@ -261,7 +279,7 @@ int main() {
 
 // displayResults() displays the respective read time, sort time, insert time,
 // and delete time of a vector, list, and set data structure.
-// arguments: long long vrt, lrt, srt, vst, lst, sst, vit, lit, sit, vdt, ldt, sdt
+// arguments: long long arr[numTimes][numStructs]
 // returns: nothing
 
 // Originally, I wasn't going to add this, but I think it was better just to 
@@ -273,7 +291,7 @@ void displayResults(long long arr[numTimes][numStructs]){
 
     cout << left;
 
-    cout << "*** RACE RESULTS ***" << endl;
+    cout << "*** RACE RESULTS ***" << endl << endl;
     cout << "Num of simulations: " << numRuns << endl;
     cout << "    Operation   |  Vector         List           Set    (all in ns)" << endl;
     cout << "-------------------------------------------------------------------" << endl;
