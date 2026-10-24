@@ -24,6 +24,15 @@ const int numRuns = 15;
 const int numStructs = 3;
 const int numTimes = 4;
 
+const int READ = 0;
+const int READ = 0;
+const int READ = 0;
+const int READ = 0;
+
+const int READ = 0;
+const int READ = 0;
+const int READ = 0;
+
 void displayResults(long long vrt, long long lrt, long long srt, 
                     long long vst, long long lst, long long sst, 
                     long long vit, long long lit, long long sit, 
@@ -56,6 +65,8 @@ int main() {
 
     int masterCodesSize = masterCodes.size();
     long long allRuns[numRuns][numTimes][numStructs];
+
+    for(int i = 0; i < numRuns; i++){
 
     // START OF RACE 1
     // START OF VECTOR RACE 1
@@ -220,6 +231,7 @@ int main() {
                    vectorSortTime, listSortTime, setSortTime, 
                    vectorInsertTime, listInsertTime, setInsertTime,
                    vectorDeleteTime, listDeleteTime, setDeleteTime);
+    }
 
 }
 
