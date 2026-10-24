@@ -33,10 +33,7 @@ const int VECTOR = 0;
 const int LIST = 1;
 const int SET = 2;
 
-void displayResults(long long vrt, long long lrt, long long srt, 
-                    long long vst, long long lst, long long sst, 
-                    long long vit, long long lit, long long sit, 
-                    long long vdt, long long ldt, long long sdt);
+void displayResults(long long arr[numTimes][numStructs]);
 
 int main() {
     
@@ -69,185 +66,184 @@ int main() {
 
     for(int run = 0; run < numRuns; run++){
 
-    // START OF RACE 1
-    // START OF VECTOR RACE 1
+        cout << "+- RUN #" << run << " -+" << endl;
 
-    auto start = high_resolution_clock::now();
+        // START OF RACE 1
+        // START OF VECTOR RACE 1
 
-    vector<string> vectorCodes;
-    for(int i = 0; i < masterCodesSize; i++){
-        vectorCodes.push_back(masterCodes[i]);
-    }
+        auto start = high_resolution_clock::now();
 
-    auto end = high_resolution_clock::now();
-    auto duration = duration_cast<nanoseconds>(end - start).count();
+        vector<string> vectorCodes;
+        for(int i = 0; i < masterCodesSize; i++){
+            vectorCodes.push_back(masterCodes[i]);
+        }
 
-    allRuns[run][READ][VECTOR] = duration;
-    averages[READ][VECTOR] += duration;
+        auto end = high_resolution_clock::now();
+        auto duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF VECTOR RACE 1, START OF LIST RACE 1
+        allRuns[run][READ][VECTOR] = duration;
+        averages[READ][VECTOR] += duration;
 
-    start = high_resolution_clock::now();
+        // END OF VECTOR RACE 1, START OF LIST RACE 1
 
-    list<string> listCodes;
-    for(int i = 0; i < masterCodesSize; i++){
-        listCodes.push_back(masterCodes[i]);
-    }
+        start = high_resolution_clock::now();
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        list<string> listCodes;
+        for(int i = 0; i < masterCodesSize; i++){
+            listCodes.push_back(masterCodes[i]);
+        }
 
-    allRuns[run][READ][LIST] = duration;
-    averages[READ][LIST] += duration;
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF LIST RACE 1, START OF SET RACE 1
+        allRuns[run][READ][LIST] = duration;
+        averages[READ][LIST] += duration;
 
-    start = high_resolution_clock::now();
+        // END OF LIST RACE 1, START OF SET RACE 1
 
-    set<string> setCodes;
-    for(int i = 0; i < masterCodesSize; i++){
-        setCodes.insert(masterCodes[i]);
-    }
+        start = high_resolution_clock::now();
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        set<string> setCodes;
+        for(int i = 0; i < masterCodesSize; i++){
+            setCodes.insert(masterCodes[i]);
+        }
 
-    allRuns[run][READ][SET] = duration;
-    averages[READ][SET] += duration;
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF RACE 1, START OF RACE 2
-    // START OF VECTOR RACE 2
+        allRuns[run][READ][SET] = duration;
+        averages[READ][SET] += duration;
 
-    start = high_resolution_clock::now();
+        // END OF RACE 1, START OF RACE 2
+        // START OF VECTOR RACE 2
 
-    sort(vectorCodes.begin(), vectorCodes.end());
+        start = high_resolution_clock::now();
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        sort(vectorCodes.begin(), vectorCodes.end());
 
-    allRuns[run][SORT][VECTOR] = duration;
-    averages[SORT][VECTOR] += duration;
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF VECTOR RACE 2, START OF LIST RACE 2
+        allRuns[run][SORT][VECTOR] = duration;
+        averages[SORT][VECTOR] += duration;
 
-    start = high_resolution_clock::now();
+        // END OF VECTOR RACE 2, START OF LIST RACE 2
 
-    listCodes.sort();
+        start = high_resolution_clock::now();
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        listCodes.sort();
 
-    allRuns[run][SORT][LIST] = duration;
-    averages[SORT][LIST] += duration;
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF LIST RACE 2, START OF SET RACE 2
+        allRuns[run][SORT][LIST] = duration;
+        averages[SORT][LIST] += duration;
 
-    // Set is already sorted, so can't time it. Per instructions, we just set
-    // the time to -1.
+        // END OF LIST RACE 2, START OF SET RACE 2
 
-    // Since the time is 0, nothing is added to the average sort set time.
+        // Set is already sorted, so can't time it. Per instructions, we just set
+        // the time to -1.
 
-    allRuns[run][SORT][SET] = -1;
+        // Since the time is 0, nothing is added to the average sort set time.
 
-    // END OF RACE 2, START OF RACE 3
-    // START OF VECTOR RACE 3
+        allRuns[run][SORT][SET] = -1;
 
-    start = high_resolution_clock::now();
+        // END OF RACE 2, START OF RACE 3
+        // START OF VECTOR RACE 3
 
-    vectorCodes.insert(vectorCodes.begin() + (vectorCodes.size()/2), "TESTCODE");
+        start = high_resolution_clock::now();
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        vectorCodes.insert(vectorCodes.begin() + (vectorCodes.size()/2), "TESTCODE");
 
-    allRuns[run][INSERT][VECTOR] = duration;
-    averages[INSERT][VECTOR] += duration;
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF VECTOR RACE 3, START OF LIST RACE 3
+        allRuns[run][INSERT][VECTOR] = duration;
+        averages[INSERT][VECTOR] += duration;
 
-    start = high_resolution_clock::now();
+        // END OF VECTOR RACE 3, START OF LIST RACE 3
 
-    // Here, we use iterators to navigate through the list and insert an
-    // element in the middle of it. This was tricky, so I need to learn about
-    // iterators and their usage more, and practice using them.
-    auto listIt = listCodes.begin();
-    advance(listIt, listCodes.size()/2);
-    listCodes.insert(listIt, "TESTCODE");
+        start = high_resolution_clock::now();
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        // Here, we use iterators to navigate through the list and insert an
+        // element in the middle of it. This was tricky, so I need to learn about
+        // iterators and their usage more, and practice using them.
+        auto listIt = listCodes.begin();
+        advance(listIt, listCodes.size()/2);
+        listCodes.insert(listIt, "TESTCODE");
 
-    allRuns[run][INSERT][LIST] = duration;
-    averages[INSERT][LIST] += duration;
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF LIST RACE 3, START OF SET RACE 3
+        allRuns[run][INSERT][LIST] = duration;
+        averages[INSERT][LIST] += duration;
 
-    start = high_resolution_clock::now();
+        // END OF LIST RACE 3, START OF SET RACE 3
 
-    // Since set auto sorts its elements, we can't insert in the middle of 
-    // the list, so all we can do is insert "TESTCODE" into the set.
-    setCodes.insert("TESTCODE");
+        start = high_resolution_clock::now();
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        // Since set auto sorts its elements, we can't insert in the middle of 
+        // the list, so all we can do is insert "TESTCODE" into the set.
+        setCodes.insert("TESTCODE");
 
-    allRuns[run][INSERT][SET] = duration;
-    averages[INSERT][SET] += duration;
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF RACE 3, START OF RACE 4
-    // START OF VECTOR RACE 4
+        allRuns[run][INSERT][SET] = duration;
+        averages[INSERT][SET] += duration;
 
-    start = high_resolution_clock::now();
+        // END OF RACE 3, START OF RACE 4
+        // START OF VECTOR RACE 4
 
-    auto vectorIt = vectorCodes.begin();
-    advance(vectorIt, vectorCodes.size()/2);
+        start = high_resolution_clock::now();
 
-    vectorCodes.erase(vectorIt);
+        auto vectorIt = vectorCodes.begin();
+        advance(vectorIt, vectorCodes.size()/2);
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        vectorCodes.erase(vectorIt);
 
-    allRuns[run][DELETE][VECTOR] = duration;
-    averages[DELETE][VECTOR] += duration;
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    // END OF VECTOR RACE 4, START OF LIST RACE 4
+        allRuns[run][DELETE][VECTOR] = duration;
+        averages[DELETE][VECTOR] += duration;
 
-    start = high_resolution_clock::now();
+        // END OF VECTOR RACE 4, START OF LIST RACE 4
+
+        start = high_resolution_clock::now();
     
-    auto listDeleteIt = listCodes.begin();
-    advance(listDeleteIt, listCodes.size()/2);
+        auto listDeleteIt = listCodes.begin();
+        advance(listDeleteIt, listCodes.size()/2);
 
-    listCodes.erase(listDeleteIt);
+        listCodes.erase(listDeleteIt);
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    allRuns[run][DELETE][LIST] = duration;
-    averages[DELETE][LIST] += duration;
+        allRuns[run][DELETE][LIST] = duration;
+        averages[DELETE][LIST] += duration;
 
-    // END OF LIST RACE 4, START OF SET RACE 4
+        // END OF LIST RACE 4, START OF SET RACE 4
 
-    start = high_resolution_clock::now();
+        start = high_resolution_clock::now();
 
-    auto setDeleteIt = setCodes.begin();
-    advance(setDeleteIt, setCodes.size()/2);
+        auto setDeleteIt = setCodes.begin();
+        advance(setDeleteIt, setCodes.size()/2);
 
-    setCodes.erase(setDeleteIt);
+        setCodes.erase(setDeleteIt);
 
-    end = high_resolution_clock::now();
-    duration = duration_cast<nanoseconds>(end - start).count();
+        end = high_resolution_clock::now();
+        duration = duration_cast<nanoseconds>(end - start).count();
 
-    allRuns[run][DELETE][SET] = duration;
-    averages[DELETE][SET] += duration;
+        allRuns[run][DELETE][SET] = duration;
+        averages[DELETE][SET] += duration;
 
     // END OF RACE 4, ONTO DISPLAYING RESULTS
 
-    cout << "***** RACE RUN # " << run << " *****" << endl;
-
-    displayResults(vectorReadTime, listReadTime, setReadTime,
-                   vectorSortTime, listSortTime, setSortTime, 
-                   vectorInsertTime, listInsertTime, setInsertTime,
-                   vectorDeleteTime, listDeleteTime, setDeleteTime);
     }
+
+    displayResults(averages);
+    
 
 }
 
@@ -259,10 +255,7 @@ int main() {
 // Originally, I wasn't going to add this, but I think it was better just to 
 // have it and not risk getting points off for not having any function 
 // prototypes or anything.
-void displayResults(long long vrt, long long lrt, long long srt, 
-                    long long vst, long long lst, long long sst, 
-                    long long vit, long long lit, long long sit, 
-                    long long vdt, long long ldt, long long sdt){
+void displayResults(long long arr[numTimes][numStructs]){
     const auto col = setw(colSize);
     const auto row = setw(rowSize);
 
@@ -272,17 +265,17 @@ void displayResults(long long vrt, long long lrt, long long srt,
     cout << "    Operation   |  Vector         List           Set    (all in ns)" << endl;
     cout << "-------------------------------------------------------------------" << endl;
     cout << col << "     Reading    |  " << 
-        row << vrt << row << lrt <<
-        row << srt  << endl;
+        row << arr[READ][VECTOR] << row << arr[READ][LIST] <<
+        row << arr[READ][SORT]  << endl;
     cout << col << "     Sorting    |  " <<
-        row << vst << row << lst <<
-        row << sst  << endl;
+        row << arr[SORT][VECTOR] << row << arr[SORT][LIST] <<
+        row << arr[SORT][SET]  << endl;
     cout << col << "    Inserting   |  " <<
-        row << vit << row << lit <<
-        row << sit  << endl;
+        row << arr[INSERT][VECTOR] << row << arr[INSERT][LIST] <<
+        row << arr[INSERT][SET]  << endl;
     cout << col << "    Deleting    |  " <<
-        row << vdt << row << ldt <<
-        row << sdt  << endl;
+        row << arr[DELETE][VECTOR] << row << arr[DELETE][LIST] <<
+        row << arr[DELETE][SET]  << endl;
 
 }
 /* syntax examples:
