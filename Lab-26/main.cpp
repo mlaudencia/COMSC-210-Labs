@@ -20,6 +20,8 @@ using namespace std::chrono;
 // These two constants are for a neater table of operations.
 const int colSize = 12;
 const int rowSize = 15;
+
+// The below constants are for
 const int numRuns = 15;
 const int numStructs = 3;
 const int numTimes = 4;
@@ -243,7 +245,7 @@ int main() {
     for(int time = 0; time < numTimes; time++){
         for(int stru = 0; stru < numStructs; stru++){
             if(time == SORT && stru == SET){
-                averages[time][stru] = -1;
+                averages[time][stru] = 0;
             } else {
             averages[time][stru] /= numRuns;
             }
@@ -272,6 +274,7 @@ void displayResults(long long arr[numTimes][numStructs]){
     cout << left;
 
     cout << "*** RACE RESULTS ***" << endl;
+    cout << "Num of simulations: " << numRuns << endl;
     cout << "    Operation   |  Vector         List           Set    (all in ns)" << endl;
     cout << "-------------------------------------------------------------------" << endl;
     cout << col << "     Reading    |  " << 
