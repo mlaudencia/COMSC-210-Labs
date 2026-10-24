@@ -1,4 +1,4 @@
-// COMSC-210 | Lab 25 | Jeremy Laudencia
+// COMSC-210 | Lab 26 | Jeremy Laudencia
 
 // Here, I included <iostream> and <iomanip> for couts and nicer formatting,
 // <chrono> for the timer, <vector>, <list>, and <set> for the races,
@@ -20,6 +20,9 @@ using namespace std::chrono;
 // These two constants are for a neater table of operations.
 const int colSize = 12;
 const int rowSize = 15;
+const int numRuns = 15;
+const int numStructs = 3;
+const int numTimes = 4;
 
 void displayResults(long long vrt, long long lrt, long long srt, 
                     long long vst, long long lst, long long sst, 
@@ -52,6 +55,7 @@ int main() {
     fin.close();
 
     int masterCodesSize = masterCodes.size();
+    long long allRuns[numRuns][numTimes][numStructs];
 
     // START OF RACE 1
     // START OF VECTOR RACE 1
