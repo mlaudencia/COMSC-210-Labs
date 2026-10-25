@@ -7,11 +7,14 @@ using namespace std;
 const int FRIENDSHIP = 0;
 const int SPECIES = 1;
 const int CATCHPHRASE = 2;
+const int IGNORE_SIZE = 10000;
 
 void searchVillager(map<string, tuple<int, string, string>>& villagerData);
+void addVillager(map<string, tuple<int, string, string>>& villagerData);
 void deleteVillager(map<string, tuple<int, string, string>>& villagerData);
 void increaseFriendship(map<string, tuple<int, string, string>>& villagerData);
 void decreaseFriendship(map<string, tuple<int, string, string>>& villagerData);
+void displayVillagers(map<string, tuple<int, string, string>>& villagerData);
 
 int main() {
     // declarations
@@ -77,12 +80,12 @@ void searchVillager(map<string, tuple<int, string, string>>& villagerData){
 
 void deleteVillager(map<string, tuple<int, string, string>>& villagerData){
     string deleteKey;
-    cout << "What villager to delete?: ";
+    cout << "What villager to remove from village?: ";
     cin >> deleteKey;
     auto it = villagerData.find(deleteKey);
     if(it != villagerData.end()){
         villagerData.erase(deleteKey);
-        cout << deleteKey << " deleted." << endl;
+        cout << deleteKey << " removed from village." << endl;
     }
     else
         cout << deleteKey << " cannot be found." << endl;
@@ -120,4 +123,37 @@ void decreaseFriendship(map<string, tuple<int, string, string>>& villagerData){
     }
     else
         cout << decreaseKey << " cannot be found." << endl;
+}
+
+void addVillager(map<string, tuple<int, string, string>>& villagerData){
+    int friendLevel;
+    string name, phrase, spec;
+    cout << "What is this villager's name?: ";
+    cin >> name;
+    cout << "What is "<< name << "'s friendship level? (0-10): ";
+    while(true){
+        cin >> friendLevel;
+        if(cin.fail() || friendLevel < 0 || friendLevel > 10){
+            cout << "   Invalid friendship level, please choose a number from 0-10." << endl;
+            cout << "   Friendship level: ";
+            cin.clear();
+            cin.ignore(IGNORE_SIZE, '\n');
+        }
+    cout << "What is "<< name << "'s species?: ";
+    cin >> spec;
+    cout << "What is "<< name << "'s catchphrase: ";
+    getline(cin, phrase);
+    villagerData[name] = {friendLevel, spec, phrase};
+    cout << name << " added. Welcome to the Village, " << name << "!" << endl;
+} 
+
+void displayVillagers(map<string, tuple<int, string, string>>& villagerData){
+    cout << "Current villagers and their details: " << endl;
+    for (map<string, tuple<int, string, string>>::iterator it = villagerData.begin(); 
+                                               it != villagerData.end(); ++it) {
+        cout << it->first << " [";
+            cout << get<FRIENDSHIP>(it->second) << ", ";
+            cout << get<SPECIES>(it->second) << ", ";
+            cout << get<CATCHPHRASE>(it->second) << "] " << endl;
+    }
 }
