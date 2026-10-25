@@ -29,16 +29,40 @@ int main() {
     villagerData["Raymond"] = {3, "Wolf", "I did not eat those sheep!"};
     villagerData["Marshal"] = {7, "Reptile", "I'm totally normal human!"};
 
-    // access the map using a range-based for loop
-    cout << "Villagers details:" << endl;
-    for (auto pair : villagerData) {
-        cout << pair.first << " [";
-            cout << get<FRIENDSHIP>(pair.second) << ", ";
-            cout << get<SPECIES>(pair.second) << ", ";
-            cout << get<CATCHPHRASE>(pair.second) << "] " << endl;
+    int choice;
+    while(choice != 4){
+        choice = displayMenu();
+        if(choice == 1)
+            // addVillager(villagerData);
+            increaseFriendship(villagerData);
+        else if(choice == 2)
+            // deleteVillager(villagerData);
+            decreaseFriendship(villagerData);
+        else if(choice == 3)
+            // deleteVillager(villagerData);
+            increaseFriendship(villagerData);
+        else if(choice == 4)
+            // deleteVillager(villagerData);
+            decreaseFriendship(villagerData);
+        else if(choice == 5)
+            searchVillager(villagerData);
+        else if(choice == 6)
+            cout << "Exitting Villager Simulator... " << endl;
+        else
+            cout << "Invalid choice. Pick from the displayed choices." << endl;
+
     }
 
     // BELOW IS FROM DEMO CODE
+
+    // access the map using a range-based for loop
+    // cout << "Villagers details:" << endl;
+    // for (auto pair : villagerData) {
+    //     cout << pair.first << " [";
+    //         cout << get<FRIENDSHIP>(pair.second) << ", ";
+    //         cout << get<SPECIES>(pair.second) << ", ";
+    //         cout << get<CATCHPHRASE>(pair.second) << "] " << endl;
+    // }
 
     // // access the map using iterators
     // cout << "\nVillagers details (iterators):" << endl;
@@ -51,7 +75,7 @@ int main() {
     // }
 
     // delete an element
-    villagerData.erase("Raymond");
+    // villagerData.erase("Raymond");
 
     // // report size, clear, report size again to confirm map operations
     // cout << "\nSize before clear: " << villagerData.size() << endl;
@@ -59,6 +83,8 @@ int main() {
     // cout << "Size after clear: " << villagerData.size() << endl;
 
     // END OF DEMO CODE
+
+
 
     return 0;
 }
@@ -166,11 +192,15 @@ void displayVillagers(map<string, tuple<int, string, string>>& villagerData){
 int displayMenu(){
     int input;
     cout << "=== Villager Simulator ===" << endl;
-    cout << " 1) Add Villager" << endl;
-    cout << " 2) Delete Villager" << endl;
-    cout << " 3) Add Villager" << endl;
-    cout << " 4) Add Villager" << endl;
-    cout << " 5) Add Villager" << endl;
-    cout << " 6) Add Villager" << endl;
+    // cout << " 1) Add Villager" << endl;
+    // cout << " 2) Delete Villager" << endl;
+    cout << " 1) Increase Friendship" << endl;
+    cout << " 2) Decrease Friendship" << endl;
+    cout << " 3) Search for Villager" << endl;
+    cout << " 4) Exit" << endl;
+    cout << " Enter choice: ";
+    cin >> input;
+    return input;
+    
 
 }
