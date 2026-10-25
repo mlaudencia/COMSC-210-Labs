@@ -1,3 +1,5 @@
+// COMSC-210 | Lab 27 | Jeremy Laudencia
+
 #include <iostream>
 #include <map>
 #include <vector>
@@ -27,33 +29,29 @@ int main() {
     // note how the right-hand side of the assignment are the vector elements
     villagerData["Audie"] = {5, "Orc", "Me not cyclops, me orc!"};
     villagerData["Raymond"] = {3, "Wolf", "I did not eat those sheep!"};
-    villagerData["Marshal"] = {7, "Reptile", "I'm totally normal human!"};
+    villagerData["Marshal"] = {7, "Reptile", "I'm totally a normal human!"};
 
     displayVillagers(villagerData);
 
-    int choice;
-    while(choice != 4){
+    int choice = 0;
+    while(choice != 6){
         choice = displayMenu();
         if(choice == 1)
-            // addVillager(villagerData);
-            increaseFriendship(villagerData);
+            addVillager(villagerData);
         else if(choice == 2)
-            // deleteVillager(villagerData);
-            decreaseFriendship(villagerData);
+            deleteVillager(villagerData);
         else if(choice == 3)
-            // increaseFriendship(villagerData);
-            searchVillager(villagerData);
+            increaseFriendship(villagerData);
         else if(choice == 4)
-            // decreaseFriendship(villagerData);
+            decreaseFriendship(villagerData);
+        else if(choice == 5)
+            searchVillager(villagerData);
+        else if(choice == 6)
             cout << "Exitting Villager Simulator... " << endl;
-        // else if(choice == 5)
-        //     searchVillager(villagerData);
-        // else if(choice == 6)
-        //     cout << "Exitting Villager Simulator... " << endl;
         else
             cout << "Invalid choice. Pick from the displayed choices." << endl;
 
-        if(choice >= 1 && choice <= 3)
+        if(choice >= 1 && choice <= 5)
             displayVillagers(villagerData);
     }
 
@@ -117,7 +115,7 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerData){
     auto it = villagerData.find(deleteKey);
     if(it != villagerData.end()){
         villagerData.erase(deleteKey);
-        cout << deleteKey << " removed from village." << endl;
+        cout << deleteKey << " removed from village. Sorry to see you go, " << deleteKey << endl;
     }
     else
         cout << deleteKey << " cannot be found." << endl;
@@ -176,6 +174,7 @@ void addVillager(map<string, tuple<int, string, string>>& villagerData){
     }
     cout << "What is "<< name << "'s species?: ";
     cin >> spec;
+    cin.ignore(IGNORE_SIZE, '\n');
     cout << "What is "<< name << "'s catchphrase: ";
     getline(cin, phrase);
     villagerData[name] = {friendLevel, spec, phrase};
@@ -198,12 +197,12 @@ int displayMenu(){
     cout << endl;
     int input;
     cout << "=== Villager Simulator ===" << endl;
-    // cout << " 1) Add Villager" << endl;
-    // cout << " 2) Delete Villager" << endl;
-    cout << " 1) Increase Friendship" << endl;
-    cout << " 2) Decrease Friendship" << endl;
-    cout << " 3) Search for Villager" << endl;
-    cout << " 4) Exit" << endl;
+    cout << " 1) Add Villager" << endl;
+    cout << " 2) Delete Villager" << endl;
+    cout << " 3) Increase Friendship" << endl;
+    cout << " 4) Decrease Friendship" << endl;
+    cout << " 5) Search for Villager" << endl;
+    cout << " 6) Exit" << endl;
     cout << " Enter choice: ";
     cin >> input;
     return input;
