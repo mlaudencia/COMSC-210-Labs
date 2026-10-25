@@ -8,8 +8,10 @@ const int FRIENDSHIP = 0;
 const int SPECIES = 1;
 const int CATCHPHRASE = 2;
 
-void searchVillager();
-void deleteVillager();
+void searchVillager(map<string, tuple<int, string, string>>& villagerData);
+void deleteVillager(map<string, tuple<int, string, string>>& villagerData);
+void increaseFriendship(map<string, tuple<int, string, string>>& villagerData);
+void decreaseFriendship(map<string, tuple<int, string, string>>& villagerData);
 
 int main() {
     // declarations
@@ -81,8 +83,41 @@ void deleteVillager(map<string, tuple<int, string, string>>& villagerData){
     if(it != villagerData.end()){
         villagerData.erase(deleteKey);
         cout << deleteKey << " deleted." << endl;
-        return;
     }
     else
-        cout << deleteKey << " does not exist." << endl;
+        cout << deleteKey << " cannot be found." << endl;
+}
+
+void increaseFriendship(map<string, tuple<int, string, string>>& villagerData){
+    string increaseKey;
+    cout << "Which villager to increase friendship of?: ";
+    cin >> increaseKey;
+    auto it = villagerData.find(increaseKey);
+    if(it != villagerData.end()){
+        if(get<FRIENDSHIP>(it->second) == 10)
+            cout << increaseKey << " is already at max level friendship." << endl;
+        else{
+        get<FRIENDSHIP>(it->second) += 1;
+        cout << "Friendship increased with " << increaseKey << endl;
+        }
+    }
+    else
+        cout << increaseKey << " cannot be found." << endl;
+}
+
+void decreaseFriendship(map<string, tuple<int, string, string>>& villagerData){
+    string decreaseKey;
+    cout << "Which villager to decrease friendship of?: ";
+    cin >> decreaseKey;
+    auto it = villagerData.find(decreaseKey);
+    if(it != villagerData.end()){
+        if(get<FRIENDSHIP>(it->second) == 0)
+            cout << decreaseKey << " is already at lowest level friendship." << endl;
+        else{
+        get<FRIENDSHIP>(it->second) -= 1;
+        cout << "Friendship decreased with " << decreaseKey << endl;
+        }
+    }
+    else
+        cout << decreaseKey << " cannot be found." << endl;
 }
