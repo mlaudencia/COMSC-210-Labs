@@ -2,6 +2,7 @@
 #include <map>
 #include <vector>
 #include <tuple>
+#include <string>
 using namespace std;
 
 const int FRIENDSHIP = 0;
@@ -9,6 +10,7 @@ const int SPECIES = 1;
 const int CATCHPHRASE = 2;
 const int IGNORE_SIZE = 10000;
 
+int displayMenu();
 void searchVillager(map<string, tuple<int, string, string>>& villagerData);
 void addVillager(map<string, tuple<int, string, string>>& villagerData);
 void deleteVillager(map<string, tuple<int, string, string>>& villagerData);
@@ -139,12 +141,15 @@ void addVillager(map<string, tuple<int, string, string>>& villagerData){
             cin.clear();
             cin.ignore(IGNORE_SIZE, '\n');
         }
+        else
+            break;
+    }
     cout << "What is "<< name << "'s species?: ";
     cin >> spec;
     cout << "What is "<< name << "'s catchphrase: ";
     getline(cin, phrase);
     villagerData[name] = {friendLevel, spec, phrase};
-    cout << name << " added. Welcome to the Village, " << name << "!" << endl;
+    cout << name << " added. Welcome to the village, " << name << "!" << endl;
 } 
 
 void displayVillagers(map<string, tuple<int, string, string>>& villagerData){
@@ -156,4 +161,16 @@ void displayVillagers(map<string, tuple<int, string, string>>& villagerData){
             cout << get<SPECIES>(it->second) << ", ";
             cout << get<CATCHPHRASE>(it->second) << "] " << endl;
     }
+}
+
+int displayMenu(){
+    int input;
+    cout << "=== Villager Simulator ===" << endl;
+    cout << " 1) Add Villager" << endl;
+    cout << " 2) Delete Villager" << endl;
+    cout << " 3) Add Villager" << endl;
+    cout << " 4) Add Villager" << endl;
+    cout << " 5) Add Villager" << endl;
+    cout << " 6) Add Villager" << endl;
+
 }
