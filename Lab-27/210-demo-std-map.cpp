@@ -29,6 +29,8 @@ int main() {
     villagerData["Raymond"] = {3, "Wolf", "I did not eat those sheep!"};
     villagerData["Marshal"] = {7, "Reptile", "I'm totally normal human!"};
 
+    displayVillagers(villagerData);
+
     int choice;
     while(choice != 4){
         choice = displayMenu();
@@ -39,18 +41,20 @@ int main() {
             // deleteVillager(villagerData);
             decreaseFriendship(villagerData);
         else if(choice == 3)
-            // deleteVillager(villagerData);
-            increaseFriendship(villagerData);
-        else if(choice == 4)
-            // deleteVillager(villagerData);
-            decreaseFriendship(villagerData);
-        else if(choice == 5)
+            // increaseFriendship(villagerData);
             searchVillager(villagerData);
-        else if(choice == 6)
+        else if(choice == 4)
+            // decreaseFriendship(villagerData);
             cout << "Exitting Villager Simulator... " << endl;
+        // else if(choice == 5)
+        //     searchVillager(villagerData);
+        // else if(choice == 6)
+        //     cout << "Exitting Villager Simulator... " << endl;
         else
             cout << "Invalid choice. Pick from the displayed choices." << endl;
 
+        if(choice >= 1 && choice <= 3)
+            displayVillagers(villagerData);
     }
 
     // BELOW IS FROM DEMO CODE
@@ -97,10 +101,10 @@ void searchVillager(map<string, tuple<int, string, string>>& villagerData){
     auto it = villagerData.find(searchKey);
     if (it != villagerData.end()) {  // the iterator points to beyond the end of the map
                                        // if searchKey is not found
-        cout << "\nFound " << searchKey << "'s Data: ";
-            cout << get<FRIENDSHIP>(it->second) << ", ";
-            cout << get<SPECIES>(it->second) << ", ";
-            cout << get<CATCHPHRASE>(it->second) << ". ";
+        cout << "\nFound " << searchKey << "'s Data: " << endl;
+            cout << "    Friendship Level: " << get<FRIENDSHIP>(it->second) <<  endl;
+            cout << "    Species: " << get<SPECIES>(it->second) <<  endl;
+            cout << "    Catchphrase: " << get<CATCHPHRASE>(it->second) << endl;
     } else
         cout << endl << searchKey << " not found." << endl;
 
@@ -126,14 +130,14 @@ void increaseFriendship(map<string, tuple<int, string, string>>& villagerData){
     auto it = villagerData.find(increaseKey);
     if(it != villagerData.end()){
         if(get<FRIENDSHIP>(it->second) == 10)
-            cout << increaseKey << " is already at max level friendship." << endl;
+            cout << "    " << increaseKey << " is already at max level friendship." << endl;
         else{
         get<FRIENDSHIP>(it->second) += 1;
-        cout << "Friendship increased with " << increaseKey << endl;
+        cout << "    " << "Friendship increased with " << increaseKey << endl;
         }
     }
     else
-        cout << increaseKey << " cannot be found." << endl;
+        cout << "    " << increaseKey << " cannot be found." << endl;
 }
 
 void decreaseFriendship(map<string, tuple<int, string, string>>& villagerData){
@@ -143,14 +147,14 @@ void decreaseFriendship(map<string, tuple<int, string, string>>& villagerData){
     auto it = villagerData.find(decreaseKey);
     if(it != villagerData.end()){
         if(get<FRIENDSHIP>(it->second) == 0)
-            cout << decreaseKey << " is already at lowest level friendship." << endl;
+            cout << "    " << decreaseKey << " is already at lowest level friendship." << endl;
         else{
         get<FRIENDSHIP>(it->second) -= 1;
-        cout << "Friendship decreased with " << decreaseKey << endl;
+        cout << "    " << "Friendship decreased with " << decreaseKey << endl;
         }
     }
     else
-        cout << decreaseKey << " cannot be found." << endl;
+        cout << "    " << decreaseKey << " cannot be found." << endl;
 }
 
 void addVillager(map<string, tuple<int, string, string>>& villagerData){
@@ -179,6 +183,7 @@ void addVillager(map<string, tuple<int, string, string>>& villagerData){
 } 
 
 void displayVillagers(map<string, tuple<int, string, string>>& villagerData){
+    cout << endl;
     cout << "Current villagers and their details: " << endl;
     for (map<string, tuple<int, string, string>>::iterator it = villagerData.begin(); 
                                                it != villagerData.end(); ++it) {
@@ -190,6 +195,7 @@ void displayVillagers(map<string, tuple<int, string, string>>& villagerData){
 }
 
 int displayMenu(){
+    cout << endl;
     int input;
     cout << "=== Villager Simulator ===" << endl;
     // cout << " 1) Add Villager" << endl;
