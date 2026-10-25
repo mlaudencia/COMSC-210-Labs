@@ -1,5 +1,8 @@
 // COMSC-210 | Lab 27 | Jeremy Laudencia
 
+// Here, <iostream>, <map>, and <vector> were added in the demo code. I added
+// <tuple> because of the lab instructions, and <string> to handle inputted
+// villager catchphrases.
 #include <iostream>
 #include <map>
 #include <vector>
@@ -7,6 +10,8 @@
 #include <string>
 using namespace std;
 
+// Here, I added constants to easily access the tuple in villagerData.
+// I also added IGNORE_SIZE for cin.ignore(), so there's no magic numbers.
 const int FRIENDSHIP = 0;
 const int SPECIES = 1;
 const int CATCHPHRASE = 2;
@@ -86,8 +91,6 @@ int main() {
 
     // END OF DEMO CODE
 
-
-
     return 0;
 }
 
@@ -96,6 +99,10 @@ void searchVillager(map<string, tuple<int, string, string>>& villagerData){
     string searchKey;
     cout << "What villager to search for?: ";
     cin >> searchKey;
+    // For this function and for most of the other functions I made, I just
+    // used some of the demo code and switched stuff around to fit my program.
+    // Here, I use iterators to go through villagerData and print each of their
+    // data values in the tuple.
     auto it = villagerData.find(searchKey);
     if (it != villagerData.end()) {  // the iterator points to beyond the end of the map
                                        // if searchKey is not found
@@ -161,11 +168,19 @@ void addVillager(map<string, tuple<int, string, string>>& villagerData){
     cout << "What is this villager's name?: ";
     cin >> name;
     cout << "What is "<< name << "'s friendship level? (0-10): ";
+    // Here, I used some code from my Lab 24 to validate the input of the user
+    // to make sure that the friendship level they were giving to the new 
+    // villager was in between 0-10.
     while(true){
         cin >> friendLevel;
         if(cin.fail() || friendLevel < 0 || friendLevel > 10){
             cout << "   Invalid friendship level, please choose a number from 0-10." << endl;
             cout << "   Friendship level: ";
+            // For this cin.clear() and the cin.ignore() below, I use this
+            // because after a invalid input from the user, cin leaves the 
+            // bad input in the input buffer. This basically clears the error
+            // state from that invalid input, and then clears it out from the
+            // input buffer.
             cin.clear();
             cin.ignore(IGNORE_SIZE, '\n');
         }
@@ -174,6 +189,11 @@ void addVillager(map<string, tuple<int, string, string>>& villagerData){
     }
     cout << "What is "<< name << "'s species?: ";
     cin >> spec;
+    // For this cin.ignore(), after the cin above, the program reads the text
+    // up until the space, but not the user's enter key in the input buffer.
+    // This just makes sure that the enter doesn't automatically get called
+    // when asking for the catchphrase, so that the cin for phrase doesn't
+    // get skipped over.
     cin.ignore(IGNORE_SIZE, '\n');
     cout << "What is "<< name << "'s catchphrase: ";
     getline(cin, phrase);
@@ -184,6 +204,8 @@ void addVillager(map<string, tuple<int, string, string>>& villagerData){
 void displayVillagers(map<string, tuple<int, string, string>>& villagerData){
     cout << endl;
     cout << "Current villagers and their details: " << endl;
+    // For the below, I just used some of the demo code again but this time for
+    // accessing specific elements in the map and printing their tuple data out
     for (map<string, tuple<int, string, string>>::iterator it = villagerData.begin(); 
                                                it != villagerData.end(); ++it) {
         cout << it->first << " [";
@@ -206,6 +228,4 @@ int displayMenu(){
     cout << " Enter choice: ";
     cin >> input;
     return input;
-    
-
 }
