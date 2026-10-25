@@ -8,8 +8,12 @@ const int FRIENDSHIP = 0;
 const int SPECIES = 1;
 const int CATCHPHRASE = 2;
 
+void searchVillager();
+void deleteVillager();
+
 int main() {
     // declarations
+    int input;
     map<string, tuple<int, string, string>> villagerData;
 
     // insert elements into the map
@@ -27,21 +31,36 @@ int main() {
             cout << get<CATCHPHRASE>(pair.second) << "] " << endl;
     }
 
-    // access the map using iterators
-    cout << "\nVillagers details (iterators):" << endl;
-    for (map<string, tuple<int, string, string>>::iterator it = villagerData.begin(); 
-                                               it != villagerData.end(); ++it) {
-        cout << it->first << " [";
-            cout << get<FRIENDSHIP>(it->second) << ", ";
-            cout << get<SPECIES>(it->second) << ", ";
-            cout << get<CATCHPHRASE>(it->second) << "] " << endl;
-    }
+    // BELOW IS FROM DEMO CODE
+
+    // // access the map using iterators
+    // cout << "\nVillagers details (iterators):" << endl;
+    // for (map<string, tuple<int, string, string>>::iterator it = villagerData.begin(); 
+    //                                            it != villagerData.end(); ++it) {
+    //     cout << it->first << " [";
+    //         cout << get<FRIENDSHIP>(it->second) << ", ";
+    //         cout << get<SPECIES>(it->second) << ", ";
+    //         cout << get<CATCHPHRASE>(it->second) << "] " << endl;
+    // }
 
     // delete an element
     villagerData.erase("Raymond");
 
+    // // report size, clear, report size again to confirm map operations
+    // cout << "\nSize before clear: " << villagerData.size() << endl;
+    // villagerData.clear();
+    // cout << "Size after clear: " << villagerData.size() << endl;
+
+    // END OF DEMO CODE
+
+    return 0;
+}
+
+void searchVillager(map<string, tuple<int, string, string>>& villagerData){
     // search for an element using .find() to avoid errors
-    string searchKey = "Audie";
+    string searchKey;
+    cout << "What villager to search for?: ";
+    cin >> searchKey;
     auto it = villagerData.find(searchKey);
     if (it != villagerData.end()) {  // the iterator points to beyond the end of the map
                                        // if searchKey is not found
@@ -52,10 +71,18 @@ int main() {
     } else
         cout << endl << searchKey << " not found." << endl;
 
-    // report size, clear, report size again to confirm map operations
-    cout << "\nSize before clear: " << villagerData.size() << endl;
-    villagerData.clear();
-    cout << "Size after clear: " << villagerData.size() << endl;
+}
 
-    return 0;
+void deleteVillager(map<string, tuple<int, string, string>>& villagerData){
+    string deleteKey;
+    cout << "What villager to delete?: ";
+    cin >> deleteKey;
+    auto it = villagerData.find(deleteKey);
+    if(it != villagerData.end()){
+        villagerData.erase(deleteKey);
+        cout << deleteKey << " deleted." << endl;
+        return;
+    }
+    else
+        cout << deleteKey << " does not exist." << endl;
 }
