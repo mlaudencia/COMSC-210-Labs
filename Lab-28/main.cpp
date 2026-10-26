@@ -48,7 +48,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 6) {
+    while (sel != 7) {
         cout << endl;
         switch (sel) {
             case 1:
@@ -71,6 +71,10 @@ int main() {
                 cout << "Clearing trip.\n";
                 clear_trip(trip);
                 break;
+            case 6:
+                cout << "Copying trip.\n";
+                copy_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -89,11 +93,12 @@ int main_menu() {
     cout << "[3] List goats\n";
     cout << "[4] Accumulate goat ages\n";
     cout << "[5] Clear trip\n";
-    cout << "[6] Quit\n";
+    cout << "[6] Copy trip\n";
+    cout << "[7] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 6) {
+    while (choice < 1 || choice > 7) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -159,9 +164,20 @@ void accumulate_goats(list<Goat> &trp){
 }
 
 void clear_trip(list<Goat> &trp){
-    // This is a pretty straightforward STL algorithm
+    // This is a pretty straightforward STL algorithm, it just clears all the
+    // goats from the trip.
     trp.clear();
     cout << "Trip cleared." << endl << endl;
 }
 
-void copy_trip(list<Goat> &trp){}
+void copy_trip(list<Goat> &trp){
+    // This is also straightforward, the algorithm just copies all the goats
+    // of a trip into another trip using that back_inserter() thing. I thought
+    // it was super interesting to use, since by copying a trip, you could
+    // basically make a save file of a previous trip, like a videogame.
+    // For this lab, though, the copy is sort of just made and then gone after
+    // the function ends since its a local variable in this function.
+    list<Goat> copyTrip;
+    copy(trp.begin(), trp.end(), back_inserter(copyTrip));
+    cout << "Trip copied. Size of copied trip: " << copyTrip.size() << "\n\n";
+}
