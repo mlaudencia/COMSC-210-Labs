@@ -15,6 +15,7 @@ void display_trip(list<Goat> trip);
 void accumulate_goats(list<Goat> &trip);
 void clear_trip(list<Goat> &trip);
 void copy_trip(list<Goat> &trip);
+void fill_trip(list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -180,4 +181,10 @@ void copy_trip(list<Goat> &trp){
     list<Goat> copyTrip;
     copy(trp.begin(), trp.end(), back_inserter(copyTrip));
     cout << "Trip copied. Size of copied trip: " << copyTrip.size() << "\n\n";
+}
+
+void fill_trip(list<Goat> &trp){
+    Goat fillGoat = Goat();
+    fill(trp.begin(), trp.end(), fillGoat);
+    cout << "Trip filled with default goats.\n\n";
 }
