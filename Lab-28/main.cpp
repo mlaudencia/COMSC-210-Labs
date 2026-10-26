@@ -18,7 +18,9 @@ void clear_trip(list<Goat> &trip);
 void copy_trip(list<Goat> &trip);
 void fill_trip(list<Goat> &trip);
 void find_goat(list<Goat> &trip);
-void reverse_trip(list<Goat> &trp);
+void reverse_trip(list<Goat> &trip);
+void sort_trip_age(list<Goat> &trip);
+void sort_trip_name(list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -277,4 +279,30 @@ void reverse_trip(list<Goat> &trp){
     reverse(trp.begin(), trp.end());
     cout << "Trip has been reversed.\n\n";
 }
+
+// sort_trip_age() sorts the trip by youngest to oldest.
+// arguments: list<Goat> &trp
+// returns: nothing
+
+// I know that these two sort functions just fall under one milestone, but
+// I just thought it'd be cool to do both. Plus, just seeing how short these
+// functions are after going through manually making sort functions in the
+// previous labs is just crazy to see.
+void sort_trip_age(list<Goat> &trp){
+    sort(trp.begin(), trp.end(), [](const Goat& a, const Goat& b){
+        return a.get_age() < b.get_age();
+    });
+    cout << "Trip has been sorted by age.\n\n";
+}
+
+// sort_trip_name() sorts the trip in alphabetical order
+// arguments: list<Goat> &trp
+// returns: nothing
+void sort_trip_name(list<Goat> &trp){
+    sort(trp.begin(), trp.end(), [](const Goat& a, const Goat& b){
+        return a.get_name() < b.get_name();
+    });
+    cout << "Trip has been sorted by name.\n\n";
+}
+
     
