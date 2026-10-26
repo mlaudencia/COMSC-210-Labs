@@ -21,6 +21,8 @@ void find_goat(list<Goat> &trip);
 void reverse_trip(list<Goat> &trip);
 void sort_trip_age(list<Goat> &trip);
 void sort_trip_name(list<Goat> &trip);
+void unique_trip_name(list<Goat> &trip);
+void unique_trip_age(list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -54,7 +56,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 12) {
+    while (sel != 14) {
         cout << endl;
         switch (sel) {
             case 1:
@@ -128,11 +130,13 @@ int main_menu() {
     cout << "[9] Reverse trip\n";
     cout << "[10] Sort trip (name)\n";
     cout << "[11] Sort trip (age)\n";
-    cout << "[12] Quit\n";
+    cout << "[12] Make trip unique (name)\n";
+    cout << "[13] Make trip unique (age)\n";
+    cout << "[14] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 12) {
+    while (choice < 1 || choice > 14) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -319,5 +323,25 @@ void sort_trip_name(list<Goat> &trp){
         return a.get_name() < b.get_name();
     });
     cout << "Trip has been sorted by name.\n\n";
+}
+
+// unique_trip() keeps unique-named goats and removes duplicates.
+// arguments: list<Goat> &trp
+// returns: nothing
+void unique_trip_name(list<Goat> &trp){
+    trp.unique([](const Goat& a, const Goat& b){
+        return a.get_name() == b.get_name();
+    });
+    cout << "All unique names in trip have been kept.\n\n";
+}
+
+// unique_trip() keeps unique-named goats and removes duplicates.
+// arguments: list<Goat> &trp
+// returns: nothing
+void unique_trip_age(list<Goat> &trp){
+    trp.unique([](const Goat& a, const Goat& b){
+        return a.get_age() == b.get_age();
+    });
+    cout << "All unique names in trip have been kept.\n\n";
 }
 
