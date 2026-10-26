@@ -13,6 +13,7 @@ void delete_goat(list<Goat> &trip);
 void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 void accumulate_goats(list<Goat> &trip);
+void clear_trip(list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -46,7 +47,8 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 5) {
+    while (sel != 6) {
+        cout << endl;
         switch (sel) {
             case 1:
                 cout << "Adding a goat.\n";
@@ -63,6 +65,10 @@ int main() {
             case 4:
                 cout << "Accumulating goat ages.\n";
                 accumulate_goats(trip);
+                break;
+            case 5:
+                cout << "Clearing trip.\n";
+                clear_trip(trip);
                 break;
             default:
                 cout << "Invalid selection.\n";
@@ -81,11 +87,12 @@ int main_menu() {
     cout << "[2] Delete a goat\n";
     cout << "[3] List goats\n";
     cout << "[4] Accumulate goat ages\n";
-    cout << "[5] Quit\n";
+    cout << "[5] Clear trip\n";
+    cout << "[6] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 5) {
+    while (choice < 1 || choice > 6) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -98,7 +105,7 @@ void delete_goat(list<Goat> &trip) {
     auto it = trip.begin();
     advance(it, index-1);
     trip.erase(it);
-    cout << "Goat deleted. New trip size: " << trip.size() << endl;
+    cout << "Goat deleted. New trip size: " << trip.size() << endl << endl;
 }
 
 void add_goat(list<Goat> &trip, string nms[], string cls[]) {
@@ -108,11 +115,15 @@ void add_goat(list<Goat> &trip, string nms[], string cls[]) {
     string cl = cls[rand() % SZ_COLORS];
     Goat tmp(nm, age, cl);
     trip.push_back(tmp);
-    cout << "Goat added. New trip size: " << trip.size() << endl;
+    cout << "Goat added. New trip size: " << trip.size() << endl << endl;
 }
 
 void display_trip(list<Goat> trp) {
     int i = 1;
+    if(trp.size() == 0){
+        cout << "Trip is empty. No goats to list." << endl << endl;
+        return;
+    }
     for (auto gt: trp)
         cout << "\t" 
              << "[" << i++ << "] "
@@ -138,5 +149,10 @@ void accumulate_goats(list<Goat> &trp){
     int total = accumulate(trp.begin(), trp.end(), 0, [](int added, const Goat& g){
         return added + g.get_age();
     });
-    cout << "Accumulated goat ages: " << total << endl;
+    cout << "Accumulated goat ages: " << total << endl << endl;
+}
+
+void clear_trip(list<Goat> &trp){
+    trp.clear();
+    cout << "Trip cleared." << endl << endl;
 }
