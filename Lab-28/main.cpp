@@ -321,4 +321,3 @@ void sort_trip_name(list<Goat> &trp){
     cout << "Trip has been sorted by name.\n\n";
 }
 
-    
