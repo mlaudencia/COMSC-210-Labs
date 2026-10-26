@@ -18,6 +18,7 @@ void clear_trip(list<Goat> &trip);
 void copy_trip(list<Goat> &trip);
 void fill_trip(list<Goat> &trip);
 void find_goat(list<Goat> &trip);
+void reverse_trip(list<Goat> &trp);
 int main_menu();
 
 int main() {
@@ -110,6 +111,7 @@ int main_menu() {
     cout << "[6] Copy trip\n";
     cout << "[7] Fill trip (default goat)\n";
     cout << "[8] Find goat\n";
+    cout << "[9] Reverse trip\n";
     cout << "[9] Quit\n";
     cout << "Choice --> ";
     int choice;
@@ -236,6 +238,13 @@ void find_goat(list<Goat> &trp){
     // about distance() that I could use for lists, but I searched it up and
     // learned about it since I thought the print would be cleaner if it had
     // the index of the goat.
+
+    // I also learned about find_if(). I initially tried to use find() here,
+    // but I basically made a blank goat with just its name, and compared all
+    // the goats and the targetGoat to see if they were the same, but that
+    // meant the program was comparing an incomplete goat to a complete one.
+    // Since that didn't work out, I opted to use find_if(), which basically
+    // just makes sure we can just compare the names of the goats.
     string name;
     cout << "What's the name of the goat to find?: ";
     cin >> name;
@@ -245,8 +254,23 @@ void find_goat(list<Goat> &trp){
 
     if(it != trp.end()){
         int index = distance(trp.begin(), it);
+        // I also added index+1, since it would return an index of index-1.
         cout << name << " found at index " << index+1 << "\n\n";
     } else{
         cout << name << " was sadly not found." << "\n\n";
     }
 }
+
+// reverse_trip() reverse the order of the goats in a trip.
+// arguments: list<Goat> &trp
+// returns: nothing
+void reverse_trip(list<Goat> &trp){
+    // This honestly feels like cheating with how short it is. In past labs,
+    // I'd have to make a whole for i loop starting from the last element going
+    // all the way back and yada yada yada, and it would be pretty long, but now
+    // you can just do it with one line of code. Lists and STL algorithms 
+    // are crazy.
+    reverse(trp.begin(), trp.end());
+    cout << "Trip has been reversed.\n\n";
+}
+    
