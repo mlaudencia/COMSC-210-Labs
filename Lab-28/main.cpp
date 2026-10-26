@@ -16,6 +16,7 @@ void accumulate_goats(list<Goat> &trip);
 void clear_trip(list<Goat> &trip);
 void copy_trip(list<Goat> &trip);
 void fill_trip(list<Goat> &trip);
+void find_goat(list<Goat> &trip){}
 int main_menu();
 
 int main() {
@@ -204,4 +205,19 @@ void fill_trip(list<Goat> &trp){
     Goat fillGoat = Goat();
     fill(trp.begin(), trp.end(), fillGoat);
     cout << "Trip filled with default goats.\n\n";
+}
+
+// fill_trip() fills the trip with default goats.
+// arguments: list<Goat> &trp
+// returns: nothing
+void find_goat(list<Goat> &trp){
+    Goat targetGoat;
+    string name;
+    cout << "What's the name of the goat to find?: ";
+    cin >> name;
+    targetGoat.set_name(name);
+    auto it = find(trp.begin(), trp.end(), targetGoat);
+    if(it != trp.end()){
+        
+    }
 }
