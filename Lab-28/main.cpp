@@ -54,7 +54,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 10) {
+    while (sel != 12) {
         cout << endl;
         switch (sel) {
             case 1:
@@ -93,6 +93,14 @@ int main() {
                 cout << "Reversing trip.\n";
                 reverse_trip(trip);
                 break;
+            case 10:
+                cout << "Sorting trip by name.\n";
+                sort_trip_name(trip);
+                break;
+            case 11:
+                cout << "Sorting trip by age.\n";
+                sort_trip_age(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -118,11 +126,13 @@ int main_menu() {
     cout << "[7] Fill trip (default goat)\n";
     cout << "[8] Find goat\n";
     cout << "[9] Reverse trip\n";
-    cout << "[10] Quit\n";
+    cout << "[10] Sort trip (name)\n";
+    cout << "[11] Sort trip (age)\n";
+    cout << "[12] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 10) {
+    while (choice < 1 || choice > 12) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -280,26 +290,32 @@ void reverse_trip(list<Goat> &trp){
     cout << "Trip has been reversed.\n\n";
 }
 
-// sort_trip_age() sorts the trip by youngest to oldest.
-// arguments: list<Goat> &trp
-// returns: nothing
-
 // I know that these two sort functions just fall under one milestone, but
 // I just thought it'd be cool to do both. Plus, just seeing how short these
 // functions are after going through manually making sort functions in the
 // previous labs is just crazy to see.
+
+// One thing I noticed about these two functions after a huge error was that
+// the way they call that STL algorithm is different. They don't use
+// trp.begin() or trp.end() like the others, just gets called under it. I
+// see the same for std::unique in the STL algorithms lessons, and I am 
+// wondering why that is.
+
+// sort_trip_age() sorts the trip by youngest to oldest.
+// arguments: list<Goat> &trp
+// returns: nothing
 void sort_trip_age(list<Goat> &trp){
-    sort(trp.begin(), trp.end(), [](const Goat& a, const Goat& b){
+    trp.sort([](const Goat& a, const Goat& b){
         return a.get_age() < b.get_age();
     });
     cout << "Trip has been sorted by age.\n\n";
 }
 
-// sort_trip_name() sorts the trip in alphabetical order
+// sort_trip_name() sorts the trip by names in alphabetical order.
 // arguments: list<Goat> &trp
 // returns: nothing
 void sort_trip_name(list<Goat> &trp){
-    sort(trp.begin(), trp.end(), [](const Goat& a, const Goat& b){
+    trp.sort([](const Goat& a, const Goat& b){
         return a.get_name() < b.get_name();
     });
     cout << "Trip has been sorted by name.\n\n";
