@@ -52,7 +52,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 9) {
+    while (sel != 10) {
         cout << endl;
         switch (sel) {
             case 1:
@@ -87,6 +87,10 @@ int main() {
                 cout << "Finding goat.\n";
                 find_goat(trip);
                 break;
+            case 9:
+                cout << "Reversing trip.\n";
+                reverse_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -112,11 +116,11 @@ int main_menu() {
     cout << "[7] Fill trip (default goat)\n";
     cout << "[8] Find goat\n";
     cout << "[9] Reverse trip\n";
-    cout << "[9] Quit\n";
+    cout << "[10] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 9) {
+    while (choice < 1 || choice > 10) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
