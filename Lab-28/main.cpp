@@ -1,3 +1,5 @@
+// COMSC-210 | Lab 28 | Jeremy Laudencia
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -31,11 +33,21 @@ int main() {
 
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
+    if(!fin){
+        cout << "Could not open external file, check if name is correct " <<
+        " then restart the program." << endl;
+        return 1;
+    }
     string names[SZ_NAMES];
     int i = 0;
     while (fin >> names[i++]);
     fin.close();
     ifstream fin1("colors.txt");
+    if(!fin1){
+        cout << "Could not open external file, check if name is correct " <<
+        " then restart the program." << endl;
+        return 1;
+    }
     string colors[SZ_COLORS];
     i = 0;
     while (fin1 >> colors[i++]);
