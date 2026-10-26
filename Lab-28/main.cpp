@@ -14,6 +14,7 @@ void add_goat(list<Goat> &trip, string [], string []);
 void display_trip(list<Goat> trip);
 void accumulate_goats(list<Goat> &trip);
 void clear_trip(list<Goat> &trip);
+void copy_trip(list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -146,6 +147,11 @@ int select_goat(list<Goat> trp) {
 }
 
 void accumulate_goats(list<Goat> &trp){
+    // Here, I use the acccumulate STL algorithm, and then a lambda function.
+    // I never really knew what lambda functions were until this week, and
+    // I think they seem super conveninent. Anyways, the accumulate function
+    // goes through all the goats in trip, adds the ages to inital value 0,
+    // then prints it.
     int total = accumulate(trp.begin(), trp.end(), 0, [](int added, const Goat& g){
         return added + g.get_age();
     });
@@ -153,6 +159,9 @@ void accumulate_goats(list<Goat> &trp){
 }
 
 void clear_trip(list<Goat> &trp){
+    // This is a pretty straightforward STL algorithm
     trp.clear();
     cout << "Trip cleared." << endl << endl;
 }
+
+void copy_trip(list<Goat> &trp){}
