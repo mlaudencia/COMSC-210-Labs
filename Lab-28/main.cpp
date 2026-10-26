@@ -103,6 +103,14 @@ int main() {
                 cout << "Sorting trip by age.\n";
                 sort_trip_age(trip);
                 break;
+            case 12:
+                cout << "Keeping unique by name.\n";
+                unique_trip_name(trip);
+                break;
+            case 13:
+                cout << "Keeping unique by age.\n";
+                unique_trip_age(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -325,23 +333,32 @@ void sort_trip_name(list<Goat> &trp){
     cout << "Trip has been sorted by name.\n\n";
 }
 
-// unique_trip() keeps unique-named goats and removes duplicates.
+// A good thing I noticed while testing my unique functions were that they had
+// to be sorted according to their respective trait, so the trip needs to be
+// sorted by name to use unique_trip_name(), and same for age.
+
+// Something else I found interesting about unique was that it only worked for
+// adjacent/consecutive elements in a range, and I had some difficulty grasping
+// that concept, but learned about differentiating a element's write position
+// versus its position in the list, which helped a lot.
+
+// unique_trip_name() keeps unique-named goats and removes duplicates.
 // arguments: list<Goat> &trp
 // returns: nothing
 void unique_trip_name(list<Goat> &trp){
     trp.unique([](const Goat& a, const Goat& b){
         return a.get_name() == b.get_name();
     });
-    cout << "All unique names in trip have been kept.\n\n";
+    cout << "All unique-named goats in trip have been kept.\n\n";
 }
 
-// unique_trip() keeps unique-named goats and removes duplicates.
+// unique_trip_age() keeps unique-aged goats and removes duplicates.
 // arguments: list<Goat> &trp
 // returns: nothing
 void unique_trip_age(list<Goat> &trp){
     trp.unique([](const Goat& a, const Goat& b){
         return a.get_age() == b.get_age();
     });
-    cout << "All unique names in trip have been kept.\n\n";
+    cout << "All unique-aged goats in trip have been kept.\n\n";
 }
 
