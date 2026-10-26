@@ -49,7 +49,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 7) {
+    while (sel != 8) {
         cout << endl;
         switch (sel) {
             case 1:
@@ -76,6 +76,10 @@ int main() {
                 cout << "Copying trip.\n";
                 copy_trip(trip);
                 break;
+            case 7:
+                cout << "Filling trip.\n";
+                fill_trip(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -95,11 +99,12 @@ int main_menu() {
     cout << "[4] Accumulate goat ages\n";
     cout << "[5] Clear trip\n";
     cout << "[6] Copy trip\n";
-    cout << "[7] Quit\n";
+    cout << "[7] Fill trip (default goat)\n";
+    cout << "[8] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 7) {
+    while (choice < 1 || choice > 8) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
@@ -152,6 +157,9 @@ int select_goat(list<Goat> trp) {
     return input;
 }
 
+// accumulate_goats() accumulates the ages of the goats
+// arguments: list<Goat> &trp
+// returns: nothing
 void accumulate_goats(list<Goat> &trp){
     // Here, I use the acccumulate STL algorithm, and then a lambda function.
     // I never really knew what lambda functions were until this week, and
@@ -164,6 +172,9 @@ void accumulate_goats(list<Goat> &trp){
     cout << "Accumulated goat ages: " << total << endl << endl;
 }
 
+// clear_trip() clear the trip of all goats.
+// arguments: list<Goat> &trp
+// returns: nothing
 void clear_trip(list<Goat> &trp){
     // This is a pretty straightforward STL algorithm, it just clears all the
     // goats from the trip.
@@ -171,6 +182,9 @@ void clear_trip(list<Goat> &trp){
     cout << "Trip cleared." << endl << endl;
 }
 
+// copy_trip() copies the trip.
+// arguments: list<Goat> &trp
+// returns: nothing
 void copy_trip(list<Goat> &trp){
     // This is also straightforward, the algorithm just copies all the goats
     // of a trip into another trip using that back_inserter() thing. I thought
@@ -183,6 +197,9 @@ void copy_trip(list<Goat> &trp){
     cout << "Trip copied. Size of copied trip: " << copyTrip.size() << "\n\n";
 }
 
+// fill_trip() fills the trip with default goats.
+// arguments: list<Goat> &trp
+// returns: nothing
 void fill_trip(list<Goat> &trp){
     Goat fillGoat = Goat();
     fill(trp.begin(), trp.end(), fillGoat);
