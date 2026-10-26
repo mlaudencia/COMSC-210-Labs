@@ -86,10 +86,6 @@ int main() {
                 cout << "Finding goat.\n";
                 find_goat(trip);
                 break;
-            case 8:
-                cout << "Finding goat.\n";
-                find_goat(trip);
-                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -113,7 +109,8 @@ int main_menu() {
     cout << "[5] Clear trip\n";
     cout << "[6] Copy trip\n";
     cout << "[7] Fill trip (default goat)\n";
-    cout << "[8] Quit\n";
+    cout << "[8] Find goat\n";
+    cout << "[9] Quit\n";
     cout << "Choice --> ";
     int choice;
     cin >> choice;
@@ -248,7 +245,7 @@ void find_goat(list<Goat> &trp){
 
     if(it != trp.end()){
         int index = distance(trp.begin(), it);
-        cout << name << " found at index " << index << "\n\n";
+        cout << name << " found at index " << index+1 << "\n\n";
     } else{
         cout << name << " was sadly not found." << "\n\n";
     }
