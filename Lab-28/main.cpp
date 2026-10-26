@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <list>
 #include <numeric>
+#include <algorithm>
 #include "Goat.h"
 using namespace std;
 
@@ -16,7 +17,7 @@ void accumulate_goats(list<Goat> &trip);
 void clear_trip(list<Goat> &trip);
 void copy_trip(list<Goat> &trip);
 void fill_trip(list<Goat> &trip);
-void find_goat(list<Goat> &trip){}
+void find_goat(list<Goat> &trip);
 int main_menu();
 
 int main() {
@@ -50,7 +51,7 @@ int main() {
     
     // Goat Manager 3001 Engine
     int sel = main_menu();
-    while (sel != 8) {
+    while (sel != 9) {
         cout << endl;
         switch (sel) {
             case 1:
@@ -81,6 +82,14 @@ int main() {
                 cout << "Filling trip.\n";
                 fill_trip(trip);
                 break;
+            case 8:
+                cout << "Finding goat.\n";
+                find_goat(trip);
+                break;
+            case 8:
+                cout << "Finding goat.\n";
+                find_goat(trip);
+                break;
             default:
                 cout << "Invalid selection.\n";
                 break;
@@ -92,6 +101,9 @@ int main() {
     return 0;
 }
 
+// main_menu() lets the user choose an option from a menu and returns it.
+// arguments: nothing
+// returns: choice, the user's chosen option
 int main_menu() {
     cout << "*** GOAT MANAGER 3001 ***\n";
     cout << "[1] Add a goat\n";
@@ -105,13 +117,16 @@ int main_menu() {
     cout << "Choice --> ";
     int choice;
     cin >> choice;
-    while (choice < 1 || choice > 8) {
+    while (choice < 1 || choice > 9) {
         cout << "Invalid, again --> ";
         cin >> choice;
     }
     return choice;
 }
 
+// delete_goat() deletes a goat from the trip.
+// arguments: list<Goat> &trip
+// returns: nothing
 void delete_goat(list<Goat> &trip) {
     cout << "DELETE A GOAT\n";
     int index = select_goat(trip);
@@ -121,6 +136,9 @@ void delete_goat(list<Goat> &trip) {
     cout << "Goat deleted. New trip size: " << trip.size() << endl << endl;
 }
 
+// add_goat() adds a goat to the trip.
+// arguments: list<Goat> &trip, string nms[], string cls[]
+// returns: nothing
 void add_goat(list<Goat> &trip, string nms[], string cls[]) {
     cout << "ADD A GOAT\n";
     int age = rand() % MAX_AGE;
@@ -131,6 +149,9 @@ void add_goat(list<Goat> &trip, string nms[], string cls[]) {
     cout << "Goat added. New trip size: " << trip.size() << endl << endl;
 }
 
+// display_trip() displays the goats of a trip.
+// arguments: list<Goat> trp
+// returns: nothing
 void display_trip(list<Goat> trp) {
     int i = 1;
     if(trp.size() == 0){
@@ -145,6 +166,9 @@ void display_trip(list<Goat> trp) {
              << ", " << gt.get_color() << ")\n";
 }
 
+// select_goat() lets the user choose the index of a goat from the trip.
+// arguments: list<Goat> trp
+// returns: input, the user's chosen index
 int select_goat(list<Goat> trp) {
     int input;
     cout << "Make a selection:\n";
@@ -211,13 +235,21 @@ void fill_trip(list<Goat> &trp){
 // arguments: list<Goat> &trp
 // returns: nothing
 void find_goat(list<Goat> &trp){
-    Goat targetGoat;
+    // I thought building this function was really interesting. I didn't know
+    // about distance() that I could use for lists, but I searched it up and
+    // learned about it since I thought the print would be cleaner if it had
+    // the index of the goat.
     string name;
     cout << "What's the name of the goat to find?: ";
     cin >> name;
-    targetGoat.set_name(name);
-    auto it = find(trp.begin(), trp.end(), targetGoat);
+    auto it = find_if(trp.begin(), trp.end(), [name](const Goat& g){
+        return g.get_name() == name;
+    });
+
     if(it != trp.end()){
-        
+        int index = distance(trp.begin(), it);
+        cout << name << " found at index " << index << "\n\n";
+    } else{
+        cout << name << " was sadly not found." << "\n\n";
     }
 }
