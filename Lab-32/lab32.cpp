@@ -23,12 +23,6 @@ int main(){
     displayTollBoothLine(tollBoothLine, 0, 0);
     while(!tollBoothLine.empty()){
         int roll = rand() % TOTAL_CHANCE;
-        if(roll < CAR_PAY_CHANCE){
-            tollBoothLine.pop_front();
-        }
-        else{
-            tollBoothLine.push_back(Car());
-        }
         displayTollBoothLine(tollBoothLine, round, roll);
         round++;
     }
@@ -46,7 +40,8 @@ void displayTollBoothLine(deque<Car>& tBL, int interval, int roll){
     else{
         cout << "Time: " << interval << " Operation: ";
         if(roll < CAR_PAY_CHANCE){
-            cout << "Car Paid: ";
+            Car leaving = tBL.front();
+            cout << "Car Paid: " << leaving.print();
             tBL.front().print();
             cout << "Queue: \n";
         }
