@@ -24,7 +24,7 @@ const int NUM_LANES = 4;
 const int NUM_TIME_INTERVALS = 20;
 
 
-void displayTollBoothLine(deque<Car>& tBL, int interval, int roll);
+void displayTollBoothLine(deque<Car> lanes[], int interval, int roll);
 
 int main(){
     srand(time(0));
@@ -65,7 +65,7 @@ void displayTollBoothLine(deque<Car> lanes[], int interval, int roll){
         }
     }
     else{
-        cout << "Time: " << interval << " Operation: ";
+        cout << "Time: " << interval << " Operation: \n";
         for(int a = 0; a < NUM_LANES; a++){{
             cout << "Lane: " << a+1 << endl;
         if(lanes[a].empty()){
@@ -74,33 +74,39 @@ void displayTollBoothLine(deque<Car> lanes[], int interval, int roll){
                 Car joining = Car();
                 cout << "Joined: ";
                 joining.print();
-                lanes[a]
+                lanes[a].push_back(joining);
             }
             else{
                 cout << "Empty\n";
             }
-            cout << "Car Paid: ";
+        } else if(roll < CAR_PAY_CHANCE){
+            Car leaving = lanes[a].front();
+            cout << "Paid:";
             leaving.print();
-            lanes[a][i].pop_front();
-            cout << "Queue: \n";
-        }
-        else if(roll < CAR_PAY_CHANCE){
-
+            lanes[a].pop_front();
+        } else if(roll < CAR_PAY_CHANCE + CAR_JOIN_CHANCE){
             Car joining = Car();
-            cout << "Joined lane: ";
+            cout << "Joined: ";
             joining.print();
-            tBL.push_back(joining);
-            cout << "Queue: \n";
+            lanes[a].push_back(joining);
         }
-        laneLength = tBL.size();
-        if(laneLength == 0){
-            cout << "   Empty";
-            return;
-        }
-        for(int i = 0; i < laneLength; i++){
-            cout << "   ";
-            tBL[i].print();
+        else{
+            Car switch = lanes[a].back();
         }
     }
+    }
+    }
+    for(int a = 0; a < NUM_LANES; a++){
+        cout << "Lane " << a+1 << " Queue:\n";
+        int laneLength = lanes[a].size();
+        if(laneLength == 0){
+            cout << "    Empty\n";
+        } else{
+        for(int i = 0; i < laneLength; i++){
+            cout << "    ";
+            lanes[a][i].print();
+        }
+    }
+}
 }
 }
