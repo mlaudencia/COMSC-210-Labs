@@ -18,8 +18,10 @@ const int DQ_INITIAL_SIZE = 2;
 const int TOTAL_CHANCE = 100;
 const int CAR_PAY_CHANCE = 46;
 const int CAR_JOIN_CHANCE = 39;
+const int EMPTY_LANE_JOIN_CHANCE = 50;
 
 const int NUM_LANES = 4;
+const int NUM_TIME_INTERVALS = 20;
 
 
 void displayTollBoothLine(deque<Car>& tBL, int interval, int roll);
@@ -32,49 +34,34 @@ int main(){
     int round = 0;
     // Here, I make the tollBoothLine, and then below that, I make the initial
     // queue of the line.
-    deque<Car> tollBoothLine;
-
-    for(int i = 0; i < DQ_INITIAL_SIZE; i++){
-        tollBoothLine.push_back(Car());
-    }
+    for(int i = 0; i < NUM_LANES; i++){
+        for(int j = 0; j < DQ_INITIAL_SIZE; j++){
+            lanes[i].push_back(Car());
+        }
+}   
     // The below runs until all the cars in the queue pay the toll and leave 
     // the line. As you can see, we have a roll that gets passed into the
     // display function, and that decides whether or not a car is added to
     // the back of the line, or the front car leaves.
-    while(!tollBoothLine.empty()){
+    for(int i = 0; i < NUM_TIME_INTERVALS; i++){
         int roll = rand() % TOTAL_CHANCE;
-        displayTollBoothLine(tollBoothLine, round, roll);
+        displayTollBoothLine(lanes, round, roll);
         round++;
     }
 }
 
 // displayTollBoothLine() prints out the cars in the toll booth line,
-// and if a car joined the line or left the line at that tim interval.
+// and if a car joined the line or left the line at that time interval.
 // arguments: deque<Car>& tBL, int interval, int roll
 // returns: nothing
-void displayTollBoothLine(deque<Car>& tBL, int interval, int roll){ 
-    // I actually had a little bit of trouble with this function. At first,
-    // I made my deque parameter constant since I intended to change the line
-    // in main without a function, but there was an error with calling print()
-    // for a car. I wasn't sure why, since I was just printing the info of the
-    // car through its function in its h file, but it turns out if the function
-    // isn't declared as a const function, then the program thinks that calling
-    // it might change something, resulting in the error with my parameter
-    // since there was a mismatch: const vs not-const despite not changing
-    // anything.
-
-    // After that, I changed it so tBL wasn't constant, and my code ran for a
-    // bit, but then I ran into another error regarding front(). If a car was
-    // to pay its toll and leave, my code would still check for tBL.front()
-    // even when the line was empty, resulting in an error. I just had to make
-    // sure that I wasn't popping the car from the front out before calling
-    // tBL.front(), so I worked around that.
-    int laneLength = tBL.size();
+void displayTollBoothLine(deque<Car> lanes[], int interval, int roll){ 
+    for(int a = 0; a < NUM_LANES; a++){
+    int laneLength = lanes[a].size();
     if(interval == 0){
         cout << "Initial Queue:\n";
         for(int i = 0; i < laneLength; i++){
             cout << "   ";
-            tBL[i].print();
+            lanes[i].print();
         }
     }
     else{
@@ -86,11 +73,8 @@ void displayTollBoothLine(deque<Car>& tBL, int interval, int roll){
             tBL.pop_front();
             cout << "Queue: \n";
         }
-        else{
-            // Because the previous if statement checks if the roll is 
-            // in that 55% chance to pay and leave, I don't need to use
-            // another chance here, since anything else would be the 45%
-            // chance for another car to join the line.
+        else if(roll < (CAR_PAY_CHANCE + CAR_JOIN_CHANCE)){
+
             Car joining = Car();
             cout << "Joined lane: ";
             joining.print();
@@ -107,5 +91,5 @@ void displayTollBoothLine(deque<Car>& tBL, int interval, int roll){
             tBL[i].print();
         }
     }
-    
+}
 }
