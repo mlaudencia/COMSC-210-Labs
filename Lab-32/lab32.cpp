@@ -1,7 +1,8 @@
-// COMSC-210 | Lab 32 | Jeremy Laudencia
+// COMSC-210 | Lab 33 | Jeremy Laudencia
 
 // Here, I included Car.h and <deque> per the lab instructions,
-// <iostream> for outputs to the terminal,
+// <iostream> for outputs to the terminal, and 
+// <cstdlib> and <ctime> for the random generation.
 #include "Car.h"
 #include <iostream>
 #include <cstdlib>
@@ -9,11 +10,6 @@
 #include <deque>
 using namespace std;
 
-// Here, I initialize three constant variables: DQ_INITIAL_SIZE per the lab
-// instructions, total chance for the total chance of 55/45, and then the 
-// chance for a car to pay the toll and leave the line. I didn't add the
-// car join chance, since it would just be the else statement after checking
-// if the roll was under CAR_PAY_CHANCE.
 const int DQ_INITIAL_SIZE = 2;
 const int TOTAL_CHANCE = 100;
 const int CAR_PAY_CHANCE = 46;
@@ -29,11 +25,12 @@ void displayTollBoothLine(deque<Car> lanes[], int interval);
 int main(){
     srand(time(0));
 
+    // Here, I make the deque array of size NUM_LANES< which is four.
     deque<Car> lanes[NUM_LANES];
 
     int round = 1;
-    // Here, I make the tollBoothLine, and then below that, I make the initial
-    // queue of the line.
+    // After making the array, we use two for i loops to fill each lane with
+    // two cars.
     for(int i = 0; i < NUM_LANES; i++){
         for(int j = 0; j < DQ_INITIAL_SIZE; j++){
             lanes[i].push_back(Car());
@@ -66,7 +63,7 @@ int main(){
 void displayTollBoothLine(deque<Car> lanes[], int interval){ 
     cout << "Time: " << interval << " Operation: \n";
     for(int a = 0; a < NUM_LANES; ++a){{
-        cout << "Lane: " << a+1 << endl;
+        cout << "Lane: " << a+1 << " ";
         if(lanes[a].empty()){
             int emptyRoll = rand() % TOTAL_CHANCE;
             if(emptyRoll < EMPTY_LANE_JOIN_CHANCE){
