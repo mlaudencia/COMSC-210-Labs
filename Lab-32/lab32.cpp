@@ -2,7 +2,6 @@
 
 // Here, I included Car.h and <deque> per the lab instructions,
 // <iostream> for outputs to the terminal,
-// and <cstdlib> and <ctime> for the random number generation.
 #include "Car.h"
 #include <iostream>
 #include <cstdlib>
@@ -17,12 +16,18 @@ using namespace std;
 // if the roll was under CAR_PAY_CHANCE.
 const int DQ_INITIAL_SIZE = 2;
 const int TOTAL_CHANCE = 100;
-const int CAR_PAY_CHANCE = 55;
+const int CAR_PAY_CHANCE = 46;
+const int CAR_JOIN_CHANCE = 39;
+
+const int NUM_LANES = 4;
+
 
 void displayTollBoothLine(deque<Car>& tBL, int interval, int roll);
 
 int main(){
     srand(time(0));
+
+    deque<Car> lanes[NUM_LANES];
 
     int round = 0;
     // Here, I make the tollBoothLine, and then below that, I make the initial
