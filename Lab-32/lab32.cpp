@@ -23,6 +23,7 @@ const int NUM_TIME_INTERVALS = 20;
 void displayLanes(deque<Car> lanes[], int interval);
 
 int main(){
+    // This makes sure that the random numbers generated are actually random.
     srand(time(0));
 
     // Here, I make the deque array of size NUM_LANES< which is four.
