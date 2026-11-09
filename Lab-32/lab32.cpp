@@ -20,7 +20,7 @@ const int NUM_LANES = 4;
 const int NUM_TIME_INTERVALS = 20;
 
 
-void displayTollBoothLine(deque<Car> lanes[], int interval);
+void displayLanes(deque<Car> lanes[], int interval);
 
 int main(){
     srand(time(0));
@@ -37,6 +37,7 @@ int main(){
         }
     }   
 
+    // Unlike my Lab 32, I pulled this out of the display
     cout << "Initial Queue:\n";
     for(int a = 0; a < NUM_LANES; a++){
         cout << "Lane: " << a+1 << endl;
@@ -51,7 +52,7 @@ int main(){
     // display function, and that decides whether or not a car is added to
     // the back of the line, or the front car leaves.
     for(int i = 0; i < NUM_TIME_INTERVALS; i++){
-        displayTollBoothLine(lanes, round);
+        displayLanes(lanes, round);
         round++;
     }
 }
@@ -60,7 +61,7 @@ int main(){
 // and if a car joined the line or left the line at that time interval.
 // arguments: deque<Car>& tBL, int interval, int roll
 // returns: nothing
-void displayTollBoothLine(deque<Car> lanes[], int interval){ 
+void displayLanes(deque<Car> lanes[], int interval){ 
     cout << "Time: " << interval << " Operation: \n";
     for(int a = 0; a < NUM_LANES; ++a){{
         cout << "Lane: " << a+1 << " ";
