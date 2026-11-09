@@ -37,7 +37,8 @@ int main(){
         }
     }   
 
-    // Unlike my Lab 32, I pulled this out of the display
+    // This goes through each lane, and prints out the cars in them to show the
+    // initial queue of each of the four lanes.
     cout << "Initial Queue:\n";
     for(int a = 0; a < NUM_LANES; a++){
         cout << "Lane: " << a+1 << endl;
@@ -47,10 +48,10 @@ int main(){
             lanes[a][i].print();
         }
     }
-    // The below runs until all the cars in the queue pay the toll and leave 
-    // the line. As you can see, we have a roll that gets passed into the
-    // display function, and that decides whether or not a car is added to
-    // the back of the line, or the front car leaves.
+    
+    // Unlike Lab 32, this now runs NUM_TIME_INTERVALS many times. Before, this
+    // looped until the line was empty, but with four lanes, we just loop 20
+    // times.
     for(int i = 0; i < NUM_TIME_INTERVALS; i++){
         displayLanes(lanes, round);
         round++;
@@ -59,13 +60,19 @@ int main(){
 
 // displayTollBoothLine() prints out the cars in the toll booth line,
 // and if a car joined the line or left the line at that time interval.
-// arguments: deque<Car>& tBL, int interval, int roll
+// arguments: deque<Car> lanes[], int interval
 // returns: nothing
+
+// Also in Lab 32, I made this so that the roll of the line was a parameter in
+// the function, but since there is more than one lane now, I took it out and 
+// now, there are rolls for each lane.
 void displayLanes(deque<Car> lanes[], int interval){ 
     cout << "Time: " << interval << " Operation: \n";
     for(int a = 0; a < NUM_LANES; ++a){{
         cout << "Lane: " << a+1 << " ";
         if(lanes[a].empty()){
+            // The below shows a 50/50 chance for a car to join an empty lane
+            // or not, as per the Milestone 4 instructions.
             int emptyRoll = rand() % TOTAL_CHANCE;
             if(emptyRoll < EMPTY_LANE_JOIN_CHANCE){
                 Car joining = Car();
@@ -77,6 +84,11 @@ void displayLanes(deque<Car> lanes[], int interval){
                 cout << "Empty\n";
             }
             
+            // After checking for the empty lanes, the below basically checks
+            // the chances if a roll is from the 46% chance to pay and leave
+            //, 39% chance to join a lane, and 15% chance to switch lanes.
+            // The code below prints out the operation, or how a lane queue
+            // changed, and then it prints ot the new queues below it.
         } else{
             int roll = rand() % TOTAL_CHANCE;
             if(roll < CAR_PAY_CHANCE){
@@ -91,12 +103,18 @@ void displayLanes(deque<Car> lanes[], int interval){
             lanes[a].push_back(joining);
         }
         else{
+            // The below is the code for Milestone 5, at least the lane
+            // switching support. The data structure operations are seen
+            // through the lanes[a].pop_back(), lanes[a].pop_front(),
+            // lanes[a].back(), etc.
             Car change = lanes[a].back();
             cout << "Switched Lanes: ";
             change.print();
             lanes[a].pop_back();
             int newLane = rand() % NUM_LANES;
             while(newLane == a){
+                // This is a loop so that the lane the car switches to isn't
+                // its old lane.
                 newLane = rand() % NUM_LANES;
             }
             lanes[newLane].push_back(change);
@@ -105,6 +123,7 @@ void displayLanes(deque<Car> lanes[], int interval){
         }
     }
 }
+// Here is where the new queues of the lanes are printed.
     for(int a = 0; a < NUM_LANES; a++){
         cout << "Lane " << a+1 << " Queue:\n";
         int laneLength = lanes[a].size();
