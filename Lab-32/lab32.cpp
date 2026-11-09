@@ -104,9 +104,9 @@ void displayTollBoothLine(deque<Car> lanes[], int interval){
             lanes[newLane].push_back(change);
 
         }
+        }
     }
-    }
-    }
+}
     for(int a = 0; a < NUM_LANES; a++){
         cout << "Lane " << a+1 << " Queue:\n";
         int laneLength = lanes[a].size();
