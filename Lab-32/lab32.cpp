@@ -24,7 +24,7 @@ const int NUM_LANES = 4;
 const int NUM_TIME_INTERVALS = 20;
 
 
-void displayTollBoothLine(deque<Car> lanes[], int interval, int roll);
+void displayTollBoothLine(deque<Car> lanes[], int interval);
 
 int main(){
     srand(time(0));
@@ -44,8 +44,7 @@ int main(){
     // display function, and that decides whether or not a car is added to
     // the back of the line, or the front car leaves.
     for(int i = 0; i < NUM_TIME_INTERVALS; i++){
-        int roll = rand() % TOTAL_CHANCE;
-        displayTollBoothLine(lanes, round, roll);
+        displayTollBoothLine(lanes, round);
         round++;
     }
 }
@@ -54,7 +53,7 @@ int main(){
 // and if a car joined the line or left the line at that time interval.
 // arguments: deque<Car>& tBL, int interval, int roll
 // returns: nothing
-void displayTollBoothLine(deque<Car> lanes[], int interval, int roll){ 
+void displayTollBoothLine(deque<Car> lanes[], int interval){ 
     for(int a = 0; a < NUM_LANES; a++){
     int laneLength = lanes[a].size();
     if(interval == 0){
@@ -79,19 +78,30 @@ void displayTollBoothLine(deque<Car> lanes[], int interval, int roll){
             else{
                 cout << "Empty\n";
             }
-        } else if(roll < CAR_PAY_CHANCE){
-            Car leaving = lanes[a].front();
-            cout << "Paid:";
-            leaving.print();
-            lanes[a].pop_front();
-        } else if(roll < CAR_PAY_CHANCE + CAR_JOIN_CHANCE){
+            
+        } else{
+            int roll = rand() % TOTAL_CHANCE;
+            if(roll < CAR_PAY_CHANCE){
+                Car leaving = lanes[a].front();
+                cout << "Paid:";
+                leaving.print();
+                lanes[a].pop_front();
+            } else if(roll < CAR_PAY_CHANCE + CAR_JOIN_CHANCE){
             Car joining = Car();
             cout << "Joined: ";
             joining.print();
             lanes[a].push_back(joining);
         }
         else{
-            Car switch = lanes[a].back();
+            Car change = lanes[a].back();
+            cout << "Switched Lanes: ";
+            change.print();
+            lanes[a].pop_back();
+            int newLane = rand() % NUM_LANES;
+            while(newLane != a){
+                newLane = rand() % NUM_LANES;
+            }
+
         }
     }
     }
