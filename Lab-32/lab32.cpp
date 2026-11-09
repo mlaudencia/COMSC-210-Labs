@@ -31,14 +31,24 @@ int main(){
 
     deque<Car> lanes[NUM_LANES];
 
-    int round = 0;
+    int round = 1;
     // Here, I make the tollBoothLine, and then below that, I make the initial
     // queue of the line.
     for(int i = 0; i < NUM_LANES; i++){
         for(int j = 0; j < DQ_INITIAL_SIZE; j++){
             lanes[i].push_back(Car());
         }
-}   
+    }   
+
+    cout << "Initial Queue:\n";
+    for(int a = 0; a < NUM_LANES; a++){
+        cout << "Lane: " << a+1 << endl;
+        int laneLength = lanes[a].size(); 
+        for(int i = 0; i < laneLength; i++){
+            cout << "   ";
+            lanes[a][i].print();
+        }
+    }
     // The below runs until all the cars in the queue pay the toll and leave 
     // the line. As you can see, we have a roll that gets passed into the
     // display function, and that decides whether or not a car is added to
@@ -54,19 +64,9 @@ int main(){
 // arguments: deque<Car>& tBL, int interval, int roll
 // returns: nothing
 void displayTollBoothLine(deque<Car> lanes[], int interval){ 
-    for(int a = 0; a < NUM_LANES; a++){
-    int laneLength = lanes[a].size();
-    if(interval == 0){
-        cout << "Initial Queue:\n";
-        for(int i = 0; i < laneLength; i++){
-            cout << "   ";
-            lanes[a][i].print();
-        }
-    }
-    else{
-        cout << "Time: " << interval << " Operation: \n";
-        for(int a = 0; a < NUM_LANES; a++){{
-            cout << "Lane: " << a+1 << endl;
+    cout << "Time: " << interval << " Operation: \n";
+    for(int a = 0; a < NUM_LANES; ++a){{
+        cout << "Lane: " << a+1 << endl;
         if(lanes[a].empty()){
             int emptyRoll = rand() % TOTAL_CHANCE;
             if(emptyRoll < EMPTY_LANE_JOIN_CHANCE){
@@ -98,9 +98,10 @@ void displayTollBoothLine(deque<Car> lanes[], int interval){
             change.print();
             lanes[a].pop_back();
             int newLane = rand() % NUM_LANES;
-            while(newLane != a){
+            while(newLane == a){
                 newLane = rand() % NUM_LANES;
             }
+            lanes[newLane].push_back(change);
 
         }
     }
@@ -117,6 +118,5 @@ void displayTollBoothLine(deque<Car> lanes[], int interval){
             lanes[a][i].print();
         }
     }
-}
 }
 }
