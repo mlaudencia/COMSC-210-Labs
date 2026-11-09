@@ -61,19 +61,30 @@ void displayTollBoothLine(deque<Car> lanes[], int interval, int roll){
         cout << "Initial Queue:\n";
         for(int i = 0; i < laneLength; i++){
             cout << "   ";
-            lanes[i].print();
+            lanes[a][i].print();
         }
     }
     else{
         cout << "Time: " << interval << " Operation: ";
-        if(roll < CAR_PAY_CHANCE){
-            Car leaving = tBL.front();
+        for(int a = 0; a < NUM_LANES; a++){{
+            cout << "Lane: " << a+1 << endl;
+        if(lanes[a].empty()){
+            int emptyRoll = rand() % TOTAL_CHANCE;
+            if(emptyRoll < EMPTY_LANE_JOIN_CHANCE){
+                Car joining = Car();
+                cout << "Joined: ";
+                joining.print();
+                lanes[a]
+            }
+            else{
+                cout << "Empty\n";
+            }
             cout << "Car Paid: ";
             leaving.print();
-            tBL.pop_front();
+            lanes[a][i].pop_front();
             cout << "Queue: \n";
         }
-        else if(roll < (CAR_PAY_CHANCE + CAR_JOIN_CHANCE)){
+        else if(roll < CAR_PAY_CHANCE){
 
             Car joining = Car();
             cout << "Joined lane: ";
