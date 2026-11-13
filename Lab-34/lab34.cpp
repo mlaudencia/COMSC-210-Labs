@@ -3,20 +3,50 @@
 #include <queue>
 #include <stack>
 #include <string>
+#include <climits>
+#include <algorithm>
 
 using namespace std;
 
 const int SIZE = 9;
 
+struct Edge {
+    int src, dest, weight;
+    
+    // Comparator for sorting edges in Kruskal's algorithm (Step 5)
+    bool operator<(const Edge& other) const {
+        return weight < other.weight;
+    }
+};
+
+// Disjoint Set Union (DSU) helper structure for Kruskal's MST algorithm
+struct DisjointSet {
+    vector<int> parent;
+    DisjointSet(int n) {
+        parent.resize(n);
+        for (int i = 0; i < n; i++) parent[i] = i;
+    }
+    int find(int i) {
+        if (parent[i] == i)
+            return i;
+        return parent[i] = find(parent[i]);
+    }
+    void unite(int i, int j) {
+        int root_i = find(i);
+        int root_j = find(j);
+        if (root_i != root_j) {
+            parent[root_i] = root_j;
+        }
+    }
+};
+
+// Prototypes
 void bfsTrace(int startVertex);
 int calculateCapacity(int src, int dest, int weight);
 void printTopology();
 void dfsTrace(int startVertex);
 void shortestPathDijkstra(int startVertex);
-
-struct Edge {
-    int src, dest, weight;
-};
+void findMinimumSpanningTree();
 
 typedef pair<int, int> Pair;
 
@@ -24,9 +54,11 @@ class Graph {
 public:
     vector<vector<Pair>> adjList;
     vector<string> nodeNames;
+    vector<Edge> allEdges; // Stored for MST calculation
 
     Graph(vector<Edge> const &edges) {
         adjList.resize(SIZE);
+        allEdges = edges; // Save edges for Kruskal's algorithm
         
         nodeNames = {
             "Main Pokemon Center Warehouse (HQ)",  // 0
@@ -56,7 +88,7 @@ public:
     }
 
     void printTopology() {
-        cout << "Pokemon Merchandise Distribution Network Topology:" << endl;
+        cout << "\nPokemon Merchandise Distribution Network Topology:" << endl;
         cout << "==================================================" << endl;
         for (int i = 0; i < adjList.size(); i++) {
             cout << "Retail Hub " << i << " (" << nodeNames[i] << ") connects to:" << endl;
@@ -73,7 +105,7 @@ public:
         stack<int> s;
         s.push(startVertex);
 
-        cout << "Network Trace (DFS) from Hub " << startVertex << " (" << nodeNames[startVertex] << "):" << endl;
+        cout << "\nNetwork Trace (DFS) from Hub " << startVertex << " (" << nodeNames[startVertex] << "):" << endl;
         cout << "Purpose: Tracing emergency restock delivery paths through the supply chain" << endl;
         cout << "========================================================================" << endl;
 
@@ -105,7 +137,7 @@ public:
         visited[startVertex] = true;
         q.push(startVertex);
 
-        cout << "Layer-by-Layer Network Inspection (BFS) from Hub " << startVertex << " (" << nodeNames[startVertex] << "):" << endl;
+        cout << "\nLayer-by-Layer Network Inspection (BFS) from Hub " << startVertex << " (" << nodeNames[startVertex] << "):" << endl;
         cout << "Purpose: Analyzing regional delivery tiers by distance from main warehouse" << endl;
         cout << "========================================================================" << endl;
 
@@ -127,7 +159,6 @@ public:
         cout << endl;
     }
 
-    // Step 4: Dijkstra's Shortest Path Algorithm
     void shortestPathDijkstra(int startVertex) {
         vector<int> dist(SIZE, INT_MAX);
         priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
@@ -153,10 +184,31 @@ public:
             }
         }
 
-        cout << "Shortest delivery path cost from Hub " << startVertex << " (" << nodeNames[startVertex] << "):" << endl;
+        cout << "\nShortest delivery path cost from Hub " << startVertex << " (" << nodeNames[startVertex] << "):" << endl;
         cout << "=========================================================================" << endl;
         for (int i = 0; i < SIZE; i++) {
             cout << startVertex << " -> " << i << " : " << dist[i] << endl;
+        }
+        cout << endl;
+    }
+
+    // Step 5: Minimum Spanning Tree (Kruskal's Algorithm)
+    void findMinimumSpanningTree() {
+        vector<Edge> edgesSorted = allEdges;
+        sort(edgesSorted.begin(), edgesSorted.end());
+
+        DisjointSet ds(SIZE);
+        cout << "\nMinimum Spanning Tree edges:" << endl;
+        cout << "===========================" << endl;
+
+        for (auto &edge : edgesSorted) {
+            int rootSrc = ds.find(edge.src);
+            int rootDest = ds.find(edge.dest);
+
+            if (rootSrc != rootDest) {
+                ds.unite(rootSrc, rootDest);
+                cout << "Edge from " << edge.src << " to " << edge.dest << " with capacity: " << edge.weight << " units" << endl;
+            }
         }
         cout << endl;
     }
@@ -173,11 +225,42 @@ int main() {
     };
 
     Graph network(edges);
+    int choice;
 
-    network.printTopology();
-    network.dfsTrace(0);
-    network.bfsTrace(0);
-    network.shortestPathDijkstra(0);
+    do {
+        cout << "Pokemon Distribution Network Menu:" << endl;
+        cout << "[1] Display Pokemon distribution network" << endl;
+        cout << "[2] Check contaminant spread (BFS)" << endl;
+        cout << "[3] Plan inspection route  (DFS)" << endl;
+        cout << "[4] Calculate shortest paths" << endl;
+        cout << "[5] Find Minimum Spanning Tree" << endl;
+        cout << "[0] Exit" << endl;
+        cout << "Enter your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+            case 1:
+                network.printTopology();
+                break;
+            case 2:
+                network.bfsTrace(0);
+                break;
+            case 3:
+                network.dfsTrace(0);
+                break;
+            case 4:
+                network.shortestPathDijkstra(0);
+                break;
+            case 5:
+                network.findMinimumSpanningTree();
+                break;
+            case 0:
+                cout << "Exiting program. Goodbye!" << endl;
+                break;
+            default:
+                cout << "Invalid choice. Please try again.\n" << endl;
+        }
+    } while (choice != 0);
     
     return 0;
 }
