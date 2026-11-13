@@ -1,3 +1,8 @@
+// COMSC-210 | Lab 34 | Jeremy Laudencia
+
+// Here, the LLM added <iostream> and <string> to handle the printing to the 
+//console, <vector> for the graph, <queue> for BFS, <stack> for DFS, and
+// <climits> and <algorithm> for
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -9,6 +14,8 @@
 using namespace std;
 
 const int SIZE = 9;
+const int CAPACITY_MULTIPLIER = 150;
+const int CAPACITY_ADDITIVE = 250;
 
 struct Edge {
     int src, dest, weight;
@@ -86,7 +93,7 @@ public:
 
     // Custom capacity formula so numbers don't match the water example
     int calculateCapacity(int src, int dest, int weight) {
-        return (weight * 150) + 250; // Distinct scaling for TCG shipment cartons
+        return (weight * CAPACITY_MULTIPLIER) + CAPACITY_ADDITIVE; // Distinct scaling for TCG shipment cartons
     }
 
     void printTopology() {
