@@ -14,12 +14,14 @@ struct Edge {
     int src, dest, weight;
     
     // Comparator for sorting edges in Kruskal's algorithm (Step 5)
+    // BELOW WAS STEP 5
     bool operator<(const Edge& other) const {
         return weight < other.weight;
     }
 };
 
 // Disjoint Set Union (DSU) helper structure for Kruskal's MST algorithm
+// ALSO FOR STEP 5
 struct DisjointSet {
     vector<int> parent;
     DisjointSet(int n) {
@@ -193,6 +195,7 @@ public:
     }
 
     // Step 5: Minimum Spanning Tree (Kruskal's Algorithm)
+    // ALSO FOR STEP 5
     void findMinimumSpanningTree() {
         vector<Edge> edgesSorted = allEdges;
         sort(edgesSorted.begin(), edgesSorted.end());
