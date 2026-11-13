@@ -2,7 +2,7 @@
 
 // Here, the LLM added <iostream> and <string> to handle the printing to the 
 //console, <vector> for the graph, <queue> for BFS, <stack> for DFS, and
-// <climits> and <algorithm> for
+// <climits> for Dijkstra's Algorithm, and <algorithm> for the sort for MST.
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -91,11 +91,18 @@ public:
         }
     }
 
-    // Custom capacity formula so numbers don't match the water example
+    // calculateCapacity() scales the weight to be different for the program
+    // compared to the example.
+    // arguments: int src, int dest, int weight
+    // returns: an integer
     int calculateCapacity(int src, int dest, int weight) {
         return (weight * CAPACITY_MULTIPLIER) + CAPACITY_ADDITIVE; // Distinct scaling for TCG shipment cartons
     }
 
+    // printTopology() prints out each Pokemon hub and its adjacent hubs along
+    // with each of their capacities.
+    // arguments: none
+    // returns: nothing
     void printTopology() {
         cout << "\nPokemon Merchandise Distribution Network Topology:" << endl;
         cout << "==================================================" << endl;
@@ -109,6 +116,11 @@ public:
         cout << endl;
     }
 
+    // dfsTrace() follows a path of Pokemon hubs as deep as it can until it
+    // reaches an end, then it goes down an untraversed path. This search uses
+    // a stack to traverse through the hubs.
+    // arguments: int startVertex
+    // returns: nothing
     void dfsTrace(int startVertex) {
         vector<bool> visited(SIZE, false);
         stack<int> s;
