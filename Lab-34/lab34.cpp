@@ -8,6 +8,12 @@ using namespace std;
 
 const int SIZE = 9;
 
+void bfsTrace(int startVertex);
+int calculateCapacity(int src, int dest, int weight);
+void printTopology();
+void dfsTrace(int startVertex);
+void shortestPathDijkstra(int startVertex);
+
 struct Edge {
     int src, dest, weight;
 };
@@ -23,10 +29,10 @@ public:
         adjList.resize(SIZE);
         
         nodeNames = {
-            "Main Pokémon Center Warehouse (HQ)",  // 0
+            "Main Pokemon Center Warehouse (HQ)",  // 0
             "Indigo Plateau League Store",         // 1
             "Celadon City Game Corner & Shop",     // 2
-            "Saffron City PokéMart",               // 3
+            "Saffron City PokeMart",               // 3
             "Cerulean City Hobby Shop",            // 4
             "Lavender Town Card Shop",             // 5
             "Vermilion Port Trading Post",         // 6
@@ -50,13 +56,13 @@ public:
     }
 
     void printTopology() {
-        cout << "Pokémon Merchandise Distribution Network Topology:" << endl;
+        cout << "Pokemon Merchandise Distribution Network Topology:" << endl;
         cout << "==================================================" << endl;
         for (int i = 0; i < adjList.size(); i++) {
             cout << "Retail Hub " << i << " (" << nodeNames[i] << ") connects to:" << endl;
             for (Pair v : adjList[i]) {
                 int capacity = calculateCapacity(i, v.first, v.second);
-                cout << "  → Retail Hub " << v.first << " (" << nodeNames[v.first] << ") - Shipment Capacity: " << capacity << " Booster Cases" << endl;
+                cout << "  > Retail Hub " << v.first << " (" << nodeNames[v.first] << ") - Shipment Capacity: " << capacity << " Booster Cases" << endl;
             }
         }
         cout << endl;
@@ -83,7 +89,7 @@ public:
                     int adjVertex = adjList[curr][i].first;
                     int cap = calculateCapacity(curr, adjVertex, adjList[curr][i].second);
                     if (!visited[adjVertex]) {
-                        cout << "  → Potential shipment route to Hub " << adjVertex << " (" << nodeNames[adjVertex] << ") - Capacity: " << cap << " Cases" << endl;
+                        cout << "  > Potential shipment route to Hub " << adjVertex << " (" << nodeNames[adjVertex] << ") - Capacity: " << cap << " Cases" << endl;
                         s.push(adjVertex);
                     }
                 }
@@ -113,10 +119,44 @@ public:
                 int cap = calculateCapacity(curr, adjVertex, v.second);
                 if (!visited[adjVertex]) {
                     visited[adjVertex] = true;
-                    cout << "  → Next delivery tier: Hub " << adjVertex << " (" << nodeNames[adjVertex] << ") - Capacity: " << cap << " Cases" << endl;
+                    cout << "  > Next delivery tier: Hub " << adjVertex << " (" << nodeNames[adjVertex] << ") - Capacity: " << cap << " Cases" << endl;
                     q.push(adjVertex);
                 }
             }
+        }
+        cout << endl;
+    }
+
+    // Step 4: Dijkstra's Shortest Path Algorithm
+    void shortestPathDijkstra(int startVertex) {
+        vector<int> dist(SIZE, INT_MAX);
+        priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
+
+        dist[startVertex] = 0;
+        pq.push({0, startVertex});
+
+        while (!pq.empty()) {
+            int u = pq.top().second;
+            int d = pq.top().first;
+            pq.pop();
+
+            if (d > dist[u]) continue;
+
+            for (auto &neighbor : adjList[u]) {
+                int v = neighbor.first;
+                int weight = neighbor.second;
+
+                if (dist[u] + weight < dist[v]) {
+                    dist[v] = dist[u] + weight;
+                    pq.push({dist[v], v});
+                }
+            }
+        }
+
+        cout << "Shortest delivery path cost from Hub " << startVertex << " (" << nodeNames[startVertex] << "):" << endl;
+        cout << "=========================================================================" << endl;
+        for (int i = 0; i < SIZE; i++) {
+            cout << startVertex << " -> " << i << " : " << dist[i] << endl;
         }
         cout << endl;
     }
@@ -137,6 +177,7 @@ int main() {
     network.printTopology();
     network.dfsTrace(0);
     network.bfsTrace(0);
+    network.shortestPathDijkstra(0);
     
     return 0;
 }
