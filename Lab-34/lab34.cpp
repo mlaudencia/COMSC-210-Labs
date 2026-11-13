@@ -151,6 +151,10 @@ public:
         cout << endl;
     }
 
+    // bfsTrace() traverses through the hubs by exploring each neighbor of the
+    // startVertex. This search uses a queue to traverse through the hubs.
+    // arguments: int startVertex
+    // returns: nothing
     void bfsTrace(int startVertex) {
         vector<bool> visited(SIZE, false);
         queue<int> q;
@@ -180,6 +184,10 @@ public:
         cout << endl;
     }
 
+    // shortestPathDijkstra() finds the shortest path from a given vertex to
+    // every other vertex on the graph.
+    // arguments: int startVertex
+    // returns: nothing
     void shortestPathDijkstra(int startVertex) {
         vector<int> dist(SIZE, INT_MAX);
         priority_queue<Pair, vector<Pair>, greater<Pair>> pq;
@@ -198,6 +206,8 @@ public:
                 int v = neighbor.first;
                 int weight = neighbor.second;
 
+                // I was a bit confused by this at first, but I understand now
+                // as the distance or weight a hub has.
                 if (dist[u] + weight < dist[v]) {
                     dist[v] = dist[u] + weight;
                     pq.push({dist[v], v});
@@ -215,6 +225,11 @@ public:
 
     // Step 5: Minimum Spanning Tree (Kruskal's Algorithm)
     // ALSO FOR STEP 5
+
+    // findMinimumSpanningTree() finds the lowest cost way for all hubs to be
+    // connected to each other.
+    // arguments: nothing
+    // returns: nothing
     void findMinimumSpanningTree() {
         vector<Edge> edgesSorted = allEdges;
         sort(edgesSorted.begin(), edgesSorted.end());
