@@ -61,10 +61,12 @@ public:
                 visited[curr] = true;
                 cout << curr << " ";
 
-                // Push neighbors in reverse order so they are visited in the correct sequence
-                for (auto it = adjList[curr].rbegin(); it != adjList[curr].rend(); ++it) {
-                    if (!visited[it->first]) {
-                        s.push(it->first);
+                // Iterate forward (0 to size-1) so the last neighbor (3) 
+                // is pushed last and ends up on top of the stack
+                for (int i = 0; i < adjList[curr].size(); ++i) {
+                    int adjVertex = adjList[curr][i].first;
+                    if (!visited[adjVertex]) {
+                        s.push(adjVertex);
                     }
                 }
             }
